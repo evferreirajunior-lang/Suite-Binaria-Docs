@@ -831,4 +831,141 @@
 <p>O Import permite conferir os valores antes de salvar e não deve usar endereços vindos de outra ROM como se fossem endereços seguros da ROM atual.</p>
 <p>Trocar de Pokémon com alterações pendentes aciona os avisos gerais do editor para evitar descartar uma lista ainda não salva.</p>
 
+
+<h5 id="pokemon-egg-moves">Aba Egg Moves: golpes herdados por reprodução</h5>
+<p>A aba <strong>Egg Moves</strong> permite editar os golpes que uma espécie pode herdar por meio do sistema de reprodução do jogo. Esses golpes são diferentes daqueles aprendidos ao subir de nível ou por TM/HM.</p>
+<p>Um Pokémon pode possuir vários Egg Moves, dependendo das regras do jogo e do conjunto de dados configurado para sua espécie.</p>
+
+<h6>Lista de Egg Moves e contador</h6>
+<p>O painel principal mostra os Egg Moves reconhecidos para a espécie selecionada e um contador com o total correspondente.</p>
+<p>Quando uma espécie não possui golpes desse tipo, a própria lista informa que não há Egg Moves configurados, sem exibir uma entrada fictícia.</p>
+<p>O seletor de golpes permite pesquisar entre os Moves reconhecidos na ROM, utilizando os nomes atuais do projeto.</p>
+
+<h6>Adicionar, Alterar e Remover</h6>
+<p>Os três botões principais permitem administrar a lista:</p>
+<ul>
+<li><strong>Adicionar:</strong> inclui um novo Move entre os Egg Moves da espécie;</li>
+<li><strong>Alterar:</strong> troca o golpe selecionado por outro;</li>
+<li><strong>Remover:</strong> retira o golpe selecionado da lista.</li>
+</ul>
+<p>Esses comandos modificam inicialmente os dados em edição. <strong>Não é necessário gravar a ROM a cada clique</strong>; é possível organizar a lista e depois salvar o conjunto.</p>
+<p>A Suite verifica os IDs dos golpes e procura impedir entradas duplicadas ou inválidas, que poderiam causar problemas ao reorganizar a tabela.</p>
+
+<h6>Expansão automática da tabela de Egg Moves</h6>
+<p>A opção <strong>Expansão automática</strong> facilita a inclusão de novos golpes quando a tabela não possui espaço suficiente no local atual.</p>
+<p>Com essa opção ativada, a Suite pode procurar uma nova região livre, mover a tabela e atualizar suas referências conhecidas durante o salvamento.</p>
+<p>Isso ajuda em ROM hacks que acrescentam novos Egg Moves sem exigir que o usuário informe manualmente um endereço para cada ampliação.</p>
+<p>O editor também apresenta informações sobre o <strong>espaço utilizado, a capacidade da tabela e os limites reconhecidos</strong>. Esses dados ajudam a saber quando uma expansão será necessária.</p>
+<p><strong>A expansão aumenta a tabela de Egg Moves, mas não cria novos golpes na engine.</strong> Os Moves que serão cadastrados já precisam existir na ROM.</p>
+
+<h6>Segurança de tabelas compartilhadas e referências</h6>
+<p>A tabela de Egg Moves costuma ser compartilhada por diversas espécies. Por isso, não basta modificar isoladamente a lista de um Pokémon: a Suite precisa manter a tabela geral organizada para que os dados das outras espécies continuem corretos.</p>
+<p>Antes de mover a tabela, a ferramenta verifica suas referências conhecidas e procura evitar alterações quando existem referências adicionais que não consegue atualizar com segurança.</p>
+<p>Ao gravar uma nova tabela em outra região, os dados anteriores podem ser preservados por segurança, especialmente quando ainda existe a possibilidade de outra rotina utilizá-los.</p>
+
+<h6>Import/Export e salvamento</h6>
+<p>Com Egg Moves selecionada, os botões gerais <strong>Import</strong> e <strong>Export</strong> trabalham com a lista de golpes da espécie atual e utilizam um arquivo JSON específico.</p>
+<p>Importar não significa gravar imediatamente. Os novos golpes entram na edição para conferência, e o usuário confirma a operação pelo botão <strong>Salvar</strong> da coluna esquerda ou pelo atalho <code>Ctrl+S</code>.</p>
+<p>A Suite confere se os golpes do arquivo existem na ROM e evita utilizar endereços de outra ROM como destinos automáticos de gravação.</p>
+
+<h6>PokéAPI de Egg Moves</h6>
+<p>A integração com a <strong>PokéAPI</strong> permite consultar golpes herdados por reprodução a partir de dados externos e compará-los com os disponíveis no projeto.</p>
+<p>Quando um Move existe na PokéAPI mas não está presente na ROM hack, a diferença deve ser revisada. A Suite procura preservar os dados personalizados que não possam ser relacionados com segurança.</p>
+<p>As opções de revisão, aplicação e salvamento seguem o funcionamento geral da PokéAPI explicado mais adiante.</p>
+
+<h5 id="pokemon-pokedex">Aba Pokédex: informações exibidas no jogo</h5>
+<p>A aba <strong>Pokédex</strong> permite editar informações usadas nas páginas de registro de cada espécie: numeração, classificação, cor, altura, peso, descrições e comparação de tamanho.</p>
+<p>Esses dados estão relacionados ao que o jogador vê ao consultar a Pokédex e são diferentes dos atributos de batalha editados em Base Stats.</p>
+
+<h6>Ordem da Déx: National, Hoenn/Regional e Hoenn to Nat</h6>
+<p>O grupo <strong>Ordem da Déx</strong> contém os números que relacionam uma espécie às entradas da Pokédex.</p>
+<ul>
+<li><strong>National:</strong> número da espécie na National Pokédex;</li>
+<li><strong>Hoenn ou Regional:</strong> número que a espécie ocupa na Pokédex regional do jogo;</li>
+<li><strong>Hoenn to Nat:</strong> correspondência utilizada em ROMs que possuem uma tabela própria para relacionar posições regionais e nacionais.</li>
+</ul>
+<p>Algumas ROMs apresentam nomes diferentes para esses campos e nem todas utilizam a mesma tabela de correspondência. A Suite ajusta a disponibilidade dos controles conforme a ROM.</p>
+<p><strong>Alterar a numeração não acrescenta automaticamente uma espécie nova nem expande a Pokédex.</strong> Ela modifica os registros reconhecidos no projeto.</p>
+
+<h6>Uma regra especial ao mudar National</h6>
+<p>O campo <strong>National</strong> merece atenção porque define qual entrada de informações da Pokédex pertence àquela espécie.</p>
+<p>Para evitar gravar dados de um Pokémon na entrada de outro, a Suite não permite que uma mudança de National seja salva ao mesmo tempo em que outras informações detalhadas daquela entrada estejam sendo modificadas.</p>
+<p>O procedimento recomendado é simples: <strong>primeiro altere National e salve</strong>; depois confira os dados carregados para a nova entrada, faça as demais edições e salve novamente.</p>
+<p>Isso evita, por exemplo, que uma descrição preparada para uma espécie seja gravada acidentalmente na entrada da outra.</p>
+
+<h6>Dados da Pokédex: Espécie e Cor</h6>
+<p>O campo <strong>Espécie</strong> permite editar a classificação apresentada na Pokédex, como <em>Seed Pokémon</em> para Bulbasaur ou outra categoria escolhida pelo autor.</p>
+<p>Esse texto não é o mesmo que o <strong>nome principal da espécie</strong>, alterado pelo botão Renomear da coluna esquerda. São informações independentes usadas em locais diferentes do jogo.</p>
+<p>O campo <strong>Cor (Base Stats)</strong> define a cor de classificação associada ao Pokémon, utilizada pelas regras e interfaces que consultam esse dado.</p>
+<p>Apesar de aparecer na aba Pokédex, essa cor é armazenada junto de informações internas de Base Stats. A Suite cuida dessa diferença para que salvar a cor não substitua os demais atributos-base.</p>
+
+<h6>Altura e Peso</h6>
+<p>O grupo <strong>Altura e Peso</strong> permite alterar as medidas registradas para a espécie.</p>
+<p>Os valores são apresentados com referências como <strong>Height, Meters, Feet, Weight, Kilograms e Pounds</strong>, ajudando a interpretar os números que serão usados pelo jogo.</p>
+<p>As medidas informadas fazem parte da descrição da espécie e não mudam automaticamente o tamanho dos sprites. A aparência na batalha é tratada separadamente na aba Sprites.</p>
+
+<h6>Size Comparison: comparação com um treinador</h6>
+<p>O painel <strong>Size Comparison</strong> mostra visualmente o Pokémon ao lado de um treinador, permitindo conferir como a comparação de tamanho aparecerá.</p>
+<p>Os controles <strong>Scale</strong> e <strong>Offset</strong>, disponíveis para Pokémon e Trainer, ajudam a ajustar as proporções e posições das imagens nessa comparação.</p>
+<p>O campo <strong>Trainer ID</strong> escolhe qual gráfico de treinador será utilizado na <strong>prévia</strong>. Alterar esse ID não substitui permanentemente os gráficos dos treinadores na ROM.</p>
+<p>Essas opções de Size Comparison não mudam os valores de HP, Attack ou outros atributos de batalha; servem para a representação visual da espécie na Pokédex.</p>
+
+<h6>Descrição e páginas da Pokédex</h6>
+<p>O painel de <strong>Descrição</strong> permite escrever o texto que o jogador encontrará ao consultar o registro do Pokémon. É possível ajustar a redação, corrigir erros ou personalizar a descrição para uma ROM hack.</p>
+<p>Há um indicador <strong>Length</strong> que ajuda a acompanhar o espaço utilizado pelo texto. O campo <strong>Offset</strong> informa onde a descrição está armazenada.</p>
+<p>Algumas ROMs possuem mais de uma página de descrição. Nesses casos, a Suite apresenta também um painel de <strong>Página 2</strong>, com seus próprios campos e contador.</p>
+<p>Os campos aceitam o padrão de caracteres utilizado pelo projeto e permitem escrever textos em várias linhas. Como as ROMs de GBA não utilizam texto exatamente como um editor moderno, a Suite considera o tamanho real do texto convertido antes de gravá-lo.</p>
+
+<h6>Repoint da descrição e textos maiores</h6>
+<p>O botão <strong>Repoint</strong> permite indicar outro endereço válido para uma descrição já existente. Ele prepara essa alteração para revisão; <strong>clicar em Repoint não salva imediatamente a ROM</strong>.</p>
+<p>Quando o novo texto é maior que o espaço disponível ou a descrição original está sendo compartilhada, a Suite pode procurar outra área livre e atualizar o endereço durante o salvamento.</p>
+<p>Essa proteção ajuda a evitar que a descrição de um Pokémon modifique a de outro por acidente.</p>
+<p><strong>Não é necessário escolher manualmente um Offset para apenas escrever um texto maior.</strong> O processo automático deve ser preferido quando a ROM e a estrutura da descrição estão corretamente reconhecidas.</p>
+
+<h6>Import/Export e Salvar Pokédex</h6>
+<p>Com a aba Pokédex selecionada, <strong>Import</strong> e <strong>Export</strong> trabalham com os dados dessa seção, utilizando um arquivo JSON.</p>
+<p>O Import apresenta as informações na edição atual, mas não utiliza cegamente os endereços de descrição de outra ROM. Os dados são preparados para a estrutura do projeto aberto.</p>
+<p>A gravação ocorre por <strong>Salvar</strong> ou <code>Ctrl+S</code>, com as verificações necessárias para proteger a numeração, a descrição e os demais campos.</p>
+<p>Se o arquivo importado foi produzido para outro Pokémon, a Suite pede confirmação antes de aplicar os valores na entrada selecionada.</p>
+
+<h6>PokéAPI da Pokédex</h6>
+<p>A integração com a <strong>PokéAPI</strong> pode auxiliar na revisão de dados como categoria, altura, peso, cor e descrição da espécie.</p>
+<p>Para textos descritivos, a janela de consulta permite considerar informações como <strong>geração, jogo e idioma</strong>, porque um Pokémon pode possuir descrições diferentes em jogos distintos.</p>
+<p>Os números de National e Regional, assim como as configurações de Size Comparison, não devem ser substituídos automaticamente por informações externas sem relação segura com a estrutura da ROM.</p>
+
+<h5 id="pokemon-pokeapi">Integração PokéAPI: consultar, comparar e aplicar informações</h5>
+<p>Além dos controles apresentados em cada aba, a Release Inicial oferece integração com a <strong>PokéAPI</strong> em <strong>Base Stats, Evolutions, Learnsets, Egg Moves e Pokédex</strong>. Essa integração pode ajudar a consultar informações de Pokémon e agilizar o preenchimento de dados conhecidos.</p>
+<p>A aba <strong>Sprites</strong> não utiliza esse mesmo processo de consulta textual: seus gráficos são tratados pelos comandos de PNG e Repoint.</p>
+
+<h6>PokéAPI, Consultar, Revisar e botão de aliases</h6>
+<p>Em uma aba compatível, a opção <strong>PokéAPI</strong> ativa o modo de consulta. O botão ao lado permite consultar ou revisar os dados correspondentes àquele Pokémon e àquela aba.</p>
+<p>Conforme a operação avança, o botão pode mostrar estados como <strong>Consultar</strong>, <strong>Obtendo...</strong>, <strong>Revisar</strong>, <strong>Parcial</strong>, <strong>Atualizado</strong> ou <strong>Erro</strong>. Essas mensagens ajudam a acompanhar o processo sem precisar adivinhar se uma consulta terminou.</p>
+<p>O botão <strong>...</strong> abre as configurações de <strong>aliases</strong>, utilizadas para relacionar nomes ou formas reconhecidos pela PokéAPI com os nomes que existem na ROM hack.</p>
+<p>Isso é especialmente útil quando o projeto utiliza nomes personalizados, espécies expandidas ou Items com IDs diferentes dos dados externos.</p>
+
+<h6>Revisão antes da aplicação</h6>
+<p>As informações consultadas podem ser comparadas com os dados atuais da ROM antes de serem aplicadas. A janela de revisão ajuda a identificar quais campos são compatíveis, quais precisam de atenção e quais devem ser preservados.</p>
+<p>Por exemplo, se a PokéAPI sugere um Move que ainda não existe na ROM, a Suite não deve simplesmente utilizar o mesmo número de ID externo, pois ele pode representar outro golpe dentro do projeto.</p>
+<p>Da mesma maneira, uma condição de evolução pertencente a gerações mais recentes não deve ser gravada como se a engine original da terceira geração já soubesse executá-la.</p>
+
+<h6>Auto-Aplicar, Auto-Save e F5</h6>
+<p>As janelas de revisão oferecem preferências para automatizar parte do trabalho, como <strong>Auto-Aplicar</strong> e <strong>Auto-Save</strong>, onde disponíveis.</p>
+<p>Com <strong>Auto-Aplicar</strong>, a Suite pode preparar a aplicação dos dados durante a navegação da revisão. Com <strong>Auto-Save</strong>, os dados aplicados podem ser gravados pela mesma rotina de salvamento seguro utilizada pela aba.</p>
+<p>Quando Auto-Save está desligado, a aplicação normalmente gera um <strong>rascunho</strong> que precisa ser confirmado depois por Salvar ou <code>Ctrl+S</code>.</p>
+<p>O atalho <code>F5</code> executa a ação PokéAPI da aba ativa quando o modo está habilitado. Ele não é um comando para salvar toda a ROM.</p>
+<p>Antes de utilizar uma aplicação automática em massa, vale conferir as preferências e o comportamento da revisão, principalmente em uma ROM hack com nomes ou regras personalizadas.</p>
+
+<h6>Cache local e preservação de dados personalizados</h6>
+<p>Os dados obtidos pela PokéAPI podem ficar armazenados localmente por meio do gerenciamento <strong>PokéAPI Data</strong>, acessível na janela principal da Suite. Isso reduz consultas repetidas e pode permitir revisões sem internet quando os dados necessários já estiverem disponíveis.</p>
+<p>Em ROM hacks, nem toda informação externa deve substituir o conteúdo original do projeto. A Suite apresenta avisos sobre diferenças e oferece mecanismos de preservação para impedir que dados personalizados sejam trocados sem revisão.</p>
+<p><strong>A PokéAPI é uma fonte de consulta e apoio à edição — não uma atualização automática da engine da ROM.</strong></p>
+
+<h5 id="pokemon-seguranca">Salvamento, compatibilidade e cuidados gerais</h5>
+<p>O Pokémon Editor trabalha com diferentes tabelas que podem ser originais, expandidas, movidas ou compartilhadas entre espécies. Para reduzir o risco de alterações indevidas, a Suite procura conferir as informações antes de gravá-las e verificar o resultado das operações.</p>
+<p>O botão <strong>Salvar</strong> da coluna esquerda e o atalho <code>Ctrl+S</code> atuam de acordo com a aba ativa. Alguns comandos específicos, como importações de sprites, Repoint de gráficos e posições de batalha, utilizam seus próprios botões.</p>
+<p>Importações em JSON geralmente preparam os dados para revisão; por outro lado, algumas ações próprias dos gráficos ou a reordenação de golpes podem ter gravação direta. Por isso, <strong>confira a finalidade do botão antes de utilizá-lo</strong>.</p>
+<p>A Suite procura preservar dados compartilhados e recusar endereços incompatíveis ou alterações inesperadas. Essas proteções ajudam bastante, mas não substituem uma cópia de segurança da ROM e um teste posterior dentro do jogo.</p>
+<p>O suporte às ROMs originais de <strong>Pokémon Emerald, FireRed, LeafGreen, Ruby e Sapphire</strong> leva em consideração diferenças entre os jogos. Em ROM hacks, tabelas expandidas e funções personalizadas exigem que as estruturas correspondentes já estejam presentes e corretamente configuradas.</p>
+<p><strong>Resumo:</strong> o Pokémon Editor permite personalizar profundamente os Pokémon do jogo, mas editar um campo não significa instalar automaticamente uma nova mecânica. O resultado final depende tanto dos dados salvos quanto dos recursos que a ROM hack efetivamente implementou.</p>
+
 </article>
