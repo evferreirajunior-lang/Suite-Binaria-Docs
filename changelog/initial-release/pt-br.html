@@ -1,0 +1,61 @@
+<article class="changelog-article" lang="pt-BR">
+<h3>Suite Binária — Release Inicial</h3>
+<p>Esta seção registra os recursos presentes na primeira versão pública da Suite Binária. O conteúdo está sendo reconstruído a partir da versão original e será detalhado por áreas da ferramenta.</p>
+
+<h4>Visão geral</h4>
+<p>A Release Inicial apresenta a base da <strong>Suite Binária</strong>, reunindo em uma única ferramenta diferentes recursos para edição de ROMs Pokémon da terceira geração.</p>
+<p>A janela principal foi pensada para servir como o ponto de partida do programa. É nela que a ROM é carregada, que os principais recursos gerais ficam disponíveis e de onde são abertos os diferentes editores.</p>
+
+<h4>Interface principal</h4>
+<p>Ao iniciar a Suite Binária sem uma ROM carregada, a janela informa que <strong>nenhuma ROM está aberta</strong> e mantém os editores indisponíveis.</p>
+<p>Depois que uma ROM compatível é carregada com sucesso, a Suite identifica o jogo e libera os recursos que podem ser utilizados com aquela ROM. O nome do jogo carregado também passa a ser exibido na parte superior da janela.</p>
+<p>Na área central ficam os botões de acesso aos editores. Na Release Inicial, a janela principal fornece acesso ao <strong>Ability Editor, Item Editor, Trainer Editor, Trade Editor, Move Editor e Pokémon Editor</strong>.</p>
+<p>As funções de cada editor serão apresentadas separadamente nas próximas seções deste changelog.</p>
+
+<h4>Opções</h4>
+<p>O menu <strong>Opções</strong> reúne os comandos mais básicos para trabalhar com uma ROM.</p>
+<p><strong>Abrir ROM</strong> permite selecionar uma ROM GBA para utilizar na Suite. O mesmo comando pode ser acessado com <code>Ctrl+O</code>.</p>
+<p>Depois de uma ROM ser carregada corretamente, ela também passa a aparecer em <strong>Recentes</strong>. A Suite mantém uma pequena lista das ROMs utilizadas mais recentemente, facilitando a reabertura de projetos em que o usuário está trabalhando com frequência.</p>
+<p>Até <strong>5 ROMs recentes</strong> podem permanecer nessa lista. Também existe a opção de limpar esse histórico sem apagar ou modificar as próprias ROMs.</p>
+<p>O menu ainda possui <strong>Sair</strong>, com o atalho <code>Ctrl+Q</code>, para fechar a Suite.</p>
+
+<h4>Projetos</h4>
+<p>Além de abrir uma ROM diretamente, a Release Inicial permite criar um <strong>projeto da Suite Binária</strong>.</p>
+<p>Um projeto serve para manter reunidas configurações próprias daquela ROM hack, como ajustes e informações que não devem necessariamente ser usadas em todas as outras ROMs abertas pelo programa.</p>
+<ul>
+<li><strong>Abrir projeto</strong> — <code>Ctrl+Shift+O</code>;</li>
+<li><strong>Criar projeto da ROM atual</strong> — <code>Ctrl+Shift+S</code>;</li>
+<li><strong>Salvar projeto</strong> — <code>Ctrl+Alt+S</code>.</li>
+</ul>
+<p>A ROM não é colocada dentro do arquivo de projeto. Dessa forma, o projeto guarda as configurações necessárias para o trabalho sem transformar o arquivo da Suite em uma cópia da ROM.</p>
+
+<h4>Histórico</h4>
+<p>A Suite Binária também conta com um histórico geral das alterações realizadas durante a sessão.</p>
+<p><strong>Desfazer</strong> (<code>Ctrl+Z</code>) permite voltar uma alteração realizada anteriormente, enquanto <strong>Refazer</strong> (<code>Ctrl+Y</code>) reaplica uma alteração que tenha sido desfeita.</p>
+<p>A opção <strong>Histórico da ROM</strong> (<code>Ctrl+Shift+H</code>) permite consultar as alterações registradas durante o trabalho.</p>
+<p>Há também o <strong>Backup Delta</strong> (<code>Ctrl+Shift+B</code>). Em vez de criar outra cópia completa da ROM a cada alteração, esse sistema pode guardar apenas aquilo que foi modificado. Isso permite manter um histórico de mudanças ocupando menos espaço e também oferece uma forma adicional de recuperação.</p>
+
+<h4>Ferramentas</h4>
+<p>A Release Inicial já inclui algumas ferramentas gerais para ajudar a analisar a ROM antes e depois de realizar alterações.</p>
+<p><strong>Explorador Global de Referências</strong> (<code>Ctrl+Shift+R</code>) ajuda a descobrir onde determinados Pokémon, Moves, Items ou Abilities estão sendo utilizados. Ele é especialmente útil antes de alterar algo que possa estar relacionado a várias partes da ROM.</p>
+<p><strong>Free Space Manager</strong> (<code>Ctrl+Shift+F</code>) auxilia na localização e análise de regiões disponíveis para novos dados. Em termos simples, ajuda a Suite a saber onde pode colocar informações novas sem simplesmente sobrescrever conteúdo que já está sendo utilizado.</p>
+<p><strong>Comparador de ROM / Change Inspector</strong> (<code>Ctrl+Shift+C</code>) mostra o que foi modificado durante a sessão, permitindo conferir os dados anteriores e os novos valores gravados.</p>
+<p><strong>Verificar ROM / Health Check</strong> (<code>Ctrl+Shift+V</code>) realiza uma verificação sem modificar a ROM. Seu objetivo é apontar possíveis problemas, referências incorretas ou situações que merecem atenção antes de continuar o trabalho.</p>
+
+<h4>Configurações</h4>
+<p>A opção <strong>Configurações</strong> concentra preferências gerais utilizadas pela Suite.</p>
+<p>É nela que podem ser ajustadas opções como a região utilizada para procurar espaço livre, o comportamento de algumas ferramentas e configurações adicionais usadas pelos editores.</p>
+<p>Também é possível acessar por essa área o <strong>INI Editor</strong>, utilizado para consultar ou ajustar informações específicas da ROM quando necessário.</p>
+<p>As configurações pessoais ficam separadas dos dados da ROM, portanto alterar uma preferência da Suite não significa automaticamente modificar o jogo.</p>
+
+<h4>PokéAPI Data</h4>
+<p>A opção <strong>PokéAPI Data</strong> permite gerenciar os dados utilizados pela integração da Suite com a PokéAPI.</p>
+<p>Esses dados podem ser baixados e armazenados no próprio computador. Depois disso, boa parte das consultas pode ser realizada sem precisar buscar novamente as mesmas informações pela internet.</p>
+<p>Essa integração é utilizada por algumas áreas do Pokémon Editor, que serão explicadas posteriormente.</p>
+
+<h4>Idiomas</h4>
+<p>Desde a Release Inicial, a interface da Suite Binária oferece cinco idiomas:</p>
+<p><strong>Português do Brasil, English, Español, Français e Italiano.</strong></p>
+<p>Na primeira execução, a Suite pode utilizar o idioma do sistema como referência. O usuário também pode escolher manualmente outro idioma pela opção <strong>Idiomas</strong>.</p>
+<p>A troca modifica apenas os textos da interface da Suite. Ela <strong>não traduz nem altera nomes, textos ou qualquer outro conteúdo existente dentro da ROM</strong>.</p>
+</article>
