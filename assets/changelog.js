@@ -21,7 +21,7 @@
 
   const availableLanguages = {
     "v0.02": ["pt-br", "en", "es", "fr", "it"],
-    "initial-release": ["pt-br"]
+    "initial-release": ["pt-br", "en", "es", "fr", "it"]
   };
 
   const topicUi = {
