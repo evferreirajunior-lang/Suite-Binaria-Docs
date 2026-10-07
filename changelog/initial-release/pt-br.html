@@ -339,4 +339,116 @@
 <p>Se mais de um treinador utilizar a mesma equipe armazenada na ROM, a Suite pode escolher uma nova região para as alterações, evitando que a modificação de um treinador mude também os demais.</p>
 <p>Essas proteções ajudam a trabalhar com maior segurança, mas ainda é recomendado manter uma cópia de segurança da ROM antes de realizar mudanças grandes, sobretudo em projetos com tabelas e equipes expandidas.</p>
 
+
+<h4>Trade Editor</h4>
+<p>O <strong>Trade Editor</strong> permite personalizar as trocas de Pokémon realizadas com personagens do jogo, também conhecidos como <strong>NPCs</strong>. É possível escolher qual Pokémon o personagem pedirá ao jogador, qual Pokémon oferecerá em troca e diversos detalhes do Pokémon recebido.</p>
+<p>Além das trocas originais, o editor reconhece tabelas de trocas expandidas e oferece recursos para criar novas entradas, organizar a lista e experimentar combinações diferentes.</p>
+
+<h5>Lista de Trades e Offset atual</h5>
+<p>À esquerda da janela fica a lista das trocas disponíveis na ROM. Basta escolher uma entrada para visualizar suas informações e começar a editá-la.</p>
+<p>O campo <strong>Offset atual</strong> mostra a localização, dentro da ROM, dos dados da troca selecionada. Ele serve como referência para quem trabalha com endereços, mas não precisa ser alterado durante uma edição comum.</p>
+<p>Nas versões originais, a quantidade de trocas reconhecida pela Suite é diferente em cada jogo: <strong>4 em Emerald, 9 em FireRed e LeafGreen, e 3 em Ruby e Sapphire</strong>. ROM hacks podem utilizar quantidades maiores.</p>
+
+<h5>Trades Total: reconhecer trocas já existentes</h5>
+<p>O campo <strong>Trades Total</strong>, acompanhado do botão <strong>Aplicar</strong>, informa à Suite quantas trocas já estão presentes na tabela da ROM.</p>
+<p>Essa opção é especialmente útil quando uma ROM hack teve sua tabela de trocas ampliada manualmente ou por outra ferramenta. Ao informar a quantidade correta, a Suite passa a exibir essas entradas na lista.</p>
+<p><strong>Alterar Trades Total não cria trocas novas na ROM.</strong> Ele apenas ajusta a quantidade de registros que a Suite deve consultar. Informar um número maior do que o realmente existente pode fazer outros dados da ROM serem interpretados como trocas; por isso, o editor apresenta um aviso sobre essa configuração.</p>
+
+<h5>Expandir Trades: adicionar novas trocas</h5>
+<p>O botão <strong>Expandir Trades</strong> é diferente de Trades Total: ele realmente <strong>cria novos registros de troca</strong> na ROM.</p>
+<p>Ao clicar nele, o usuário informa a quantidade total desejada. A Suite tenta aproveitar o espaço disponível logo após a tabela atual. Se não houver espaço suficiente, ela procura outro local apropriado e move a tabela, ajustando as referências conhecidas necessárias para encontrá-la.</p>
+<p>As novas entradas recebem dados iniciais válidos, para que não sejam apresentadas como registros vazios ou informações sem sentido. A Suite também procura reservar a região adicionada para evitar que outra operação a utilize por engano.</p>
+<p><strong>Importante:</strong> criar um registro novo não faz surgir automaticamente um personagem oferecendo essa troca no mapa. Para utilizar uma nova entrada dentro do jogo, o autor da ROM hack ainda precisa configurar os scripts ou eventos dos NPCs que vão chamá-la.</p>
+
+<h5>Reorganizar a ordem das trocas</h5>
+<p>As setas <strong>▲</strong> e <strong>▼</strong>, ao lado da lista, permitem mover a troca selecionada uma posição para cima ou para baixo.</p>
+<p>Ao mover uma entrada, a Suite troca todos os dados daquela negociação, e não apenas o nome ou o Pokémon exibido na lista. Essa operação <strong>altera a tabela da ROM</strong> após a confirmação, diferentemente de modificar campos comuns antes de clicar em Salvar Trade.</p>
+<p>Na primeira utilização, o editor apresenta um aviso: os scripts dos NPCs podem utilizar o número da posição da troca para identificá-la. Portanto, depois de reorganizar a tabela, talvez seja necessário atualizar esses scripts para evitar que um personagem ofereça uma negociação diferente da esperada.</p>
+<p>É possível desativar esse aviso para as próximas reorganizações.</p>
+
+<h5>Pokémon solicitado e Pokémon recebido</h5>
+<p>O grupo <strong>Troca</strong> reúne os dois Pokémon envolvidos na negociação:</p>
+<ul>
+<li><strong>Pokémon solicitado:</strong> espécie que o NPC exige que o jogador entregue;</li>
+<li><strong>Pokémon recebido:</strong> espécie que o NPC oferece em troca.</li>
+</ul>
+<p>Cada lado apresenta uma prévia do Pokémon para ajudar a conferir visualmente a escolha.</p>
+<p>No lado do Pokémon recebido, também podem ser configurados o <strong>Nickname</strong>, o <strong>Held Item</strong> e a <strong>Ability</strong>. O Nickname é o apelido que o Pokémon terá ao ser recebido; o Held Item é o item que ele carregará.</p>
+<p>O campo <strong>Ability</strong> mostra as duas possibilidades da espécie, quando disponíveis, utilizando nomes conhecidos como referência. Ele trabalha com os dois espaços de Ability oferecidos pela estrutura original da troca. <strong>Selecionar uma Ability nessa lista não cria novas Abilities nem adiciona um terceiro espaço à estrutura original.</strong></p>
+<p>A troca normalmente usa o <strong>nível do Pokémon entregue pelo jogador</strong>. Por esse motivo, não existe um campo separado para escolher livremente o nível do Pokémon recebido nessa tabela original.</p>
+
+<h5>IVs do Pokémon recebido</h5>
+<p>O grupo <strong>IVs</strong> permite ajustar individualmente os seis valores que influenciam os atributos do Pokémon recebido:</p>
+<ul>
+<li>HP;</li>
+<li>Attack;</li>
+<li>Defense;</li>
+<li>Sp. Attack;</li>
+<li>Sp. Defense;</li>
+<li>Speed.</li>
+</ul>
+<p>Cada valor pode variar de <strong>0 a 31</strong>. Em termos simples, IVs mais altos geralmente favorecem os atributos correspondentes, respeitando as regras do jogo.</p>
+<p>Isso permite criar trocas com Pokémon de características diferentes, incluindo equipes com valores mais equilibrados ou Pokémon recebidos com IVs especialmente bons.</p>
+
+<h5>Hidden Power e sua engrenagem</h5>
+<p>Logo abaixo dos IVs, o editor mostra o <strong>Type de Hidden Power</strong> calculado para o Pokémon. A informação é atualizada conforme os IVs são alterados.</p>
+<p>Ao passar o mouse sobre o campo, também é possível consultar a <strong>Power</strong> calculada. O botão de <strong>engrenagem</strong> abre uma janela para encontrar combinações de IVs que produzam o Type desejado.</p>
+<p>Essa janela oferece três formas de procurar uma combinação:</p>
+<ul>
+<li><strong>Preservar os IVs atuais:</strong> tenta alterar o mínimo possível;</li>
+<li><strong>Preservar IVs + Power 70:</strong> busca uma combinação próxima à atual com a maior Power prevista pela terceira geração;</li>
+<li><strong>Maximizar IVs (30/31) + Power 70:</strong> prioriza IVs elevados junto com a Power desejada.</li>
+</ul>
+<p>O usuário pode comparar as combinações encontradas antes de clicar em <strong>Aplicar combinação</strong>. Essa ação modifica os valores mostrados no editor, mas <strong>não grava a ROM imediatamente</strong>: ainda é necessário clicar em <strong>Salvar Trade</strong>.</p>
+
+<h5>Original Trainer: nome, IDs e gênero</h5>
+<p>O grupo <strong>Original Trainer</strong> reúne os dados que identificam o treinador original do Pokémon recebido, também chamado de <strong>OT</strong>.</p>
+<ul>
+<li><strong>OT Name:</strong> nome do treinador original;</li>
+<li><strong>Trainer ID:</strong> número de identificação do treinador;</li>
+<li><strong>Secret ID:</strong> número complementar de identificação;</li>
+<li><strong>Gender:</strong> opção <strong>Male</strong> ou <strong>Female</strong> para o treinador original.</li>
+</ul>
+<p>Os campos <strong>OT Name</strong>, <strong>Trainer ID</strong> e <strong>Secret ID</strong> possuem botões <strong>Random</strong> independentes. Eles preenchem o campo correspondente com outro valor, caso o usuário queira criar dados diferentes sem digitá-los manualmente.</p>
+<p>Essas informações fazem parte do Pokémon recebido na troca. Alterá-las não modifica o nome nem os dados do próprio NPC no mapa.</p>
+
+<h5>Dados avançados: Personality, Contest, Sheen e Mail</h5>
+<p>O grupo <strong>Dados avançados</strong> permite personalizar outras características do Pokémon recebido.</p>
+<p><strong>Personality</strong> (também conhecido como PID) é um número interno utilizado pelo jogo para definir determinadas características do Pokémon. O campo é apresentado em hexadecimal para permitir uma configuração precisa quando necessário.</p>
+<p>Os campos <strong>Cool, Beauty, Cute, Smart e Tough</strong> correspondem às condições utilizadas nos <strong>Pokémon Contests</strong>. Assim, o Pokémon recebido pode ter valores de Contest previamente definidos.</p>
+<p><strong>Sheen</strong> é outro valor relacionado ao preparo do Pokémon para os Contests.</p>
+<p>Já <strong>Mail ID</strong> indica uma mensagem de Mail associada à troca, quando o Pokémon está segurando um item de Mail. A opção <strong>None (-1)</strong> significa que nenhuma mensagem foi escolhida.</p>
+<p>Como as ROMs originais possuem quantidades diferentes de mensagens de Mail, a Suite avisa antes de gravar um ID que esteja fora da faixa conhecida para o jogo. Valores personalizados só devem ser utilizados quando a ROM hack já possuir a estrutura necessária para eles.</p>
+
+<h5>Randomizar e configurações do randomizador</h5>
+<p>O botão <strong>Randomizar</strong> prepara uma combinação aleatória para a <strong>troca atualmente selecionada</strong>.</p>
+<p>Na engrenagem localizada abaixo do botão, o usuário decide quais informações podem ser alteradas. É possível habilitar ou desabilitar separadamente:</p>
+<ul>
+<li>Pokémon solicitado e Pokémon recebido;</li>
+<li>Nickname, Held Item e Ability;</li>
+<li>IVs;</li>
+<li>OT Name, Trainer ID, Secret ID e Gender;</li>
+<li>Personality;</li>
+<li>condições de Contest, Sheen e Mail ID.</li>
+</ul>
+<p>A janela oferece <strong>Marcar tudo</strong> e <strong>Desmarcar tudo</strong>, além de guardar as escolhas para as próximas utilizações.</p>
+<p>A randomização usa os Pokémon, itens e demais opções reconhecidos pela Suite na ROM carregada. No caso de <strong>Mail ID</strong>, evita escolher mensagens fora da tabela original conhecida.</p>
+<p><strong>Randomizar não salva a ROM automaticamente.</strong> O resultado aparece nos campos para que o usuário possa conferir, ajustar ou descartar antes de clicar em <strong>Salvar Trade</strong>.</p>
+<p>Os botões <strong>Random</strong> do grupo Original Trainer continuam funcionando individualmente e não dependem das opções marcadas nessa engrenagem.</p>
+
+<h5>Salvar Trade e Recarregar</h5>
+<p>O botão <strong>Salvar Trade</strong> grava os dados da troca selecionada na ROM. Ele também pode ser acionado com <code>Ctrl+S</code>.</p>
+<p>Já <strong>Recarregar</strong> (<code>Ctrl+R</code>) lê novamente os dados da entrada atual, permitindo desfazer modificações que ainda não foram gravadas.</p>
+<p>Se houver mudanças pendentes ao recarregar, mudar de entrada ou fechar o editor, a Suite oferece as opções <strong>Salvar, Descartar ou Cancelar</strong>. Dessa forma, as alterações não são perdidas sem aviso.</p>
+<p>Antes de salvar, a Suite confere se os dados originais não foram modificados por outro programa ou operação desde o carregamento. Ela também verifica o resultado da gravação para reduzir o risco de alterações inesperadas.</p>
+
+<h5>Ajuda integrada</h5>
+<p>O botão <strong>Ajuda</strong> abre uma explicação dos campos utilizados pelo Trade Editor, incluindo os números de identificação do OT, Personality, IVs, dados de Contest e Mail ID.</p>
+<p>É uma referência rápida para consultar enquanto a janela está aberta. Acessar essa ajuda não altera nenhuma informação na ROM.</p>
+
+<h5>Compatibilidade e limites</h5>
+<p>O Trade Editor reconhece as estruturas de trocas originais de <strong>Emerald, FireRed, LeafGreen, Ruby e Sapphire</strong>, em suas versões 1.0 / Rev 0, e pode trabalhar com tabelas expandidas corretamente configuradas.</p>
+<p>A expansão cria novos registros de negociação, mas <strong>não adiciona personagens, diálogos ou scripts de troca aos mapas</strong>. Essas partes continuam sendo responsabilidade de quem desenvolve a ROM hack.</p>
+<p>Para projetos muito modificados, vale conferir a quantidade de Trades, a localização da tabela e os scripts dos NPCs antes de fazer expansões ou reordenar entradas. Manter uma cópia de segurança da ROM também é recomendado.</p>
+
 </article>
