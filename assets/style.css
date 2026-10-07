@@ -22,10 +22,30 @@
 @media(max-width:560px){.changelog-topic-index{padding:15px 12px}.changelog-topic-buttons{gap:7px}.changelog-topic-button{padding:9px 11px;flex:1 1 auto}.changelog-topic-index-hint{font-size:.86rem}}
 
 
-/* O seletor de idiomas no cabeçalho altera a página, sem navegação externa. */
-.nav button{border:1px solid transparent;border-radius:10px;padding:7px 10px;background:transparent;color:var(--muted);font-size:14px;line-height:1.5;cursor:pointer;white-space:nowrap;transition:color .16s ease,border-color .16s ease,background .16s ease}
-.nav button:hover,.nav button:focus-visible{color:var(--text);border-color:#42628a;background:var(--panel)}
-.nav button.is-active{color:#e7f3ff;border-color:#517eae;background:#1a304d;font-weight:650}
+/* Visual original dos links de idioma, agora aplicado aos botões sem navegação. */
+.nav button{
+  appearance:none;
+  padding:7px 10px;
+  border:1px solid transparent;
+  border-radius:10px;
+  background:transparent;
+  color:var(--muted);
+  font-size:14px;
+  line-height:inherit;
+  font-weight:inherit;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.nav button:hover,.nav button:focus-visible{
+  color:var(--text);
+  border-color:var(--line);
+  background:var(--panel);
+}
+.nav button.is-active{
+  color:var(--text);
+  border-color:var(--line);
+  background:var(--panel);
+}
 @media(max-width:700px){
   .topbar .wrap{flex-wrap:wrap;align-items:center;gap:3px;padding:9px 0}
   .nav{display:flex;max-width:100%;width:100%;flex:0 0 100%;justify-content:flex-start;flex-wrap:nowrap;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:3px 0 6px}
