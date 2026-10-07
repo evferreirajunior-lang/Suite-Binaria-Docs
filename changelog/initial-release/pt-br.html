@@ -228,4 +228,115 @@
 <p>O editor avisa quando há modificações não salvas antes de trocar de item ou fechar a janela. Também valida valores e endereços antes de escrever na ROM, procurando evitar alterações parciais ou a substituição de dados utilizados por outros itens.</p>
 <p>Essas verificações ajudam a tornar a edição mais segura, mas continuam sendo recomendados backups próprios, especialmente ao trabalhar com ROM hacks que já possuem estruturas modificadas.</p>
 
+
+<h4>Trainer Editor</h4>
+<p>O <strong>Trainer Editor</strong> permite personalizar os treinadores encontrados durante o jogo. Nele, é possível modificar nomes, classes, aparência, músicas de batalha, itens utilizados pelos treinadores e os Pokémon que fazem parte de suas equipes.</p>
+<p>A ferramenta também permite ajustar como o treinador se comporta durante a batalha, escolher golpes específicos para seus Pokémon e reaproveitar configurações de outros treinadores. Tudo fica organizado na mesma janela para facilitar a edição.</p>
+
+<h5>Lista de treinadores e pesquisa</h5>
+<p>Na parte esquerda da janela fica a lista de treinadores disponíveis na ROM, acompanhados de suas respectivas classes.</p>
+<p>O campo <strong>Buscar</strong> permite encontrar um treinador pelo nome ou pela classe. A pesquisa filtra a lista enquanto o usuário digita, sem precisar percorrer todos os registros manualmente.</p>
+<p>Na parte superior também existem dois campos de <strong>ID</strong>: um apresenta o número do treinador em formato decimal e o outro em hexadecimal. Os dois servem para localizar o mesmo treinador de maneiras diferentes; selecionar um ID não altera sua posição ou identificação no jogo.</p>
+
+<h5>Identificação: nome e Trainer Class</h5>
+<p>O grupo <strong>Identificação</strong> reúne o nome do treinador e sua <strong>Trainer Class</strong>, isto é, a categoria exibida pelo jogo, como Youngster, Bug Catcher ou outra classe já existente na ROM.</p>
+<p>O campo <strong>Name</strong> permite alterar o nome individual do treinador. Depois de digitar o texto desejado, o botão <strong>Renomear</strong> grava esse nome.</p>
+<p>Já o campo <strong>Nome da Classe</strong> possui outro botão <strong>Renomear</strong>, usado para mudar o nome da classe selecionada. Existe ainda a <strong>Lista de Classes</strong>, que permite escolher a classe associada àquele treinador.</p>
+<p><strong>Atenção:</strong> o nome de uma Trainer Class é compartilhado por todos os treinadores que utilizam essa mesma classe. Se você renomear a classe <em>Youngster</em>, por exemplo, os demais treinadores que usam essa classe também passarão a apresentar o novo nome. A Suite informa essa situação antes de confirmar a alteração.</p>
+<p>Trocar apenas a classe de um treinador não renomeia a classe escolhida. Os nomes também respeitam o espaço disponível na ROM para evitar textos maiores do que o jogo consegue armazenar.</p>
+
+<h5>Decap, Decap All e suas engrenagens</h5>
+<p>Os botões <strong>Decap</strong> e <strong>Decap All</strong> ajudam a corrigir nomes escritos inteiramente em letras maiúsculas, deixando-os com uma apresentação mais natural.</p>
+<p>O <strong>Decap</strong> atua sobre o treinador selecionado, enquanto <strong>Decap All</strong> permite aplicar esse tratamento a vários treinadores de uma só vez.</p>
+<p>Ao lado de cada botão há uma <strong>engrenagem de configuração</strong>. Ela permite escolher se a alteração deve atingir somente os nomes dos treinadores ou também os nomes de suas classes.</p>
+<p>Como os nomes de classes são compartilhados, vale conferir essa escolha antes de executar <strong>Decap All</strong>. A operação em massa não começa silenciosamente caso existam alterações pendentes na janela.</p>
+
+<h5>Aparência e Gender</h5>
+<p>O grupo <strong>Aparência</strong> mostra uma prévia do sprite do treinador. O campo numérico abaixo permite escolher outro <strong>Trainer Sprite</strong> já existente na ROM.</p>
+<p>Por exemplo, é possível atribuir a um treinador o gráfico de uma classe diferente, desde que o ID escolhido corresponda a um sprite válido para aquela ROM.</p>
+<p>A mesma área oferece as opções <strong>Male</strong> e <strong>Female</strong>, que representam a informação de gênero armazenada no registro do treinador.</p>
+<p>Essa opção permite selecionar gráficos existentes, mas <strong>não importa novos sprites nem cria novas imagens de treinadores</strong> por conta própria.</p>
+
+<h5>Battle Music e Battle Style</h5>
+<p>O grupo <strong>Batalha</strong> contém as opções relacionadas à apresentação e ao funcionamento do confronto.</p>
+<p><strong>Battle Music</strong> permite escolher o identificador de música associado ao treinador. A lista considera as músicas disponíveis na configuração daquela ROM.</p>
+<p><strong>Battle Style</strong> define se o treinador utilizará uma <strong>Single Battle</strong> ou uma <strong>Double Battle</strong>. Assim, o usuário pode ajustar o estilo de batalha previsto pelo jogo para esse encontro.</p>
+<p>Essas opções modificam informações já utilizadas pela ROM; elas não adicionam músicas ou sistemas de batalha que ainda não existam no projeto.</p>
+
+<h5>AI: comportamento do treinador durante a batalha</h5>
+<p>O campo <strong>AI</strong> reúne as opções que influenciam as decisões do treinador controlado pelo jogo.</p>
+<p>Ao clicar na <strong>engrenagem</strong> ao lado desse campo, é aberta uma janela com as opções de AI separadas, permitindo marcar ou desmarcar os comportamentos disponíveis. Cada opção apresenta uma descrição para ajudar a entender sua finalidade.</p>
+<p>É possível, por exemplo, trabalhar com as regras que o jogo utiliza para avaliar golpes e situações de batalha, conforme os comportamentos implementados na engine da ROM.</p>
+<p>O botão <strong>Aplicar</strong> leva as opções escolhidas de volta ao Trainer Editor. A gravação definitiva dessas alterações acontece ao utilizar <strong>Salvar Trainer</strong>.</p>
+<p><strong>Importante:</strong> marcar uma opção de AI não cria um novo comportamento. A ROM precisa possuir suporte para ele; opções desconhecidas ou personalizadas podem ter efeitos diferentes dependendo da ROM hack.</p>
+
+<h5>Price Money e Money Rate</h5>
+<p>O editor também mostra os campos <strong>Price Money</strong> e <strong>Money Rate</strong>, relacionados à recompensa em dinheiro recebida após vencer o treinador.</p>
+<p><strong>Price Money</strong> apresenta uma prévia calculada com base no nível dos Pokémon da equipe e na taxa de recompensa da classe.</p>
+<p><strong>Money Rate</strong> mostra essa taxa, que pertence à <strong>Trainer Class</strong> e pode ser compartilhada por diversos treinadores.</p>
+<p>Os dois campos são <strong>somente para consulta</strong> nessa janela. Eles não podem ser alterados diretamente por <strong>Salvar Trainer</strong>.</p>
+
+<h5>Battle Items e Custom Held Item</h5>
+<p>O grupo <strong>Itens</strong> contém quatro espaços para configurar os <strong>Battle Items</strong> que o treinador poderá utilizar em batalha, conforme as regras da ROM.</p>
+<p>É possível selecionar os itens em cada uma dessas posições e salvar a configuração com os demais dados do treinador.</p>
+<p>O grupo possui ainda a opção <strong>Custom Held Item</strong>. Apesar de ficar perto dos Battle Items, ela possui uma finalidade diferente: indica se os Pokémon da equipe utilizam a estrutura que permite guardar <strong>Held Items</strong> individuais.</p>
+<p>Em outras palavras, os <strong>Battle Items</strong> são itens associados ao treinador para o combate; os <strong>Held Items</strong> pertencem aos próprios Pokémon da equipe.</p>
+
+<h5>Data Party: equipe de Pokémon</h5>
+<p>A área <strong>Data Party</strong> reúne os Pokémon utilizados pelo treinador. Uma equipe pode conter até <strong>seis Pokémon</strong>.</p>
+<p>Ao selecionar um membro da equipe, é possível consultar ou modificar:</p>
+<ul>
+<li><strong>Specie:</strong> a espécie do Pokémon;</li>
+<li><strong>Lv.:</strong> o nível que ele terá na batalha;</li>
+<li><strong>Held Item:</strong> o item que ele carrega, quando a equipe utiliza itens individuais;</li>
+<li><strong>EV's:</strong> o campo numérico exibido com esse nome na interface;</li>
+<li><strong>Move 1 a Move 4:</strong> os golpes do Pokémon, quando a equipe utiliza golpes personalizados.</li>
+</ul>
+<p>O campo chamado <strong>EV's</strong> merece uma observação: apesar do nome apresentado na interface, ele corresponde a um <strong>valor interno usado para definir os IVs dos Pokémon de treinadores</strong>, não à distribuição convencional de EVs obtidos por treinamento.</p>
+<p>Quando <strong>Custom Moves</strong> está desativado, a ROM utiliza os golpes padrão previstos para a espécie e o nível do Pokémon. Ao ativar <strong>Custom Moves</strong> na configuração da equipe, passa a ser possível definir diretamente os quatro golpes.</p>
+<p>A janela também apresenta uma prévia do sprite do Pokémon selecionado e uma fileira com os membros da equipe, facilitando a visualização da ordem em que estão organizados.</p>
+
+<h5>Adicionar, remover, duplicar e reorganizar Pokémon</h5>
+<p>Abaixo da lista da Data Party ficam os comandos utilizados para administrar a equipe:</p>
+<ul>
+<li><strong>+</strong> adiciona um Pokémon, respeitando o limite de seis membros;</li>
+<li><strong>−</strong> remove o Pokémon selecionado;</li>
+<li><strong>Dup</strong> cria uma cópia de um membro já existente, quando há espaço;</li>
+<li><strong>↑</strong> move o Pokémon selecionado para uma posição anterior;</li>
+<li><strong>↓</strong> move o Pokémon para a posição seguinte.</li>
+</ul>
+<p>Essas alterações podem ser conferidas na própria janela antes de serem gravadas. A equipe só é atualizada na ROM depois que o usuário confirma o salvamento do treinador.</p>
+
+<h5>Data Offset, Editar e Carregar</h5>
+<p>O campo <strong>Data Offset</strong> mostra a região da ROM em que a equipe do treinador está armazenada. Esse campo é informativo, mas há dois botões relacionados a ele.</p>
+<p><strong>Editar</strong> abre uma janela para ajustar a quantidade de Pokémon, escolher se a equipe possui <strong>Custom Held Item</strong> e <strong>Custom Moves</strong> e decidir onde seus dados serão armazenados.</p>
+<p>Quando a nova equipe precisa de mais espaço, o usuário pode utilizar <strong>Buscar área livre</strong> para encontrar uma região disponível. O editor também pode aproveitar o espaço atual quando ele já for suficiente.</p>
+<p><strong>Carregar</strong> permite visualizar uma equipe armazenada em outro endereço da ROM e trazer seus Pokémon para a edição atual. A janela mostra uma prévia antes de aplicar a seleção.</p>
+<p>Carregar uma equipe de outro endereço <strong>não faz o treinador passar automaticamente a compartilhar aquele mesmo endereço</strong>. Os dados são copiados para a edição, reduzindo o risco de modificar sem querer a equipe de outro treinador.</p>
+<p>Quando é necessário mover a equipe para uma nova região, a Suite procura preservar os dados anteriores, pois eles ainda podem estar sendo utilizados em outros locais da ROM.</p>
+
+<h5>Preferências de Party/Repoint</h5>
+<p>A <strong>engrenagem</strong> que fica próxima aos botões de salvamento abre as preferências da equipe e de suas operações de repoint.</p>
+<p>Nessa janela, o usuário pode escolher se a Suite deverá <strong>buscar espaço livre automaticamente</strong> quando a equipe não couber no local atual e consultar onde a busca começa.</p>
+<p>Essa busca utiliza a configuração geral de <strong>Free Space</strong> da Suite, apresentada anteriormente neste changelog.</p>
+<p>Também há opções avançadas relacionadas à autorização para utilizar um endereço já ocupado e à exibição da confirmação antes de salvar. Essas opções devem ser utilizadas com cuidado, especialmente em ROM hacks que possuem dados compartilhados.</p>
+<p>Por segurança, os dados antigos de uma equipe movida são preservados, já que outro treinador pode continuar utilizando a mesma região.</p>
+
+<h5>Salvar Trainer e Recarregar</h5>
+<p>O botão <strong>Salvar Trainer</strong> grava as alterações pendentes do treinador e de sua equipe, verificando se os novos dados cabem nos campos e se não irão substituir acidentalmente informações importantes da ROM.</p>
+<p>O atalho <code>Ctrl+S</code> também pode ser utilizado para salvar. Dependendo das preferências escolhidas, a Suite mostra uma confirmação antes de gravar.</p>
+<p>O botão <strong>Recarregar</strong> permite ler novamente os dados do treinador na ROM. O atalho correspondente é <code>Ctrl+R</code>.</p>
+<p>Se houver mudanças ainda não salvas, a Suite oferece a oportunidade de <strong>Salvar, Descartar ou Cancelar</strong> antes de recarregar ou trocar de treinador.</p>
+
+<h5>Importar e Exportar</h5>
+<p>O botão <strong>Exportar</strong> permite guardar as configurações do treinador em um arquivo <strong>JSON</strong>, incluindo informações gerais e os Pokémon de sua equipe.</p>
+<p>O botão <strong>Importar</strong> permite trazer essas informações de volta, por exemplo, para reaproveitar a composição de uma equipe em outro treinador ou em outro projeto.</p>
+<p>Antes da importação, a Suite confere se os Pokémon, itens, golpes e classes mencionados no arquivo estão disponíveis na ROM carregada. Caso existam diferenças importantes entre a ROM de origem e a atual, apresenta um aviso.</p>
+<p>Os dados importados são preparados para o <strong>treinador atualmente selecionado</strong>. Eles não substituem automaticamente o ID desse treinador nem fazem sua equipe apontar para um endereço da ROM original do arquivo. O usuário pode revisar as alterações antes de utilizar <strong>Salvar Trainer</strong>.</p>
+
+<h5>Proteção das alterações</h5>
+<p>Além de avisar sobre modificações não salvas, o Trainer Editor procura proteger equipes compartilhadas e verificar os dados antes e depois de gravá-los.</p>
+<p>Se mais de um treinador utilizar a mesma equipe armazenada na ROM, a Suite pode escolher uma nova região para as alterações, evitando que a modificação de um treinador mude também os demais.</p>
+<p>Essas proteções ajudam a trabalhar com maior segurança, mas ainda é recomendado manter uma cópia de segurança da ROM antes de realizar mudanças grandes, sobretudo em projetos com tabelas e equipes expandidas.</p>
+
 </article>
