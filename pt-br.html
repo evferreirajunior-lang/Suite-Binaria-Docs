@@ -1,0 +1,197 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Documentação completa da Suite Binária"><title>Português (Brasil) — Suite Binária v0.02</title><link rel="stylesheet" href="assets/style.css"></head><body><header class="topbar"><div class="wrap"><a class="brand" href="index.html">Suite <span>Binária</span></a><nav class="nav" aria-label="Languages"><a href="pt-br.html">Português (Brasil)</a><a href="en.html">English</a><a href="es.html">Español</a><a href="fr.html">Français</a><a href="it.html">Italiano</a></nav></div></header><main><section class="lang-hero"><div class="wrap"><a class="home-link" href="index.html">← Suite Binária</a><h1>Português (Brasil)</h1><p class="lead">Documentação completa da Suite Binária</p></div></section><div class="wrap"><article class="readme-shell"><header class="readme-head"><h2>Suite Binária v0.02</h2><a href="index.html">Todos os idiomas</a></header><div class="readme"><pre>Refiz toda a estrutura da ferramenta, adicionando novas funcionalidades, opções e recursos.
+
+O suporte a ROMs abrange:
+
+Pokémon Emerald
+Pokémon FireRed
+Pokémon Ruby
+Pokémon Sapphire
+Pokémon LeafGreen
+
+Todas em suas versões 1.0 / Rev 0, ou seja, as versões originais de lançamento dumpadas dos cartuchos.
+
+Cada ROM possui seu próprio perfil e suas próprias estruturas. A Suite não simplesmente assume que todas funcionam como Emerald ou FireRed; diferenças entre as engines são tratadas individualmente.
+
+Pokémon Editor
+
+Editor dividido em abas para Sprites, Base Stats, Evolutions, Learnsets, Egg Moves e Pokédex, permitindo editar dados das espécies, gráficos, paletas, posições em batalha, evoluções, golpes, compatibilidades e informações da Pokédex.
+
+Sprites e gráficos de Pokémon
+
+Suporte a Front Sprite, Back Sprite, paletas normal/shiny, ícones e footprints, com importação, exportação e repoint quando necessário.
+
+A Suite também procura evitar alterações acidentais em recursos compartilhados por mais de um Pokémon.
+
+Base Stats
+
+Edição de HP, Attack, Defense, Speed, Sp. Attack, Sp. Defense, Types, Catch Rate, Base Experience, EV Yield, Held Items, Gender Ratio, Egg Groups, Abilities, Growth Rate e demais campos da estrutura da espécie.
+
+Types customizados
+
+ROM hacks com Types adicionais, como Fairy, Sound ou outros, podem configurá-los manualmente. A Suite não impõe IDs ou expansões específicas de uma determinada hack.
+
+Evoluções customizáveis
+
+Permite editar método, parâmetro e espécie resultante.
+
+Métodos evolutivos adicionais usados por ROM hacks também podem ser mapeados pelo usuário.
+
+Isso NÃO adiciona novos métodos evolutivos à ROM; apenas permite que IDs já existentes sejam reconhecidos e configurados corretamente pela Suite.
+
+Learnsets, TM/HM, Tutors e Egg Moves
+
+Edição de golpes aprendidos por nível, compatibilidades e Egg Moves, com suporte a repoint e Free Space quando as estruturas precisam crescer.
+
+Pokédex Editor
+
+Edição de Category, Height, Weight, números da Pokédex, cores, escalas e descrições.
+
+Ruby e Sapphire possuem suporte às duas páginas de texto utilizadas originalmente por essas versões.
+
+Integração com PokéAPI
+
+Dados da PokéAPI podem auxiliar no preenchimento de Base Stats, Evolutions, Learnsets, Egg Moves e Pokédex.
+
+Os dados são adaptados às estruturas e IDs existentes no projeto atual, em vez de serem gravados cegamente na ROM.
+
+PokéAPI Data Manager
+
+Permite baixar e manter localmente os dados utilizados pela integração, com cache, retomada de downloads, verificação de integridade e downloads paralelos.
+
+Depois de baixados, grande parte das consultas pode ser realizada offline.
+
+Move Editor
+
+Edição de nome, descrição, Power, Type, Accuracy, PP, Effect, Target, Priority, Category, flags e demais campos.
+
+Descrições maiores podem ser reapontadas automaticamente.
+
+Ability Editor
+
+Edição de nomes, descrições e dados associados às Abilities, incluindo tabelas expandidas configuradas pelo usuário.
+
+Item Editor
+
+Edição de nomes, descrições, preços, parâmetros internos, funções, gráficos e outras propriedades da estrutura de Items.
+
+Item Effects Editor
+
+Permite interpretar e modificar efeitos de Items, como cura, PP, status, X-Items, EVs, Friendship e outros.
+
+Novos blocos podem ser criados automaticamente em Free Space quando uma entrada ainda não possui efeito.
+
+Trainer Editor
+
+Edição de Trainer Class, sprite, nome, gênero, música, Battle Style, Battle Items, AI, dinheiro e party.
+
+Suporta os formatos de party da Gen III, incluindo Held Items e movesets customizados.
+
+Trade Editor
+
+Edição das trocas com NPCs, incluindo Pokémon solicitado/recebido, nickname, OT, IDs, IVs, Personality, Held Item, Ability, Contest Stats, Sheen, Mail e outros campos.
+
+Expansão automática de Trades
+
+A tabela de Trades pode ser expandida diretamente pela Suite.
+
+Primeiro é tentado o crescimento no endereço atual; um novo repoint é realizado somente quando não existe espaço contíguo suficiente.
+
+Blocos criados pela própria Suite recebem uma pequena assinatura de segurança para evitar que aquela região seja reutilizada posteriormente como Free Space comum.
+
+Trades Total configurável
+
+ROM hacks que já possuam Trades expandidos por outras ferramentas podem informar manualmente a quantidade de registros existentes.
+
+A Suite não tenta determinar essa quantidade analisando bytes aleatórios da ROM.
+
+Reordenação de Trades
+
+Trades podem ser movidos para cima ou para baixo, trocando o registro completo.
+
+Como o índice é utilizado pelos scripts do jogo, a Suite alerta sobre a necessidade de atualizar os scripts após uma reordenação.
+
+Suporte a ROMs expandidas
+
+Pokémon, Moves, Items, Abilities, Trainers, Trades e outras estruturas não ficam limitados às quantidades de uma ROM vanilla.
+
+Os valores originais servem apenas como configuração inicial; cada ROM hack pode utilizar suas próprias quantidades e offsets.
+
+Sistema de .offset por ROM
+
+Tabelas reapontadas ou expandidas podem possuir endereços e quantidades configurados individualmente para cada ROM.
+
+Assim, valores específicos de uma hack não se tornam automaticamente padrão para todas as outras.
+
+Free Space configurável
+
+É possível definir a partir de onde a Suite deve procurar espaço livre e se a ROM utiliza FF ou 00 como byte de preenchimento.
+
+Free Space Manager
+
+Analisa regiões livres da ROM e auxilia operações de repoint, levando em consideração tabelas conhecidas, estruturas existentes e áreas reservadas pela própria Suite.
+
+Proteção contra recursos compartilhados
+
+Textos, gráficos e outras estruturas podem ser compartilhados por várias entradas.
+
+Quando necessário, a Suite evita modificar silenciosamente um recurso utilizado por mais de uma delas.
+
+Escrita atômica e validação
+
+Operações críticas possuem verificações antes e depois da gravação e podem restaurar os bytes anteriores caso uma escrita não seja concluída corretamente.
+
+Detecção de alteração externa
+
+Se outro programa modificar a ROM enquanto ela estiver aberta na Suite, a alteração pode ser detectada antes que uma versão antiga mantida em memória sobrescreva os novos dados.
+
+Undo / Redo global
+
+Alterações realizadas em diferentes editores podem fazer parte de um histórico comum da sessão, utilizando Ctrl+Z e Ctrl+Y.
+
+Backup Delta
+
+Em vez de sempre gerar uma cópia completa da ROM, a Suite pode armazenar apenas as diferenças causadas pelas alterações, que posteriormente podem ser inspecionadas e restauradas.
+
+Projetos .sbproj
+
+Permitem armazenar identificação, offsets e demais configurações específicas de uma ROM hack sem incluir a própria ROM no arquivo de projeto.
+
+Explorador Global de Referências
+
+Procura onde Pokémon, Moves, Items e Abilities estão sendo utilizados em diferentes estruturas, ajudando a localizar dependências antes de modificações.
+
+Change Inspector
+
+Exibe os bytes modificados durante a sessão, incluindo offset, tamanho, valor anterior, valor novo e a operação responsável.
+
+ROM Health Check
+
+Executa uma análise somente de leitura procurando referências inválidas, IDs incompatíveis, ponteiros suspeitos, overlaps, problemas estruturais e conflitos relacionados ao Free Space.
+
+Importação e exportação
+
+Diversos editores permitem importar e exportar dados individualmente ou em lote utilizando formatos como JSON, CSV e PNG.
+
+Rascunhos independentes
+
+Alterações não salvas não desaparecem silenciosamente ao trocar de registro ou fechar um editor.
+
+Quando necessário, a Suite oferece Salvar, Descartar ou Cancelar.
+
+Interface portátil
+
+Configurações, aliases, cache da PokéAPI, logs e preferências ficam na pasta UserData, permitindo manter a Suite portátil sem depender do AppData do Windows.
+
+Cinco idiomas
+
+A interface atualmente possui:
+
+Português do Brasil
+English
+Español
+Français
+Italiano
+
+Atalhos e navegação
+
+Há atalhos para salvamento, PokéAPI, Undo/Redo e navegação entre partes da interface.</pre></div></article></div></main><footer class="footer"><div class="wrap">Suite Binária · v0.02</div></footer></body></html>
