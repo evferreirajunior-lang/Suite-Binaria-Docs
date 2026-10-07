@@ -11,12 +11,12 @@
 <header class="topbar">
   <div class="wrap">
     <a class="brand" href="index.html">Suite <span>Binária</span></a>
-    <nav class="nav" aria-label="Idiomas da documentação">
-      <a href="pt-br.html">Português (Brasil)</a>
-      <a href="en.html">English</a>
-      <a href="es.html">Español</a>
-      <a href="fr.html">Français</a>
-      <a href="it.html">Italiano</a>
+    <nav class="nav" data-i18n-aria-label="siteLanguageNav" aria-label="Selecionar idioma da página">
+      <button type="button" data-site-lang="pt-br" aria-pressed="true">Português (Brasil)</button>
+      <button type="button" data-site-lang="en" aria-pressed="false">English</button>
+      <button type="button" data-site-lang="es" aria-pressed="false">Español</button>
+      <button type="button" data-site-lang="fr" aria-pressed="false">Français</button>
+      <button type="button" data-site-lang="it" aria-pressed="false">Italiano</button>
     </nav>
   </div>
 </header>
@@ -25,11 +25,11 @@
   <section class="hero">
     <div class="wrap">
       <h1>Suite Binária</h1>
-      <p class="lead">Ferramenta de edição para ROMs Pokémon da terceira geração, com perfis próprios para Emerald, FireRed, Ruby, Sapphire e LeafGreen em suas versões 1.0 / Rev 0.</p>
+      <p class="lead" data-i18n="heroLead">Ferramenta de edição para ROMs Pokémon da terceira geração, com perfis próprios para Emerald, FireRed, Ruby, Sapphire e LeafGreen em suas versões 1.0 / Rev 0.</p>
       <div class="meta">
         <span class="pill">Pokémon Gen III</span>
-        <span class="pill">5 ROMs suportadas</span>
-        <span class="pill">5 idiomas</span>
+        <span class="pill" data-i18n="supportedRoms">5 ROMs suportadas</span>
+        <span class="pill" data-i18n="availableLanguages">5 idiomas</span>
       </div>
     </div>
   </section>
@@ -38,24 +38,24 @@
     <div class="wrap">
       <div class="section-heading">
         <div>
-          <span class="section-kicker">Histórico de versões</span>
-          <h2>Changelog</h2>
-          <p class="section-intro">Selecione uma versão e, em seguida, o idioma para visualizar as alterações diretamente nesta página.</p>
+          <span class="section-kicker" data-i18n="historyKicker">Histórico de versões</span>
+          <h2 data-i18n="changelogHeading">Changelog</h2>
+          <p class="section-intro" data-i18n="changelogIntro">Selecione uma versão e o idioma do changelog para visualizar as informações diretamente nesta página.</p>
         </div>
       </div>
 
       <div class="changelog-panel">
         <div class="changelog-controls">
           <label class="field">
-            <span>Changelog Version</span>
-            <select id="changelog-version" aria-label="Selecionar versão do changelog">
-              <option value="initial-release" selected>Release Inicial</option>
+            <span data-i18n="versionLabel">Versão do changelog</span>
+            <select id="changelog-version" data-i18n-aria-label="versionAria" aria-label="Selecionar versão do changelog">
+              <option value="initial-release" selected data-i18n="initialRelease">Release Inicial</option>
               <option value="v0.02">v0.02</option>
             </select>
           </label>
 
-          <div class="language-picker" aria-label="Selecionar idioma do changelog">
-            <span class="language-picker-label">Idioma</span>
+          <div class="language-picker" data-i18n-aria-label="changelogLanguageAria" aria-label="Selecionar idioma do changelog">
+            <span class="language-picker-label" data-i18n="changelogLanguageLabel">Idioma do changelog</span>
             <div class="language-buttons">
               <button type="button" data-changelog-lang="pt-br" aria-pressed="false">Português</button>
               <button type="button" data-changelog-lang="en" aria-pressed="false">English</button>
@@ -70,35 +70,21 @@
 
         <div id="changelog-content" class="changelog-viewer" aria-live="polite" aria-busy="false">
           <div class="changelog-placeholder">
-            <strong>Escolha um idioma.</strong>
-            <span>O changelog da versão selecionada será carregado aqui.</span>
+            <strong data-i18n="selectLanguage">Escolha um idioma.</strong>
+            <span data-i18n="changelogWillLoad">O changelog da versão selecionada será carregado aqui.</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section documentation-section">
-    <div class="wrap">
-      <span class="section-kicker">Leia-me completo</span>
-      <h2>Documentação</h2>
-      <p class="section-intro">Escolha o idioma para abrir a documentação completa da Suite Binária.</p>
-
-      <div class="language-grid">
-        <a class="language-card" href="pt-br.html"><div><strong>Português (Brasil)</strong><br><small>Leia-me completo</small></div><span class="arrow">Abrir →</span></a>
-        <a class="language-card" href="en.html"><div><strong>English</strong><br><small>Full documentation</small></div><span class="arrow">Open →</span></a>
-        <a class="language-card" href="es.html"><div><strong>Español</strong><br><small>Documentación completa</small></div><span class="arrow">Abrir →</span></a>
-        <a class="language-card" href="fr.html"><div><strong>Français</strong><br><small>Documentation complète</small></div><span class="arrow">Ouvrir →</span></a>
-        <a class="language-card" href="it.html"><div><strong>Italiano</strong><br><small>Documentazione completa</small></div><span class="arrow">Apri →</span></a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
-  <div class="wrap">Suite Binária · Documentação e histórico de versões</div>
+  <div class="wrap" data-i18n="footer">Suite Binária · Histórico de versões</div>
 </footer>
 
+<script src="assets/site-i18n.js" defer></script>
 <script src="assets/changelog.js" defer></script>
 </body>
 </html>
