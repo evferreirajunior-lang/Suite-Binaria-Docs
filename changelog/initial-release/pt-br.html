@@ -562,4 +562,172 @@
 <p>Como os campos possuem botões de gravação independentes, o aviso também ajuda a identificar qual parte ainda precisa ser salva. A Suite verifica nomes, endereços e dados antes de aplicar mudanças para reduzir o risco de gravações incorretas.</p>
 <p>Em ROM hacks com tabelas expandidas ou funções personalizadas, é recomendado conferir a configuração dos Offsets e manter uma cópia de segurança antes de grandes alterações.</p>
 
+
+<h4 id="pokemon-editor">Pokémon Editor</h4>
+<p>O <strong>Pokémon Editor</strong> é uma das partes mais completas da Suite Binária. Ele reúne diferentes ferramentas para personalizar as espécies de Pokémon presentes na ROM: gráficos, atributos, evoluções, golpes aprendidos, Egg Moves e informações exibidas na Pokédex.</p>
+<p>Em vez de apresentar todas essas informações em uma única tela, a Suite organiza o editor em <strong>seis abas</strong>. Assim, o usuário pode trabalhar em uma área de cada vez, sem precisar aprender todas as opções antes de começar.</p>
+<nav class="changelog-toc" aria-label="Partes do Pokémon Editor">
+  <strong>Conteúdo do Pokémon Editor</strong>
+  <a href="#pokemon-geral">Interface e comandos gerais</a>
+  <a href="#pokemon-sprites">Sprites</a>
+  <a href="#pokemon-base-stats">Base Stats</a>
+  <a href="#pokemon-evolutions">Evolutions</a>
+  <a href="#pokemon-learnsets">Learnsets</a>
+  <a href="#pokemon-egg-moves">Egg Moves</a>
+  <a href="#pokemon-pokedex">Pokédex</a>
+  <a href="#pokemon-pokeapi">Integração PokéAPI</a>
+  <a href="#pokemon-seguranca">Salvamento e cuidados</a>
+</nav>
+
+<h5 id="pokemon-geral">Interface e comandos gerais</h5>
+<p>À esquerda da janela fica o painel <strong>Seleção e Ações</strong>, compartilhado por todas as abas. É nele que o usuário escolhe o Pokémon que deseja editar, altera seu nome e encontra os principais comandos de importação, exportação e salvamento.</p>
+<p>Na parte direita ficam as abas <strong>Sprites, Base Stats, Evolutions, Learnsets, Egg Moves e Pokédex</strong>. Ao trocar de aba, o Pokémon selecionado continua sendo o mesmo, mas os campos exibidos passam a corresponder à nova área.</p>
+
+<h6>Total Pokémon: quantidade de entradas reconhecidas</h6>
+<p>O campo <strong>Total Pokémon</strong> informa quantas entradas da tabela de espécies a Suite deve apresentar, incluindo o registro de <strong>ID 0</strong>. Nas ROMs originais reconhecidas pelo editor, o total padrão é de <strong>412 entradas</strong>, incluindo posições reservadas que não correspondem a espécies comuns.</p>
+<p>Em uma ROM hack expandida, esse número pode ser aumentado para acompanhar a quantidade de Pokémon que já foi implementada no projeto.</p>
+<p><strong>Alterar Total Pokémon não cria espécies novas nem expande automaticamente todas as tabelas da ROM.</strong> O usuário precisa ter preparado as estruturas necessárias previamente. Informar uma quantidade incorreta pode fazer o editor tentar interpretar outros dados como se fossem Pokémon.</p>
+
+<h6>Lista, pesquisa e navegação</h6>
+<p>A lista principal apresenta o ID e o nome de cada Pokémon reconhecido. Basta selecionar uma entrada para carregar seus dados nas abas.</p>
+<p>O campo <strong>Buscar</strong> permite localizar uma espécie por parte do nome, e o atalho <code>Ctrl+F</code> facilita o acesso à pesquisa. Também existe uma caixa de seleção compacta ao lado de Total Pokémon que permite navegar rapidamente entre as espécies, inclusive usando a roda do mouse quando o cursor está sobre ela.</p>
+<p>O atalho <strong>Ctrl esquerdo + Tab</strong> alterna entre as abas do Pokémon Editor sem precisar clicar em cada uma com o mouse.</p>
+
+<h6>Renomear, Decap e Decap All</h6>
+<p>Depois de selecionar um Pokémon, seu nome aparece em um campo editável. O botão <strong>Renomear</strong> grava o novo nome na ROM, respeitando o espaço disponível na tabela.</p>
+<p>O botão <strong>Decap</strong> ajuda a transformar nomes escritos totalmente em maiúsculas em uma apresentação mais natural. Por exemplo, <code>BULBASAUR</code> pode passar a aparecer como <code>Bulbasaur</code>.</p>
+<p><strong>Decap All</strong> aplica o mesmo tratamento aos nomes de várias espécies, após a confirmação do usuário. Esses comandos alteram nomes; eles não mudam o ID nem reorganizam a tabela de Pokémon.</p>
+
+<h6>Import, Export e Salvar: comandos que dependem da aba</h6>
+<p>Os botões <strong>Import</strong> e <strong>Export</strong> trabalham com a <strong>aba que está aberta naquele momento</strong>. Por exemplo, quando Base Stats está selecionada, a exportação reúne dados de Base Stats; quando Evolutions está selecionada, reúne as evoluções daquele Pokémon.</p>
+<p>Os arquivos utilizados são <strong>JSON</strong>, apropriados para guardar informações que poderão ser utilizadas novamente na Suite. Em geral, a importação apresenta os valores como alterações a revisar antes do salvamento.</p>
+<p>Na aba <strong>Sprites</strong>, esses botões gerais cuidam das <strong>referências e endereços gráficos</strong>, e não dos desenhos em si. Para importar ou exportar imagens PNG, devem ser utilizados os botões próprios dos painéis de gráficos.</p>
+<p>O botão <strong>Salvar</strong>, na coluna esquerda, também acompanha a aba ativa, assim como o atalho <code>Ctrl+S</code>. Ele <strong>não significa “salvar automaticamente tudo o que está aberto em todas as abas”</strong>. Cada aba possui seu próprio conjunto de alterações e algumas ações gráficas têm botões de gravação específicos.</p>
+
+<h6>Alterações pendentes</h6>
+<p>Quando um campo foi alterado mas ainda não foi salvo, a Suite sinaliza a existência de mudanças pendentes. Antes de trocar de Pokémon, descartar um rascunho ou fechar o editor, ela procura oferecer a possibilidade de salvar, descartar ou cancelar a operação.</p>
+<p>Isso permite, por exemplo, trabalhar em Base Stats sem apagar acidentalmente um texto que ainda esteja sendo editado na Pokédex.</p>
+
+<h5 id="pokemon-sprites">Aba Sprites: gráficos e aparência dos Pokémon</h5>
+<p>A aba <strong>Sprites</strong> permite visualizar e modificar os gráficos usados para representar cada Pokémon dentro do jogo. Ela inclui a aparência vista de frente e de costas, as versões com cores normais e Shiny, os ícones, os Footprints e a posição dos Pokémon durante uma batalha.</p>
+<p>Boa parte da aba apresenta uma <strong>prévia visual</strong>, para que o usuário confira como os gráficos estão aparecendo antes de continuar.</p>
+
+<h6>Main Sprites: Front Sprite, Back Sprite e paletas</h6>
+<p>O painel <strong>Main Sprites</strong> apresenta as imagens principais do Pokémon:</p>
+<ul>
+<li><strong>Front Sprite:</strong> aparência do Pokémon quando ele aparece como adversário;</li>
+<li><strong>Back Sprite:</strong> aparência vista por trás, normalmente utilizada quando o Pokémon pertence ao jogador;</li>
+<li><strong>Normal Pal:</strong> conjunto de cores da aparência comum;</li>
+<li><strong>Shiny Pal:</strong> conjunto de cores da versão Shiny.</li>
+</ul>
+<p>Ao lado desses campos aparecem os quatro previews correspondentes, combinando os gráficos de frente e de costas com as paletas normal e Shiny.</p>
+<p>Os valores mostrados nos campos são <strong>Offsets</strong>, isto é, endereços dentro da ROM que indicam onde os gráficos e as cores estão armazenados.</p>
+
+<h6>Import Sprite e Export Sprite</h6>
+<p><strong>Export Sprite</strong> cria uma imagem PNG reunindo as aparências de frente e de costas, normais e Shiny. O arquivo pode ser editado em um programa de imagens e depois reutilizado na Suite.</p>
+<p>A folha exportada normalmente possui <strong>256 × 64 pixels</strong>: quatro quadros de 64 × 64 pixels, organizados em sequência. Quando o Pokémon possui uma segunda linha de animação compatível, a imagem pode ter <strong>256 × 128 pixels</strong>.</p>
+<p>O botão <strong>Import Sprite</strong> aceita esse mesmo formato de folha. A Suite prepara os gráficos e as paletas para o padrão utilizado pelo jogo, confere se podem ser armazenados e, quando necessário, procura outro espaço disponível na ROM.</p>
+<p>Se o gráfico importado já existir em outra região, a Suite pode reaproveitá-lo, em vez de gravar uma cópia desnecessária. Também procura proteger imagens e paletas compartilhadas por outros Pokémon.</p>
+<p><strong>Import Sprite realiza uma operação própria de gravação.</strong> Portanto, não deve ser confundido com o botão Import da coluna esquerda, que importa somente referências gráficas.</p>
+
+<h6>Repoint de sprites e paletas</h6>
+<p>O botão <strong>Repoint</strong> do painel Main Sprites permite indicar outros endereços para os gráficos e paletas do Pokémon. É útil quando o usuário já possui os dados gráficos em outra região da ROM e deseja aproveitá-los.</p>
+<p>Antes de aceitar a mudança, a Suite verifica se os endereços informados realmente contêm dados que podem ser utilizados como gráficos e paletas.</p>
+<p><strong>Repoint não cria nem desenha uma nova sprite.</strong> Ele modifica a referência para um gráfico já existente. Para substituir o desenho a partir de um PNG, use <strong>Import Sprite</strong>.</p>
+
+<h6>Animation (Emerald)</h6>
+<p>Em <strong>Pokémon Emerald</strong>, a aba também apresenta o painel <strong>Animation (Emerald)</strong>, com uma prévia dos quadros animados da espécie. O botão <strong>Shiny</strong> permite conferir como esses quadros aparecem com a paleta Shiny, sem alterar os gráficos principais.</p>
+<p>O painel contém um endereço próprio e um botão <strong>Repoint</strong> para utilizar dados animados já presentes em outra região válida da ROM.</p>
+<p>Também é possível ajustar <strong>Front Anim</strong>, <strong>Back Anim</strong> e <strong>Anim Delay</strong>, valores relacionados à apresentação das animações, e gravá-los pelo botão <strong>Salvar</strong> do próprio painel.</p>
+<p>Algumas ROM hacks de Emerald reaproveitam a tabela animada como fonte do Front Sprite. A Suite reconhece situações conhecidas desse tipo ao carregar os gráficos.</p>
+<p><strong>Compatibilidade:</strong> esse painel é específico de Emerald. Ele não fica disponível da mesma maneira em FireRed, LeafGreen, Ruby e Sapphire.</p>
+
+<h6>Icon: imagem pequena do Pokémon</h6>
+<p>O painel <strong>Icon</strong> trata da imagem pequena utilizada pelo jogo em interfaces como o menu da equipe Pokémon.</p>
+<p>Ele mostra uma prévia do ícone e permite escolher visualmente entre <strong>Pal 0, Pal 1 e Pal 2</strong>. Alterar essa seleção apenas para conferir as cores <strong>não grava imediatamente outra paleta na ROM</strong>.</p>
+<p><strong>Exportar</strong> salva o ícone em PNG de <strong>32 × 64 pixels</strong>, contendo dois quadros de 32 × 32, um acima do outro. <strong>Importar</strong> utiliza uma imagem nesse formato para substituir o gráfico, respeitando as paletas disponíveis.</p>
+<p>O botão <strong>Repoint</strong> permite usar outro ícone já existente em um endereço válido. Quando a importação precisa de uma das outras paletas para representar corretamente a imagem, a Suite pode ajustar essa referência junto com o gráfico.</p>
+
+<h6>Footprint: pegada do Pokémon</h6>
+<p><strong>Footprint</strong> é o pequeno desenho da pegada associado à espécie. Ele aparece em tamanho reduzido na prévia da aba.</p>
+<p>O botão <strong>Exportar</strong> salva esse desenho em um PNG de <strong>16 × 16 pixels</strong>. O botão <strong>Importar</strong> permite utilizar outra imagem compatível, enquanto <strong>Repoint</strong> aponta para uma pegada já armazenada na ROM.</p>
+<p>Como esse desenho tem um formato mais simples do que uma sprite de batalha, convém manter a imagem nas dimensões corretas e com um desenho bem definido.</p>
+
+<h6>Battle Sprite Position: posição durante a batalha</h6>
+<p>O painel <strong>Battle Sprite Position</strong> permite ajustar a posição visual dos Pokémon quando aparecem em combate. A prévia mostra as sprites sobre uma representação da tela de batalha.</p>
+<ul>
+<li><strong>Player Y:</strong> ajusta a altura do Pokémon visto por trás, no lado do jogador;</li>
+<li><strong>Enemy Y:</strong> ajusta a posição vertical do Pokémon adversário;</li>
+<li><strong>Enemy Altitude:</strong> indica uma elevação adicional, útil para Pokémon que aparecem voando ou flutuando.</li>
+</ul>
+<p>O botão <strong>Auto Position</strong> calcula uma sugestão de alinhamento com base nos pixels visíveis dos gráficos. Ele modifica <strong>Player Y</strong> e <strong>Enemy Y</strong> apenas na prévia, preservando Enemy Altitude.</p>
+<p>Como alguns sprites especiais precisam de ajustes próprios, o resultado pode ser corrigido manualmente antes de gravar. O botão <strong>Salvar</strong> desse painel confirma as posições na ROM.</p>
+<p><strong>Auto Position não salva automaticamente</strong>: ele é uma ferramenta de auxílio para encontrar um alinhamento inicial.</p>
+
+<h6>Cuidados com gráficos compartilhados</h6>
+<p>Em algumas ROM hacks, dois ou mais Pokémon podem compartilhar o mesmo gráfico ou paleta. A Suite procura identificar essas situações ao importar e reapontar imagens, evitando substituir dados que ainda estejam sendo utilizados por outra espécie.</p>
+<p>Quando precisa de mais espaço, utiliza as configurações gerais de <strong>Free Space</strong>. É recomendável conferir as prévias depois de importar, principalmente em ROMs expandidas ou com gráficos personalizados.</p>
+
+<h5 id="pokemon-base-stats">Aba Base Stats: atributos e características da espécie</h5>
+<p>A aba <strong>Base Stats</strong> reúne os principais valores que caracterizam uma espécie. É nela que o usuário ajusta seus atributos-base, Types, Abilities, itens que pode carregar e informações como gênero, reprodução, experiência e felicidade.</p>
+<p>Essas configurações pertencem à <strong>espécie</strong>. Alterar os Base Stats de Bulbasaur, por exemplo, modifica os valores usados pelo jogo para representar Bulbasaur, não apenas um Pokémon individual de um treinador.</p>
+
+<h6>Stats: atributos-base e BST</h6>
+<p>O grupo <strong>Stats</strong> contém os seis atributos-base:</p>
+<ul>
+<li><strong>HP:</strong> pontos de vida;</li>
+<li><strong>Attack:</strong> força dos ataques físicos;</li>
+<li><strong>Defense:</strong> resistência a ataques físicos;</li>
+<li><strong>Sp. Attack:</strong> força dos ataques especiais;</li>
+<li><strong>Sp. Defense:</strong> resistência a ataques especiais;</li>
+<li><strong>Speed:</strong> velocidade utilizada pelo sistema de batalha.</li>
+</ul>
+<p>O campo <strong>BST</strong> mostra automaticamente a soma dos seis atributos. É um indicador para comparar o total de Stats de diferentes Pokémon, mas <strong>não é um sétimo atributo editável</strong>.</p>
+<p>Os valores-base podem ser ajustados individualmente, respeitando o intervalo aceito pelo registro da espécie.</p>
+
+<h6>Catch Rate, Base Exp e Run Rate</h6>
+<p><strong>Catch Rate</strong> é o valor usado pelo jogo nas regras de captura. Em termos gerais, influencia a facilidade de capturar aquela espécie, embora outros fatores também participem do cálculo.</p>
+<p><strong>Base Exp</strong> informa a experiência-base associada ao Pokémon e utilizada nas regras de recompensa de experiência.</p>
+<p><strong>Run Rate</strong> é outro valor interno da espécie, relacionado a comportamentos específicos previstos pelo jogo. Nem todas as ROM hacks utilizam esse campo da mesma maneira.</p>
+
+<h6>Types: Type 1, Type 2 e Types customizados</h6>
+<p>Os campos <strong>Type 1</strong> e <strong>Type 2</strong> definem as tipagens da espécie. Um Pokémon pode ter duas tipagens diferentes ou repetir a mesma quando deve ser tratado como possuindo apenas uma.</p>
+<p>As listas utilizam os nomes em inglês, como <strong>Grass, Poison, Fire, Water, Electric</strong> e <strong>Psychic</strong>.</p>
+<p>Se a ROM hack já utiliza Types adicionais, a Suite também pode apresentar os nomes cadastrados em <strong>Configurações → Types customizados</strong>.</p>
+<p><strong>Selecionar Fairy, Sound ou outro Type extra não instala esse Type na engine.</strong> A ROM precisa já possuir o suporte correspondente para que ele funcione no jogo.</p>
+
+<h6>Held Items e Abilities</h6>
+<p>O grupo <strong>Held Items</strong> apresenta dois campos de itens associados à espécie, permitindo escolher itens já reconhecidos pela tabela da ROM. Quando disponível, a interface também exibe uma pequena prévia do ícone do item.</p>
+<p>No grupo <strong>Abilities</strong>, os campos <strong>Ability 1</strong> e <strong>Ability 2</strong> permitem escolher as duas opções armazenadas na estrutura original de Base Stats.</p>
+<p>Os nomes mostrados são atualizados a partir dos dados reconhecidos pelos respectivos Item Editor e Ability Editor. Caso a ROM utilize valores personalizados ainda sem nome, a Suite procura preservar seus IDs em vez de substituí-los sem necessidade.</p>
+<p><strong>Hidden Ability não é um terceiro campo padrão dessa estrutura original.</strong> Projetos que implementaram Hidden Abilities precisam respeitar a forma como sua própria engine armazena essa informação.</p>
+
+<h6>EV Yield: recompensa de EVs</h6>
+<p>O grupo <strong>EVs</strong> determina quais pontos de esforço são concedidos ao derrotar um Pokémon daquela espécie. Esses valores não representam os EVs que um Pokémon específico já possui; representam a <strong>recompensa concedida ao adversário</strong>.</p>
+<p>A Suite apresenta combinações permitidas pela estrutura da ROM para facilitar a escolha, incluindo os atributos físicos e especiais.</p>
+
+<h6>Egg Groups e Growth Rate</h6>
+<p><strong>Egg Group 1</strong> e <strong>Egg Group 2</strong> indicam os grupos de reprodução associados à espécie, conforme as regras de breeding do jogo.</p>
+<p><strong>Growth Rate</strong> determina a curva de experiência utilizada para subir de nível. A janela também exibe uma referência de experiência acumulada correspondente ao crescimento escolhido, facilitando a comparação entre as opções.</p>
+
+<h6>Gender Ratio, Steps to Hatch e Base Happiness</h6>
+<p>Esses três grupos possuem as opções <strong>Standard</strong> e <strong>Custom</strong>:</p>
+<ul>
+<li><strong>Gender Ratio:</strong> proporção de machos e fêmeas da espécie, incluindo situações especiais como espécies sem gênero;</li>
+<li><strong>Steps to Hatch:</strong> informação utilizada para definir quanto tempo um Egg leva para chocar;</li>
+<li><strong>Base Happiness:</strong> felicidade inicial normalmente associada ao Pokémon.</li>
+</ul>
+<p>O modo <strong>Standard</strong> oferece valores conhecidos do jogo com nomes mais fáceis de entender. Já <strong>Custom</strong> permite informar diretamente um valor próprio, útil quando a ROM hack precisa de uma configuração diferente das opções comuns.</p>
+
+<h6>Filler Bytes: campos adicionais</h6>
+<p><strong>Filler Bytes</strong> apresenta dois pequenos valores extras existentes no registro de Base Stats. Eles aparecem em hexadecimal, normalmente entre <code>00</code> e <code>FF</code>.</p>
+<p>Na ROM original esses espaços podem não representar uma configuração comum ao jogador, mas algumas ROM hacks podem utilizá-los para guardar dados personalizados.</p>
+<p><strong>Se você não souber como seu projeto utiliza esses campos, mantenha os valores originais.</strong> Alterá-los sem conhecer seu significado pode interferir em modificações feitas na engine.</p>
+
+<h6>Salvar e importar Base Stats</h6>
+<p>As alterações dessa aba são gravadas pelo botão <strong>Salvar</strong> da coluna esquerda ou pelo atalho <code>Ctrl+S</code>. O salvamento atua nos dados de Base Stats da espécie selecionada, sem exigir que as outras abas sejam salvas ao mesmo tempo.</p>
+<p>Os botões gerais <strong>Import</strong> e <strong>Export</strong>, quando usados nesta aba, trabalham apenas com os campos de Base Stats. O arquivo JSON exportado pode guardar inclusive valores ainda em edição; ao importar, a Suite coloca os dados para revisão antes do salvamento.</p>
+<p>Se o JSON pertence a outro Pokémon, a ferramenta pede confirmação antes de aplicar os valores à espécie selecionada.</p>
+<p>A informação de <strong>Dex Color</strong> pertence à aba Pokédex e não é alterada por um salvamento comum de Base Stats.</p>
+
 </article>
