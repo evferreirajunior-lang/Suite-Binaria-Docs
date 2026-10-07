@@ -451,4 +451,115 @@
 <p>A expansão cria novos registros de negociação, mas <strong>não adiciona personagens, diálogos ou scripts de troca aos mapas</strong>. Essas partes continuam sendo responsabilidade de quem desenvolve a ROM hack.</p>
 <p>Para projetos muito modificados, vale conferir a quantidade de Trades, a localização da tabela e os scripts dos NPCs antes de fazer expansões ou reordenar entradas. Manter uma cópia de segurança da ROM também é recomendado.</p>
 
+
+<h4>Move Editor</h4>
+<p>O <strong>Move Editor</strong> permite consultar e modificar os golpes disponíveis na ROM. Por meio dele, o usuário pode alterar nomes, descrições e características como Power, Accuracy, PP, Type, prioridade e efeitos usados durante as batalhas.</p>
+<p>A janela é dividida em duas áreas principais. À esquerda ficam a lista de golpes, as opções de renomeação, importação e exportação, além de informações sobre os dados do golpe. À direita ficam os parâmetros de batalha, as Flags e a descrição.</p>
+
+<h5>Seleção e pesquisa de Moves</h5>
+<p>O campo de seleção apresenta os golpes reconhecidos pela ROM. O usuário pode abrir a lista ou digitar parte de um nome para encontrar rapidamente o Move desejado.</p>
+<p>O atalho <code>Ctrl+F</code> leva o foco diretamente à pesquisa. Depois de escolher um golpe, a Suite carrega suas informações nos campos da janela.</p>
+<p>O campo <strong>ID</strong> mostra o número que identifica o golpe dentro do jogo. Esse número serve para consulta e não é alterado pelo botão Renomear.</p>
+
+<h5>Total Moves</h5>
+<p><strong>Total Moves</strong> informa quantas entradas da tabela de golpes a Suite deve reconhecer, incluindo a entrada de ID 0. Nas ROMs originais suportadas, a configuração inicial é de <strong>355 entradas</strong>.</p>
+<p>Em uma ROM hack que já tenha uma tabela expandida, é possível informar uma quantidade maior, até o limite de <strong>5.000 entradas</strong> aceitas pelo editor.</p>
+<p>Essa opção é útil quando o projeto inclui golpes adicionais e o usuário deseja que eles apareçam na lista. A Suite verifica se consegue ler a quantidade informada antes de aceitar a mudança.</p>
+<p><strong>Aumentar Total Moves não cria golpes novos nem expande automaticamente as tabelas do jogo.</strong> O campo apenas informa quantas entradas já existentes devem ser consideradas pela ferramenta.</p>
+
+<h5>Nome, Renomear, Decap e Decap All</h5>
+<p>O campo abaixo da lista permite editar o nome do golpe selecionado. Após digitar o novo texto, o botão <strong>Renomear</strong> grava a alteração na ROM.</p>
+<p>Os nomes seguem o espaço disponível na tabela do jogo. A Suite verifica esse limite para impedir que um nome maior do que o permitido seja gravado de forma incorreta.</p>
+<p>O botão <strong>Decap</strong> transforma um nome escrito inteiramente em letras maiúsculas em uma apresentação mais natural. Por exemplo, <code>THUNDERBOLT</code> pode passar a ser exibido como <code>Thunderbolt</code>.</p>
+<p><strong>Decap All</strong> faz o mesmo com todos os nomes de golpes reconhecidos. Como essa opção realiza alterações em massa, a Suite solicita confirmação antes de gravá-las.</p>
+<p><strong>Renomear e Decap possuem gravação própria.</strong> Não é necessário clicar no botão Salvar dos parâmetros para aplicar essas mudanças.</p>
+
+<h5>Dados do Golpe: Effect, Power, Type e Accuracy</h5>
+<p>O grupo <strong>Dados do Golpe</strong> concentra os valores utilizados para configurar como um Move se comporta durante o combate.</p>
+<ul>
+<li><strong>Effect:</strong> identifica o tipo de efeito que o jogo executa quando o golpe é utilizado, como causar dano, aplicar uma condição ou executar outra ação prevista pela ROM;</li>
+<li><strong>Power:</strong> define a força-base utilizada por golpes que causam dano;</li>
+<li><strong>Type:</strong> determina a tipagem do golpe, como Fire, Water, Electric ou Psychic;</li>
+<li><strong>Accuracy:</strong> representa o valor de precisão do golpe, conforme as regras do jogo.</li>
+</ul>
+<p>As listas utilizam nomes conhecidos para facilitar a identificação de cada configuração. Se uma ROM hack já possuir um Type adicional, como Fairy ou Sound, a Suite pode mostrar o nome cadastrado anteriormente em <strong>Types customizados</strong>.</p>
+<p><strong>Escolher um novo Effect ou Type não adiciona por si só um efeito ou tipagem à ROM.</strong> A engine do jogo precisa já reconhecer o valor escolhido.</p>
+
+<h5>PP e EffectAcc</h5>
+<p><strong>PP</strong> define quantas vezes o golpe pode ser utilizado antes de precisar recuperar seus pontos de uso.</p>
+<p><strong>EffectAcc</strong> é um valor separado, associado à chance ou intensidade de determinados efeitos adicionais do golpe, dependendo do Effect e de como a ROM interpreta essa informação.</p>
+<p>Por exemplo, um golpe pode ter uma precisão própria para acertar o alvo e, separadamente, uma chance de provocar um efeito secundário. Alterar EffectAcc não significa, necessariamente, aumentar a precisão do golpe.</p>
+<p>Nem todos os Effects utilizam esse campo da mesma maneira. Em ROM hacks, o comportamento também pode depender de modificações feitas no sistema de batalha.</p>
+
+<h5>Target e Priority</h5>
+<p><strong>Target</strong> informa a quem o golpe pode ser direcionado, como um adversário selecionado ou outro conjunto de alvos permitido pelo jogo.</p>
+<p><strong>Priority</strong> representa a prioridade do golpe. Em termos simples, esse valor ajuda a definir quais movimentos podem agir antes de outros, sem depender somente da Speed dos Pokémon.</p>
+<p>Esses campos são úteis para personalizar o funcionamento de golpes existentes e de golpes adicionados por ROM hacks. As regras finais continuam dependendo do sistema de batalha presente na ROM.</p>
+
+<h5>Category: Physical, Special e Status</h5>
+<p>O campo <strong>Category</strong> permite selecionar valores como <strong>Physical, Special</strong> e <strong>Status</strong>.</p>
+<p>Existe, porém, uma diferença importante entre as ROMs originais da terceira geração e algumas ROM hacks modernas: <strong>nos jogos originais da Gen III, a divisão entre ataques físicos e especiais depende do Type do golpe</strong>, e não de uma categoria independente para cada Move.</p>
+<p>Em projetos que já implementaram uma divisão física/especial por golpe, o valor de Category pode ser utilizado pela engine modificada. <strong>Alterar Category na Suite não instala essa expansão e não garante, sozinho, que o jogo original passe a usar a nova categoria.</strong></p>
+
+<h5>Pad Byte 1 e Pad Byte 2</h5>
+<p>Os campos <strong>Pad Byte 1</strong> e <strong>Pad Byte 2</strong> representam valores adicionais armazenados na estrutura do Move.</p>
+<p>Nas ROMs originais, esses espaços podem não ter uma função útil para uma edição comum. Já uma ROM hack pode aproveitá-los para guardar informações próprias.</p>
+<p>Por isso, a recomendação é simples: <strong>se você não souber exatamente como sua ROM utiliza esses campos, mantenha os valores originais</strong>. A Suite permite consultá-los e editá-los, mas não pode determinar automaticamente o significado de toda modificação personalizada.</p>
+
+<h5>Flags: propriedades adicionais dos golpes</h5>
+<p>As <strong>Flags</strong> são opções marcadas por caixas de seleção. Elas indicam determinadas propriedades que o sistema de batalha pode consultar durante o uso do golpe.</p>
+<ul>
+<li><strong>Makes Contact:</strong> indica se o golpe faz contato físico com o alvo;</li>
+<li><strong>Is affected by Protect:</strong> informa se o golpe pode ser bloqueado por Protect, conforme as regras da ROM;</li>
+<li><strong>Is affected by Magic Coat:</strong> indica se o golpe pode interagir com Magic Coat;</li>
+<li><strong>Is affected by Snatch:</strong> controla sua interação com Snatch;</li>
+<li><strong>Is affected by Mirror Move:</strong> indica a compatibilidade com Mirror Move;</li>
+<li><strong>Is affected by King's Rock:</strong> marca a propriedade utilizada na interação com King's Rock;</li>
+<li><strong>High Critical Chance:</strong> representa a propriedade relacionada à maior chance de acerto crítico, quando a ROM oferece essa Flag.</li>
+</ul>
+<p><strong>High Critical Chance</strong> possui uma particularidade: a edição dessa Flag está disponível no perfil de <strong>Emerald</strong>. Em <strong>FireRed, LeafGreen, Ruby e Sapphire</strong>, a alta chance de crítico é tratada pelo Effect original do golpe, e a Suite preserva o valor dessa Flag em vez de aplicar a mesma alteração usada em Emerald.</p>
+<p>Marcar uma Flag ajusta a informação armazenada no golpe, mas a resposta final depende de como o sistema de batalha da ROM utiliza essa propriedade.</p>
+
+<h5>Anim. Offset e Repoint</h5>
+<p>O campo <strong>Anim. Offset</strong> mostra onde está localizada a animação associada ao golpe. Ao lado dele existe o botão <strong>Repoint</strong>.</p>
+<p>Esse recurso permite indicar outro endereço válido da ROM para que o golpe passe a utilizar uma animação já existente naquele local.</p>
+<p><strong>Repoint não cria uma nova animação nem importa gráficos automaticamente.</strong> Ele apenas altera a referência usada pelo golpe. É indicado principalmente para quem já conhece a localização dos dados de animação de sua ROM hack.</p>
+<p>Durante edições normais de Power, Type, PP e demais parâmetros, não é necessário modificar o Anim. Offset.</p>
+
+<h5>Descrição, Desc. Offset e Repoint</h5>
+<p>O campo de <strong>Descrição</strong> permite modificar o texto apresentado ao jogador quando ele consulta as informações de um golpe.</p>
+<p>Logo acima fica o <strong>Desc. Offset</strong>, que mostra onde esse texto está armazenado na ROM. O botão <strong>Repoint</strong> permite apontar manualmente para outra descrição já existente em um endereço válido.</p>
+<p>Abaixo da caixa de texto, um contador mostra a quantidade de caracteres digitados em relação à descrição original. Quando o novo texto precisa de mais espaço, o editor também sinaliza essa diferença.</p>
+<p>Se a descrição modificada não couber no espaço atual, a Suite pode procurar outra região livre, salvar o texto nesse novo local e atualizar sua referência. Antes disso, ela solicita confirmação.</p>
+<p>Para escrever uma descrição maior, normalmente basta clicar no <strong>Salvar</strong> que fica ao lado do contador, sem preencher manualmente um Offset.</p>
+<p>A entrada de <strong>ID 0</strong> é especial e sua descrição não é editável pelo Move Editor.</p>
+
+<h5>Dados Hex: conferindo as alterações</h5>
+<p>A área <strong>Dados Hex</strong> apresenta os 12 bytes que representam os parâmetros do golpe. Cada valor aparece com uma cor, e a legenda identifica a qual campo ele pertence.</p>
+<p>Essa visualização é atualizada enquanto o usuário altera os parâmetros, permitindo conferir como os valores ficariam na ROM <strong>antes de clicar em Salvar</strong>.</p>
+<p>Os números podem ser selecionados e copiados para consulta em um editor hexadecimal, como o HxD. O painel é apenas informativo: <strong>não é necessário saber hexadecimal para utilizar o Move Editor</strong>, nem é possível editar os bytes diretamente por essa visualização.</p>
+
+<h5>Salvar os parâmetros do Move</h5>
+<p>O botão <strong>Salvar</strong> da área esquerda grava os parâmetros de batalha, como Effect, Power, Type, Accuracy, PP, Target, Priority, Category e Flags.</p>
+<p>É importante distinguir os comandos: <strong>Renomear</strong> grava o nome; <strong>Salvar</strong> da área esquerda grava os dados do golpe; o <strong>Salvar</strong> abaixo da descrição grava o texto; e os botões <strong>Repoint</strong> mudam referências específicas.</p>
+<p>Essa separação permite modificar apenas a parte desejada, sem gravar automaticamente todos os campos ao mesmo tempo.</p>
+
+<h5>Import Single, Import All, Export Single e Export All</h5>
+<p>O Move Editor possui quatro botões para reutilizar configurações:</p>
+<ul>
+<li><strong>Export Single:</strong> exporta o golpe selecionado;</li>
+<li><strong>Export All:</strong> exporta todos os golpes reconhecidos na ROM;</li>
+<li><strong>Import Single:</strong> importa os dados de um golpe;</li>
+<li><strong>Import All:</strong> importa vários golpes de uma vez.</li>
+</ul>
+<p>As exportações podem ser feitas em <strong>JSON</strong>, indicado para utilizar os dados novamente na Suite, ou <strong>CSV</strong>, útil para consultar as informações em uma planilha. <strong>A importação utiliza JSON; o CSV é somente para consulta e exportação.</strong></p>
+<p>Esses arquivos podem guardar informações como nomes, descrições e parâmetros de batalha. Também incluem dados de identificação que ajudam a conferir de onde vieram as informações.</p>
+<p>Se o ID de um golpe importado for diferente do selecionado, a Suite pergunta onde aplicar os dados. Nas importações, apresenta uma prévia do que será alterado. A opção de importação em massa também permite solicitar um backup antes da gravação.</p>
+<p>Importar um golpe <strong>não instala efeitos inéditos na engine</strong>. Os valores importados precisam ser compatíveis com as estruturas e os recursos da ROM de destino.</p>
+
+<h5>Alterações pendentes e segurança</h5>
+<p>Se o usuário alterar campos e tentar selecionar outro golpe ou fechar a janela sem salvar, a Suite avisa sobre as mudanças pendentes e permite revisá-las ou descartá-las.</p>
+<p>Como os campos possuem botões de gravação independentes, o aviso também ajuda a identificar qual parte ainda precisa ser salva. A Suite verifica nomes, endereços e dados antes de aplicar mudanças para reduzir o risco de gravações incorretas.</p>
+<p>Em ROM hacks com tabelas expandidas ou funções personalizadas, é recomendado conferir a configuração dos Offsets e manter uma cópia de segurança antes de grandes alterações.</p>
+
 </article>
