@@ -135,4 +135,97 @@
 <p>Se houver alterações ainda não salvas, o editor avisa antes de mudar de Ability ou fechar a janela. Assim, um texto digitado não é descartado silenciosamente.</p>
 <p>As mudanças são conferidas antes e depois da gravação, e operações inválidas são recusadas para reduzir o risco de danificar dados existentes.</p>
 <p><strong>Importante:</strong> o Ability Editor modifica a apresentação e os textos das Abilities. Ele <strong>não cria novos efeitos de batalha nem altera sozinho o funcionamento de uma Ability</strong>; esses comportamentos precisam já existir na ROM hack.</p>
+
+<h4>Item Editor</h4>
+<p>O <strong>Item Editor</strong> permite consultar e modificar diferentes informações dos itens presentes na ROM, como nomes, descrições, preços, ícones e propriedades que determinam como eles são usados no jogo.</p>
+<p>É uma ferramenta útil tanto para ajustar os itens originais quanto para trabalhar com itens adicionais de uma ROM hack. A janela reúne, de um lado, a seleção dos itens e seus gráficos; do outro, a descrição, os efeitos e as configurações gerais.</p>
+
+<h5>Seleção e pesquisa de itens</h5>
+<p>Na parte superior esquerda fica a lista dos itens reconhecidos na ROM. O usuário pode selecionar um item diretamente ou digitar parte de seu nome para encontrá-lo mais rapidamente, sem precisar percorrer toda a lista.</p>
+<p>O atalho <code>Ctrl+F</code> leva o foco até a pesquisa. Ao selecionar outro item, os campos são atualizados para mostrar os dados correspondentes.</p>
+<p>Se houver modificações ainda não salvas, a Suite avisa antes de trocar a seleção para evitar a perda acidental do que estava sendo editado.</p>
+
+<h5>Total Items</h5>
+<p>O campo <strong>Total Items</strong> informa quantas entradas da tabela de itens a Suite deve reconhecer, incluindo a entrada de ID 0.</p>
+<p>Nas ROMs originais, a quantidade varia conforme o jogo: <strong>377 em Emerald, 375 em FireRed e LeafGreen, e 349 em Ruby e Sapphire</strong>.</p>
+<p>Em uma ROM hack com itens adicionais, essa quantidade pode ser configurada para acompanhar a tabela já expandida, respeitando o limite de até <strong>5.000 entradas</strong> aceitas pelo editor.</p>
+<p><strong>Importante:</strong> aumentar o número não cria novos itens nem expande automaticamente a tabela da ROM. A Suite verifica se a quantidade informada pode ser utilizada e, caso encontre um problema, mantém a configuração anterior.</p>
+
+<h5>Nome do item, Renomear e Decap</h5>
+<p>O campo de nome permite modificar como o item aparece dentro do jogo. Após digitar o novo nome, basta clicar em <strong>Renomear</strong> para gravá-lo na ROM.</p>
+<p>Um contador mostra quanto espaço o nome está utilizando. A Suite considera o espaço realmente ocupado pelos dados, que nem sempre corresponde ao número de letras visíveis.</p>
+<p>O botão <strong>Decap</strong> ajuda a transformar nomes totalmente em maiúsculas em uma escrita mais natural. Por exemplo, <code>SUPER POTION</code> pode passar a ser exibido como <code>Super Potion</code>.</p>
+<p>Já <strong>Decap All</strong> realiza esse tratamento em vários nomes de uma só vez. Antes da alteração, os nomes são conferidos; aqueles que não couberem no espaço disponível são preservados, em vez de serem gravados incorretamente.</p>
+
+<h5>Descrição do item</h5>
+<p>O grupo <strong>Descrição</strong> apresenta o texto que explica o item ao jogador. Esse texto pode ser alterado diretamente e gravado pelo botão <strong>Salvar Desc.</strong>.</p>
+<p>O indicador <strong>Length</strong> ajuda a acompanhar o tamanho da descrição. Caso o novo texto seja maior que o espaço disponível, a Suite pode procurar outra região livre da ROM e guardar a descrição ali.</p>
+<p>O campo <strong>Offset</strong> mostra onde a descrição está armazenada. O botão <strong>Repoint</strong> permite indicar manualmente outro endereço que já contenha um texto válido.</p>
+<p>Na maioria das edições comuns, <strong>não é necessário mexer no Offset</strong>: basta alterar a descrição e salvá-la. A Suite também evita sobrescrever silenciosamente um texto que esteja sendo compartilhado por mais de um item.</p>
+
+<h5>Gráficos: Icon e Pal</h5>
+<p>A área <strong>Gráficos</strong> mostra uma prévia do ícone do item e os campos <strong>Icon</strong> e <strong>Pal</strong>, que indicam onde estão armazenados o desenho e suas cores.</p>
+<p>O botão <strong>Repoint</strong> dessa área permite apontar o item para outro ícone e outra paleta já existentes, após verificar se os dados são válidos.</p>
+<p>Com <strong>Import Icon</strong>, é possível utilizar uma imagem <strong>PNG de 24 × 24 pixels</strong>, com até 16 cores apropriadas ao formato utilizado pelo GBA. A Suite prepara os dados para a ROM e, quando necessário, procura um espaço livre para armazená-los.</p>
+<p><strong>Export Icon</strong> salva o ícone atual em PNG, facilitando ajustes em outro editor de imagens ou o reaproveitamento do gráfico.</p>
+<p>Quando vários itens compartilham um gráfico, a importação procura preservar os demais itens. Também pode reaproveitar desenhos e paletas iguais já encontrados na ROM, evitando cópias desnecessárias.</p>
+<p><strong>Compatibilidade:</strong> os recursos de ícones individuais funcionam em <strong>Emerald, FireRed e LeafGreen</strong>. Em <strong>Ruby e Sapphire</strong>, o grupo Gráficos fica indisponível porque essas ROMs não utilizam a mesma estrutura de ícones individuais.</p>
+
+<h5>Parâmetros Gerais</h5>
+<p>O grupo <strong>Parâmetros Gerais</strong> reúne informações que ajudam o jogo a decidir onde um item fica guardado, quanto custa e de que maneira pode ser utilizado.</p>
+<ul>
+<li><strong>Price:</strong> preço definido para o item;</li>
+<li><strong>Pocket:</strong> seção da Bag em que o item aparece, como Items, Balls, Berries ou Key Items, conforme o jogo;</li>
+<li><strong>Hold Effect e Parameter:</strong> informações utilizadas por determinados efeitos e comportamentos dos itens;</li>
+<li><strong>Field Func:</strong> função relacionada ao uso do item fora de batalha;</li>
+<li><strong>Battle Func e Btl Usage:</strong> informações relacionadas ao uso durante as batalhas;</li>
+<li><strong>Type:</strong> classificação interna usada pelo sistema de itens — não é o Type elemental de um Pokémon;</li>
+<li><strong>Key Item Val, Bag Key Itm e Extra Param:</strong> valores adicionais usados pela ROM em situações específicas.</li>
+</ul>
+<p>Algumas opções exibem nomes conhecidos para facilitar a escolha. Quando a ROM utiliza um valor personalizado ou ainda sem nome, a Suite procura preservar e mostrar o valor original, em vez de trocá-lo automaticamente por outro.</p>
+<p>O botão <strong>Salvar</strong> do grupo de seleção grava o preço e as alterações dos Parâmetros Gerais. Os botões de nome, descrição e gráficos possuem seus próprios comandos.</p>
+
+<h5>Index: copiar configurações de outro item</h5>
+<p>O campo <strong>Index</strong> possui uma função especial: permite carregar os Parâmetros Gerais de outro item como ponto de partida para a edição do item atualmente selecionado.</p>
+<p>Por exemplo, se o usuário deseja criar um item com um comportamento semelhante ao de uma Potion, pode informar o índice desse item, conferir os parâmetros carregados e então adaptá-los antes de salvar.</p>
+<p><strong>Alterar o Index não muda o ID do item selecionado, não troca seu nome, descrição ou ícone e não grava nada automaticamente na ROM.</strong> Apenas prepara uma cópia dos parâmetros para revisão.</p>
+
+<h5>Field Func, Battle Func e Custom...</h5>
+<p>Os campos <strong>Field Func</strong> e <strong>Battle Func</strong> apresentam funções conhecidas da ROM com nomes que ajudam a identificar seu uso, como opções relacionadas a medicamentos, recuperação de PP ou utilização de itens em batalha.</p>
+<p>Se uma ROM hack já possui uma função personalizada, a opção <strong>Custom...</strong> permite cadastrar seu endereço e, opcionalmente, um nome para facilitar a identificação na lista.</p>
+<p>Esse cadastro <strong>não cria uma nova função dentro do jogo</strong>. Ele apenas permite selecionar e reconhecer uma função que já foi implementada na ROM hack.</p>
+
+<h5>Item Effects</h5>
+<p>A área <strong>Item Effects</strong>, ao lado da descrição, permite abrir uma janela específica para consultar e modificar os efeitos de vários itens.</p>
+<p>Nela podem ser ajustados comportamentos como:</p>
+<ul>
+<li>recuperar HP ou PP e reviver Pokémon;</li>
+<li>curar problemas de status, como Poison, Burn, Sleep e Paralysis;</li>
+<li>efeitos de PP Up, PP Max, Evolution Stone e Level-Up;</li>
+<li>efeitos de itens de batalha, como X Attack, X Defense e Dire Hit;</li>
+<li>modificações em EVs e Friendship, quando o jogo oferece esse comportamento;</li>
+<li>outros efeitos previstos pela estrutura original, como Guard Spec e Sacred Ash.</li>
+</ul>
+<p>Os controles são organizados por grupos para que o usuário consiga entender o que cada item faz sem precisar editar os dados em hexadecimal. A janela também mostra informações sobre o efeito atualmente armazenado na ROM, úteis para quem deseja conferir detalhes mais avançados.</p>
+<p>O botão <strong>Save Changes</strong> ou o atalho <code>Ctrl+S</code> grava as alterações. <strong>Remove Effect</strong> remove a referência ao efeito da entrada selecionada.</p>
+<p>Se um item ainda não possuir um efeito comum, a Suite pode criar os dados necessários em espaço livre, desde que a ROM ofereça suporte a essa entrada.</p>
+<p><strong>Limitações importantes:</strong> essa ferramenta trabalha com a faixa de itens <strong>13 a 175</strong> prevista pela tabela original. Ela não expande automaticamente o sistema de efeitos do jogo. A <strong>Enigma Berry</strong> também recebe tratamento especial, porque seu efeito pode depender de dados dinâmicos do próprio jogo.</p>
+<p>Há ainda diferenças entre as ROMs: por exemplo, o sistema original de <strong>Emerald</strong> admite reduções de EVs em situações em que o <strong>FireRed</strong> original não oferece o mesmo comportamento. A Suite respeita essas diferenças em vez de apresentar funções que não existem naquela versão.</p>
+
+<h5>Importação e exportação de itens</h5>
+<p>O Item Editor disponibiliza quatro comandos para guardar e reutilizar informações:</p>
+<ul>
+<li><strong>Export INI:</strong> exporta os dados do item selecionado;</li>
+<li><strong>Import INI:</strong> importa dados de um item;</li>
+<li><strong>Export ALL:</strong> exporta os dados de todos os itens reconhecidos;</li>
+<li><strong>Import ALL:</strong> importa vários itens de uma só vez.</li>
+</ul>
+<p>Embora os botões individuais usem o nome histórico <strong>INI</strong>, o formato utilizado para importar os dados é <strong>JSON</strong>. Também existe exportação em <strong>CSV</strong>, útil para consultar os registros em um programa de planilhas, mas arquivos CSV não podem ser importados por essa função.</p>
+<p>O arquivo exportado reúne nomes, descrições e Parâmetros Gerais. O preço e algumas informações de identificação podem aparecer como referência, mas <strong>a importação não modifica automaticamente o preço, o ID interno nem os gráficos</strong>; os ícones possuem comandos próprios.</p>
+<p>Na importação de um item individual, a Suite permite escolher como proceder se o ID do arquivo não coincidir com o item selecionado. Ao importar vários itens, os dados são conferidos antes da gravação, uma prévia é apresentada e pode ser oferecida a criação de um backup.</p>
+
+<h5>Cuidados com o salvamento</h5>
+<p>O editor avisa quando há modificações não salvas antes de trocar de item ou fechar a janela. Também valida valores e endereços antes de escrever na ROM, procurando evitar alterações parciais ou a substituição de dados utilizados por outros itens.</p>
+<p>Essas verificações ajudam a tornar a edição mais segura, mas continuam sendo recomendados backups próprios, especialmente ao trabalhar com ROM hacks que já possuem estruturas modificadas.</p>
+
 </article>
