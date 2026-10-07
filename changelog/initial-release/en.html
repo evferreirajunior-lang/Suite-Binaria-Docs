@@ -1,0 +1,346 @@
+<article class="changelog-article" lang="en">
+<h3>Suite Binária — Initial Release</h3>
+<p>This section documents the features available in the first public release of Suite Binária. It is organized by area of the application, with practical explanations intended for both new and experienced ROM hackers.</p>
+
+<h4>Overview</h4>
+<p>The initial release introduces Suite Binária, a collection of tools for editing third-generation Pokémon GBA ROMs. The main window is the starting point for opening a ROM, accessing general functions and launching individual editors.</p>
+<h4>Main interface</h4>
+<p>When no ROM is loaded, the application indicates that no ROM is open and keeps ROM-dependent editors unavailable. After loading a compatible ROM, it identifies the game and displays the current ROM in the window.</p>
+<p>The top menus are <strong>Options, Project, History, Tools, Settings, PokéAPI Data and Languages</strong>. Buttons for the individual editors are available in the central area.</p>
+<h4>Options</h4>
+<p><strong>Open ROM</strong> (<code>Ctrl+O</code>) lets you choose a GBA ROM. The <strong>Recent</strong> menu remembers up to five successfully opened ROMs so they can be reopened quickly. Invalid entries are removed when selected; clearing the recent list never deletes the ROM files themselves.</p>
+<p><strong>Exit</strong> (<code>Ctrl+Q</code>) closes the application.</p>
+<h4>Projects</h4>
+<p>A Suite Binária project keeps settings specific to a ROM hack together, without embedding a full copy of the ROM in the project file.</p>
+<ul>
+<li><strong>Open project</strong> — <code>Ctrl+Shift+O</code>.</li>
+<li><strong>Create project from current ROM</strong> — <code>Ctrl+Shift+S</code>.</li>
+<li><strong>Save project</strong> — <code>Ctrl+Alt+S</code>.</li>
+</ul>
+<p>This separation makes it easier to switch between projects without unintentionally carrying project-specific settings into another ROM.</p>
+<h4>History</h4>
+<p><strong>Undo</strong> (<code>Ctrl+Z</code>) and <strong>Redo</strong> (<code>Ctrl+Y</code>) provide a general history of changes made during a session. <strong>ROM History</strong> (<code>Ctrl+Shift+H</code>) lets you review recorded changes.</p>
+<p><strong>Delta Backup</strong> (<code>Ctrl+Shift+B</code>) can keep only the changed parts of a ROM instead of storing another complete copy for every operation. This helps with recovery while saving disk space.</p>
+<h4>Tools</h4>
+<p><strong>Global Reference Explorer</strong> (<code>Ctrl+Shift+R</code>) helps identify where Pokémon, Moves, Items and Abilities are referenced before you change them.</p>
+<p><strong>Free Space Manager</strong> (<code>Ctrl+Shift+F</code>) helps locate areas where new data can be stored. <strong>ROM Comparator / Change Inspector</strong> (<code>Ctrl+Shift+C</code>) compares previous and changed values.</p>
+<p><strong>Check ROM / Health Check</strong> (<code>Ctrl+Shift+V</code>) examines possible problems and questionable references without modifying the ROM.</p>
+<h4>Settings</h4>
+<p>The Settings window exposes three major groups: <strong>Free Space</strong>, <strong>Custom Types</strong> and <strong>INI Editor</strong>. Some settings affect how the application works; others describe the layout of the ROM currently open.</p>
+<h4>Free Space configuration</h4>
+<p>Free Space defines where the Suite starts looking when an edited description, image or expanded table needs a new location in the ROM.</p>
+<p>You can choose whether unused regions are identified by <code>0xFF</code> or <code>0x00</code>. The Suite searches for the selected value only; it does not mix both kinds. <code>0xFF</code> is the usual safer default. Choosing <code>0x00</code> raises a warning because zero-filled bytes can also be legitimate game data.</p>
+<h4>Custom Types</h4>
+<p>Custom Types lets the Suite display the names of additional Pokémon Types already implemented by a ROM hack, such as <strong>Fairy</strong> or <strong>Sound</strong>. The original Type IDs 0–17 are reserved; extra IDs can be named within the 18–255 range.</p>
+<p>These names can appear in places such as Move Editor and Pokémon Base Stats. <strong>Registering a Type here does not add it to the game's battle engine.</strong></p>
+<h4>INI Editor</h4>
+<p>INI Editor becomes available from Settings after a ROM is loaded. It can adjust the locations and counts of ROM structures, including tables expanded or moved by a ROM hack, so the Suite knows where to read and write.</p>
+<p>It can also be configured to open automatically whenever a ROM is loaded. Changes belong to the appropriate ROM or project rather than all ROMs indiscriminately.</p>
+<h4>PokéAPI Data</h4>
+<p>The PokéAPI Data manager downloads and maintains external reference data used by supported editor functions. It can be opened without loading a ROM.</p>
+<p>You can select individual datasets, recommended datasets or all available ones; download missing data, refresh selected data, pause, resume or cancel downloads, and run more than one download concurrently.</p>
+<p><strong>Verify integrity</strong> checks locally stored data; <strong>Clear selected</strong> removes selected cache entries without modifying the ROM. Keeping data locally reduces repeated internet requests.</p>
+<h4>Languages</h4>
+<p>The interface supports <strong>Brazilian Portuguese, English, Spanish, French and Italian</strong>. Automatic mode follows the Windows display language when supported and falls back to English otherwise. A manually selected language is remembered for future launches.</p>
+<p>Language switching is temporarily disabled while an editor is open to prevent a window from being only partly translated. The language setting changes the application interface; <strong>it does not translate names or text inside the ROM</strong>.</p>
+
+<h4>Ability Editor</h4>
+<p><strong>Ability Editor</strong> lets you view and change the names and descriptions of Abilities used by the ROM. It has an Ability selection area on the left and description controls on the right.</p>
+<h5>Selecting and finding Abilities</h5>
+<p>Choose an Ability from the list or type part of its name to find it. <code>Ctrl+F</code> focuses the search. The selected Ability's ID and description are displayed; the ID is informational.</p>
+<h5>Total Abilities</h5>
+<p><strong>Total Abilities</strong> tells the Suite how many Ability records already exist. An original Gen III ROM typically has 78 entries. Expanded hacks can configure a larger total, up to the editor's 256-entry limit. <strong>Increasing the count does not create new Abilities or expand the game engine.</strong></p>
+<h5>Renaming Abilities</h5>
+<p>Edit the name and press <strong>Rename</strong> to save it. The character/space indicator helps prevent names from exceeding the ROM's storage. Other open editors that display Ability names can refresh their lists.</p>
+<h5>Decap and Decap All</h5>
+<p><strong>Decap</strong> changes an all-uppercase name such as <code>INTIMIDATE</code> into a more natural form such as <code>Intimidate</code>. <strong>Decap All</strong> applies the treatment across the recognized entries and requests confirmation first.</p>
+<h5>Descriptions and Length</h5>
+<p>You can edit an Ability's in-game description and press <strong>Save</strong>. <strong>Length</strong> compares the new text size with the available space. If it is too long, the Suite can find another free location and update the reference. Shared descriptions are protected to avoid changing other Abilities by mistake.</p>
+<h5>Desc. Offset and Repoint</h5>
+<p><strong>Desc. Offset</strong> shows where the description is stored. <strong>Repoint</strong> can link it to another valid description address. For normal text editing, manual offsets are generally unnecessary: use Save and let the Suite handle relocation.</p>
+<h5>Free Space and Search</h5>
+<p><strong>Free Space</strong> shows the configured search region; <strong>Search</strong> looks for a location large enough to hold the text. Finding an address does not itself save the description.</p>
+<h5>Import and Export</h5>
+<p><strong>Import</strong> and <strong>Import All</strong> read Ability data from compatible JSON files. <strong>Export</strong> and <strong>Export All</strong> save one or all entries. Exports support JSON for reimporting and CSV for viewing in spreadsheets; <strong>CSV cannot be imported</strong>.</p>
+<p>Imports are validated, can show a preview and may offer a backup. If an imported ID differs from the currently selected one, the Suite asks where to apply the data.</p>
+<h5>Unsaved changes and limits</h5>
+<p>The editor warns before discarding unfinished edits and checks data before and after writing. It edits Ability names and descriptions; <strong>it does not create new battle effects or implement an Ability's behavior</strong>.</p>
+
+<h4>Item Editor</h4>
+<p><strong>Item Editor</strong> covers the names, descriptions, pictures and behavior-related parameters of the ROM's items, with a separate <strong>Item Effects</strong> window for supported effects.</p>
+<h5>Selecting and finding Items</h5>
+<p>Select an entry or search by part of its name. <code>Ctrl+F</code> focuses the search. The editor warns about unsaved changes before switching entries.</p>
+<h5>Total Items</h5>
+<p>The default counts include the ID 0 entry: <strong>377 for Emerald, 375 for FireRed/LeafGreen and 349 for Ruby/Sapphire</strong>. A hack with a previously expanded table can configure up to 5,000 recognized entries. Changing this setting <strong>does not create new items</strong>.</p>
+<h5>Name, Rename, Decap and Decap All</h5>
+<p>Type a new name and use <strong>Rename</strong> to store it. <strong>Decap</strong> makes uppercase names easier to read, for example <code>SUPER POTION</code> to <code>Super Potion</code>. <strong>Decap All</strong> works across the list, preserving entries that cannot safely fit in their allocated name fields.</p>
+<h5>Item description</h5>
+<p>Edit the item's description and press <strong>Save Desc.</strong>. <strong>Length</strong> shows the space needed; if the new text is larger, the Suite can relocate it into free space. <strong>Offset</strong> displays the current location, while <strong>Repoint</strong> selects another valid one. Shared texts are protected.</p>
+<h5>Graphics: Icon and Pal</h5>
+<p>The Graphics panel previews the item's picture and shows its <strong>Icon</strong> and <strong>Pal</strong> addresses. <strong>Repoint</strong> selects existing graphics. <strong>Import Icon</strong> accepts a 24 × 24 PNG in the GBA-compatible palette format; <strong>Export Icon</strong> writes the current image as PNG.</p>
+<p>Shared icons and repeated palettes are handled carefully, with possible reuse of matching graphics. <strong>Individual item icons are supported in Emerald, FireRed and LeafGreen; the same panel is not available for original Ruby and Sapphire.</strong></p>
+<h5>General Parameters</h5>
+<p>These fields include <strong>Price</strong>, <strong>Pocket</strong> (where an item appears in the Bag), <strong>Hold Effect</strong>, <strong>Parameter</strong>, <strong>Field Func</strong>, <strong>Battle Func</strong>, <strong>Btl Usage</strong>, <strong>Type</strong>, <strong>Key Item Val</strong>, <strong>Bag Key Itm</strong> and <strong>Extra Param</strong>.</p>
+<p>The <strong>Type</strong> in this area is an internal item classification, not a Pokémon's elemental Type. Unknown custom values can be preserved. The general <strong>Save</strong> button writes prices and parameters; names, descriptions and graphics have their own commands.</p>
+<h5>Index: copying another item's parameters</h5>
+<p><strong>Index</strong> loads the general parameters of another item into the current editor as a starting point. It <strong>does not change the selected item's ID, name, description or icon, and does not write the ROM immediately</strong>.</p>
+<h5>Field Func, Battle Func and Custom...</h5>
+<p>These lists show recognized in-game functions, including those associated with medicine, PP recovery or battle items. <strong>Custom...</strong> can label an address of a function already implemented by a ROM hack. Registering its address <strong>does not create a new function in the game</strong>.</p>
+<h5>Item Effects</h5>
+<p>The separate <strong>Item Effects</strong> window exposes supported effects using readable controls: HP and PP recovery, reviving, status healing, PP Up/PP Max, evolution stones, Level-Up, battle boosts, EV/Friendship changes and other effects supported by the original format.</p>
+<p><strong>Save Changes</strong> or <code>Ctrl+S</code> writes the effects; <strong>Remove Effect</strong> removes the reference. The original supported effects area covers item IDs <strong>13–175</strong>. Enigma Berry needs special handling. Some effects differ between Emerald and FireRed and are only editable where the ROM's engine supports them.</p>
+<h5>Import and Export items</h5>
+<p><strong>Import INI</strong>, <strong>Export INI</strong>, <strong>Import ALL</strong> and <strong>Export ALL</strong> exchange one or several items. Despite the historical <strong>INI</strong> button labels, imports use <strong>JSON</strong>; CSV is an export-only format for spreadsheets.</p>
+<p>Imports focus on names, descriptions and general parameters. They do not automatically overwrite the item's ID, price or image. Individual imports offer an ID choice; batch imports are checked and previewed, with a possible backup.</p>
+<h5>Saving safely</h5>
+<p>The editor checks values and addresses, warns about unsaved changes and tries not to overwrite data still used by another item. Keeping a separate backup remains recommended for expanded ROM hacks.</p>
+
+<h4>Trainer Editor</h4>
+<p><strong>Trainer Editor</strong> customizes opponent trainers: their names and classes, appearance, battle settings, AI, usable items and Pokémon parties of up to six members.</p>
+<h5>Trainer list, search and IDs</h5>
+<p>Choose a trainer from the list, search by name or class, or use the decimal and hexadecimal ID fields to reach the same entry. These fields identify the trainer rather than changing its ID.</p>
+<h5>Name and Trainer Class</h5>
+<p><strong>Name</strong> is the individual trainer's name. <strong>Trainer Class</strong> assigns a class such as Youngster or Bug Catcher. The <strong>Rename</strong> command next to a class renames the <em>shared class name</em>: <strong>every trainer using that class will display the new name</strong>. The Suite warns before confirming this change.</p>
+<h5>Decap, Decap All and settings</h5>
+<p>Decap adjusts all-uppercase names. Its settings gear lets you choose whether to affect trainer names only or also class names. <strong>Decap All</strong> performs batch changes and checks for pending edits first.</p>
+<h5>Appearance and Gender</h5>
+<p>The Appearance panel previews the trainer sprite and lets you select another sprite ID already in the ROM. The <strong>Male</strong> and <strong>Female</strong> options edit the trainer's stored Gender value. This panel does not import new character graphics.</p>
+<h5>Battle Music and Battle Style</h5>
+<p><strong>Battle Music</strong> chooses a music identifier recognized by the ROM. <strong>Battle Style</strong> selects <strong>Single Battle</strong> or <strong>Double Battle</strong>. These values do not install missing music or battle systems.</p>
+<h5>AI behavior</h5>
+<p>The gear next to <strong>AI</strong> opens a window containing individual trainer AI options. The options explain the behaviors that can be enabled; <strong>Apply</strong> returns them to the trainer form, and <strong>Save Trainer</strong> writes them to the ROM.</p>
+<p>Checking a custom AI flag does not create the corresponding behavior; the ROM's battle engine must already implement it.</p>
+<h5>Price Money and Money Rate</h5>
+<p><strong>Price Money</strong> previews a reward calculation based on party level and class information. <strong>Money Rate</strong> shows the reward rate associated with a Trainer Class. <strong>Both are read-only in this editor</strong>.</p>
+<h5>Battle Items and Custom Held Item</h5>
+<p>Up to four <strong>Battle Items</strong> can be assigned for the trainer to use under the game's rules. <strong>Custom Held Item</strong> is a different setting: it indicates whether party members use individual held-item records.</p>
+<h5>Data Party: editing Pokémon</h5>
+<p>The team editor works with up to <strong>six Pokémon</strong>. For each member you can set <strong>Specie</strong>, <strong>Lv.</strong>, an optional <strong>Held Item</strong>, the field labeled <strong>EV's</strong> and up to four custom Moves.</p>
+<p>Despite its label, <strong>EV's</strong> in this trainer record is an internal value used to generate trainer Pokémon IVs, not the ordinary EV distribution awarded by training. <strong>Custom Moves</strong> enables explicit movesets; otherwise the ROM uses its standard level-based logic.</p>
+<h5>Adding and reorganizing the party</h5>
+<p><strong>+</strong> adds a member, <strong>−</strong> removes it, <strong>Dup</strong> duplicates a member, and <strong>↑</strong>/<strong>↓</strong> change the order. The new team can be reviewed before saving and cannot exceed six Pokémon.</p>
+<h5>Data Offset, Edit and Load</h5>
+<p><strong>Data Offset</strong> shows where the party is stored. <strong>Edit</strong> can change the number of members, the custom item/move layout and storage location; it can search free space if needed. <strong>Load</strong> previews a party stored elsewhere and copies its data into the current editing session.</p>
+<p>Loading another trainer's party does not automatically make two trainers share a pointer. Moved data may be preserved because it can still be referenced.</p>
+<h5>Party/Repoint preferences</h5>
+<p>The nearby settings gear configures automatic Free Space searches, confirmation prompts and certain advanced address options. For safety, use occupied addresses only if you know how the ROM stores shared parties.</p>
+<h5>Save Trainer, Reload and shortcuts</h5>
+<p><strong>Save Trainer</strong> or <code>Ctrl+S</code> writes the trainer and party. <strong>Reload</strong> or <code>Ctrl+R</code> reloads them from the ROM. Pending changes trigger a <strong>Save / Discard / Cancel</strong> choice when switching or reloading.</p>
+<h5>Import and Export trainers</h5>
+<p>JSON exports and imports contain the trainer settings and party. Imports validate Pokémon, items, Moves and classes, warn about incompatible ROMs and prepare the values for the currently selected trainer without replacing its ID or reusing source-ROM addresses.</p>
+<h5>Protection against shared-data edits</h5>
+<p>When two trainers share party data, the Suite can move an edited team so the other trainer is not unintentionally changed. It checks writes and recommends backups for heavily modified games.</p>
+
+<h4>Trade Editor</h4>
+<p><strong>Trade Editor</strong> edits Pokémon exchanges offered by in-game NPCs: requested and received species, Pokémon details, trainer data and optional expanded trade records.</p>
+<h5>Trade list and current Offset</h5>
+<p>The list displays the trades recognized in the ROM; <strong>Current Offset</strong> shows where each record is located. Original counts are <strong>4 in Emerald, 9 in FireRed/LeafGreen and 3 in Ruby/Sapphire</strong>.</p>
+<h5>Trades Total versus Expand Trades</h5>
+<p><strong>Trades Total</strong> tells the Suite how many trade records already exist. It does <strong>not</strong> create entries. <strong>Expand Trades</strong> really adds entries and can relocate the table when more space is needed, updating recognized references.</p>
+<p>Adding a trade record does <strong>not</strong> place a new trading NPC on a map or write the character's dialogue and scripts. Those must be configured separately.</p>
+<h5>Changing trade order</h5>
+<p>The <strong>▲</strong> and <strong>▼</strong> buttons swap whole trade entries and write the order after confirmation. NPC scripts may refer to a trade's numeric position, so reordering can require script updates.</p>
+<h5>Requested and received Pokémon</h5>
+<p>Choose the Pokémon the NPC requests and the one the player receives. The received Pokémon can also have its own <strong>Nickname</strong>, <strong>Held Item</strong> and Ability slot. The original trade structure uses two Ability choices, not a new third Hidden Ability slot.</p>
+<p>The Pokémon received generally follows the level of the Pokémon offered by the player, rather than using a separate editable level field.</p>
+<h5>IVs and Hidden Power</h5>
+<p>Edit <strong>HP, Attack, Defense, Sp. Attack, Sp. Defense and Speed IVs</strong>, each between 0 and 31. The <strong>Hidden Power</strong> display updates based on the chosen IVs and can show the resulting Power.</p>
+<p>Its gear offers combinations that preserve existing IVs where possible, aim for Power 70, or prioritize high IVs (30/31) with Power 70. <strong>Apply combination</strong> updates the form but still requires <strong>Save Trade</strong> to write.</p>
+<h5>Original Trainer</h5>
+<p>The <strong>OT Name</strong>, <strong>Trainer ID</strong>, <strong>Secret ID</strong> and <strong>Gender</strong> fields identify the Pokémon's original trainer. Individual <strong>Random</strong> buttons can fill name and ID fields with alternative values. They do not change the NPC's own map identity.</p>
+<h5>Personality, Contest, Sheen and Mail</h5>
+<p><strong>Personality</strong> (PID) is an internal value that affects certain Pokémon traits. <strong>Cool, Beauty, Cute, Smart and Tough</strong> are Contest conditions; <strong>Sheen</strong> is related to Contest preparation.</p>
+<p><strong>Mail ID</strong> refers to a message associated with a held Mail item. <strong>None (-1)</strong> means no Mail. Supported Mail ranges vary by game, and custom values require the necessary ROM data.</p>
+<h5>Randomize and its settings</h5>
+<p><strong>Randomize</strong> prepares randomized fields for the current trade. Its gear lets you choose which categories may change: species, nickname, held item, Ability, IVs, OT data, Personality, Contest values, Sheen and Mail.</p>
+<p><strong>Select all</strong> and <strong>Deselect all</strong> are available, and preferences are remembered. The randomized result stays editable and is <strong>not written until Save Trade</strong>.</p>
+<h5>Save Trade, Reload and Help</h5>
+<p><strong>Save Trade</strong> or <code>Ctrl+S</code> writes the current entry; <strong>Reload</strong> or <code>Ctrl+R</code> retrieves it again. The editor warns about unsaved changes and checks whether the source data was modified elsewhere.</p>
+<p><strong>Help</strong> explains IVs, OT IDs, Personality, Contests and Mail without changing the ROM.</p>
+<h5>Compatibility and limits</h5>
+<p>The editor handles original Emerald, FireRed, LeafGreen, Ruby and Sapphire trade structures and suitably configured expanded tables. It does not build NPC events or install extra trade mechanics.</p>
+
+<h4>Move Editor</h4>
+<p><strong>Move Editor</strong> edits move names, descriptions, battle parameters, flags and the stored references associated with moves.</p>
+<h5>Select, search and Total Moves</h5>
+<p>Choose a Move or search by name with <code>Ctrl+F</code>. Its ID is shown for reference. <strong>Total Moves</strong> defaults to <strong>355 entries</strong>, including ID 0, and can recognize up to 5,000 existing entries in suitably expanded hacks. Changing this count does not create Moves.</p>
+<h5>Rename, Decap and Decap All</h5>
+<p><strong>Rename</strong> writes a new name, subject to the original space limit. <strong>Decap</strong> and <strong>Decap All</strong> transform uppercase names into natural capitalization; the batch action requests confirmation. Naming operations save separately from move parameters.</p>
+<h5>Effect, Power, Type and Accuracy</h5>
+<p><strong>Effect</strong> selects the game routine for the Move; <strong>Power</strong> defines its base strength; <strong>Type</strong> is its elemental Type; <strong>Accuracy</strong> stores its accuracy value. Custom Type names registered in Settings may appear in the list, but choosing one does not implement it in the engine.</p>
+<h5>PP and EffectAcc</h5>
+<p><strong>PP</strong> controls how many uses a Move has. <strong>EffectAcc</strong> is a separate value used by certain additional effects; it is not necessarily the Move's hit accuracy and may behave differently in modified engines.</p>
+<h5>Target and Priority</h5>
+<p><strong>Target</strong> selects which opponent or group may be affected. <strong>Priority</strong> influences move order independently of Speed under the game's rules.</p>
+<h5>Category: Physical, Special and Status</h5>
+<p><strong>Category</strong> displays Physical, Special and Status choices. In the <strong>original Gen III games</strong>, physical/special damage classification depends on the Move's <strong>Type</strong>. Per-Move classification only works if the ROM hack has implemented the necessary engine changes. Changing the Category field does not install that mechanic.</p>
+<h5>Pad Byte 1 and Pad Byte 2</h5>
+<p>These additional bytes are normally reserved or unused in ordinary editing, but some ROM hacks give them a custom meaning. Keep their original values unless you know how your project uses them.</p>
+<h5>Move Flags</h5>
+<p>Flags represent properties such as <strong>Makes Contact</strong>, interactions with <strong>Protect</strong>, <strong>Magic Coat</strong>, <strong>Snatch</strong>, <strong>Mirror Move</strong> and <strong>King's Rock</strong>, and <strong>High Critical Chance</strong>.</p>
+<p>High Critical Chance is separately editable in the Emerald profile; FireRed, LeafGreen, Ruby and Sapphire handle the original high-critical behavior differently. A checked flag has an effect only if the ROM engine uses it.</p>
+<h5>Anim. Offset and Repoint</h5>
+<p><strong>Anim. Offset</strong> shows the reference to a Move's animation. <strong>Repoint</strong> selects another valid animation address already in the ROM. It does not import or create animation graphics.</p>
+<h5>Descriptions and Desc. Offset</h5>
+<p>Edit a Move's text description in its own panel and use the nearby <strong>Save</strong>. <strong>Desc. Offset</strong> shows its current address; <strong>Repoint</strong> can select another. Text that no longer fits can be relocated automatically after confirmation. The special <strong>ID 0</strong> description is not editable.</p>
+<h5>Hex Data preview</h5>
+<p><strong>Hex Data</strong> displays a color-labeled preview of the 12 bytes of move parameters. It updates as fields change, and you may copy the numbers to another tool. It is informational and does not require editing hexadecimal manually.</p>
+<h5>Separate Save commands</h5>
+<p>The main <strong>Save</strong> writes battle parameters and flags; <strong>Rename</strong> writes the Move name; the description <strong>Save</strong> writes text; and <strong>Repoint</strong> changes specific references. These are separate operations, not one global save for the whole Move.</p>
+<h5>Import Single/All and Export Single/All</h5>
+<p>JSON exports preserve data for reuse; CSV exports are intended for spreadsheets. <strong>JSON is required for imports</strong>. Imported IDs are checked, with a selection when the source ID differs and previews for batch operations. Importing values does not install new battle effects.</p>
+<h5>Pending changes and safety</h5>
+<p>The editor warns when switching Moves or closing with unsaved changes. Addresses, names and values are checked before writes. For heavily expanded ROM hacks, verify configured tables and maintain backups.</p>
+
+<h4 id="pokemon-editor">Pokémon Editor</h4>
+<p><strong>Pokémon Editor</strong> brings together the main tools for editing Pokémon species. It has six tabs: <strong>Sprites, Base Stats, Evolutions, Learnsets, Egg Moves and Pokédex</strong>. Each tab has its own data and save behavior.</p>
+<nav class="changelog-toc" aria-label="Pokémon Editor sections">
+<strong>Pokémon Editor contents</strong>
+<a href="#pokemon-geral">General controls</a><a href="#pokemon-sprites">Sprites</a><a href="#pokemon-base-stats">Base Stats</a><a href="#pokemon-evolutions">Evolutions</a><a href="#pokemon-learnsets">Learnsets</a><a href="#pokemon-egg-moves">Egg Moves</a><a href="#pokemon-pokedex">Pokédex</a><a href="#pokemon-pokeapi">PokéAPI</a><a href="#pokemon-seguranca">Saving and safety</a>
+</nav>
+<h5 id="pokemon-geral">General controls and navigation</h5>
+<p>The left-hand panel contains Pokémon selection, a search field (<code>Ctrl+F</code>), the <strong>Total Pokémon</strong> count and shared commands. The original recognized table has <strong>412 entries</strong>, including ID 0 and reserved positions. Larger values can recognize tables already expanded by a ROM hack; they do not create new species.</p>
+<p><strong>Rename</strong> saves the species name; <strong>Decap</strong> or <strong>Decap All</strong> adjusts uppercase names. <strong>Import</strong>, <strong>Export</strong> and <strong>Save</strong> work with the <strong>currently selected tab</strong>, not every tab at once. The file format for tab-specific data is JSON.</p>
+<p><strong>Ctrl+S</strong> saves the active tab. <strong>Left Ctrl + Tab</strong> switches tabs. The Suite warns about pending changes when changing species or leaving the editor.</p>
+<h5 id="pokemon-sprites">Sprites: front, back, Shiny and battle position</h5>
+<p><strong>Main Sprites</strong> previews the <strong>Front Sprite</strong> and <strong>Back Sprite</strong> with their <strong>Normal Pal</strong> and <strong>Shiny Pal</strong>. The Offset fields show where the graphics and palettes are stored.</p>
+<h6>Import Sprite and Export Sprite</h6>
+<p><strong>Export Sprite</strong> creates a PNG sheet of <strong>256 × 64 pixels</strong>, with four 64 × 64 pictures for the front/back and normal/Shiny combinations. Compatible animated layouts may produce a <strong>256 × 128</strong> sheet.</p>
+<p><strong>Import Sprite</strong> reads the matching PNG layout, converts its graphics for the GBA and finds safe space when necessary. It can reuse identical graphics and protect shared palettes. This operation has its own save behavior, unlike the general JSON Import command.</p>
+<h6>Repoint and Emerald animations</h6>
+<p><strong>Repoint</strong> changes references to existing graphics and palettes; it does not draw a new sprite. <strong>Animation (Emerald)</strong> displays animation frames and their Shiny colors, with controls such as <strong>Front Anim</strong>, <strong>Back Anim</strong> and <strong>Anim Delay</strong>. This panel is specific to Emerald.</p>
+<h6>Icon and Footprint</h6>
+<p>The small <strong>Icon</strong> supports palette previews <strong>Pal 0/1/2</strong>, PNG export/import at <strong>32 × 64 pixels</strong> (two 32 × 32 frames) and Repoint. <strong>Footprint</strong> is a 16 × 16 picture with its own PNG Import, Export and Repoint.</p>
+<h6>Battle Sprite Position and Auto Position</h6>
+<p><strong>Player Y</strong>, <strong>Enemy Y</strong> and <strong>Enemy Altitude</strong> change where the Pokémon appears on the battle screen. <strong>Auto Position</strong> suggests a suitable Player/Enemy alignment based on visible pixels; you can adjust it manually before using the panel's <strong>Save</strong>. It does not automatically save the new position.</p>
+<h6>Shared graphics and free space</h6>
+<p>When Pokémon share graphics or palettes, the editor attempts to preserve other species' data. Large imports may need relocation using the project's Free Space settings. Always review the preview after an import.</p>
+
+<h5 id="pokemon-base-stats">Base Stats: species characteristics</h5>
+<p><strong>Base Stats</strong> controls the species' fundamental properties, not those of one individual Pokémon.</p>
+<h6>Stats and BST</h6>
+<p>Edit <strong>HP, Attack, Defense, Sp. Attack, Sp. Defense and Speed</strong>. <strong>BST</strong> displays their sum and is not a seventh editable statistic.</p>
+<h6>Catch Rate, Base Exp and Run Rate</h6>
+<p><strong>Catch Rate</strong> participates in capture calculations; <strong>Base Exp</strong> contributes to experience rewards. <strong>Run Rate</strong> is an additional field whose behavior depends on the game or modified engine.</p>
+<h6>Type 1 and Type 2</h6>
+<p>Choose the species' Types. The list uses names such as Grass, Poison, Fire and Psychic and can display the additional Type labels registered under Settings. An extra Type still needs engine support.</p>
+<h6>Held Items and Abilities</h6>
+<p>Two <strong>Held Items</strong> and the original <strong>Ability 1</strong>/<strong>Ability 2</strong> fields are available. Their names follow the Item and Ability tables. <strong>Hidden Ability is not an automatic third field</strong> of the original Base Stats structure.</p>
+<h6>EV Yield, Egg Groups and Growth Rate</h6>
+<p><strong>EV Yield</strong> is the effort reward earned by defeating the species, not the EVs already held by an individual Pokémon. <strong>Egg Group 1/2</strong> identifies breeding groups; <strong>Growth Rate</strong> defines its experience curve.</p>
+<h6>Gender Ratio, Steps to Hatch and Base Happiness</h6>
+<p>These controls offer <strong>Standard</strong> values or <strong>Custom</strong> numeric values for gender distribution, egg-hatching time and starting happiness.</p>
+<h6>Filler Bytes and saving</h6>
+<p><strong>Filler Bytes</strong> are additional storage fields that a ROM hack may use for its own purposes. Leave them unchanged if you do not know their meaning. The active-tab <strong>Save</strong> stores Base Stats; JSON Import/Export operates on that tab. Pokédex <strong>Dex Color</strong> is edited separately.</p>
+
+<h5 id="pokemon-evolutions">Evolutions: methods and results</h5>
+<p>The <strong>Evolutions</strong> tab edits how and into which species a Pokémon evolves. Up to <strong>five positions per Pokémon</strong> are supported by the configured structure. Changing the <strong>EvolutionPerPKMN</strong> setting does not automatically erase data beyond the displayed positions.</p>
+<h6>Evolution methods and arguments</h6>
+<p>Known methods include level, Happiness, day/night conditions when supported, Trade, held or used Items, Attack/Defense comparisons, Personality-related outcomes and special evolution conditions. <strong>Level</strong>, <strong>Item</strong> and <strong>Evolves into</strong> fields are adjusted to the selected method.</p>
+<h6>Bank, Move, Map, Location and Value</h6>
+<p>Additional fields such as <strong>Bank</strong>, <strong>Move</strong>, <strong>Map</strong>, <strong>Location</strong> and <strong>Value</strong> can describe custom method arguments. An engine must already recognize the corresponding method; simply entering a number does not implement location- or move-based evolution.</p>
+<h6>Filler u16 and custom method settings</h6>
+<p><strong>Filler u16</strong> is an optional extra field in certain evolution formats, with a nearby <strong>?</strong> help button. The settings gear can register a custom <strong>Method ID</strong>, name and meanings of its arguments. Original method entries are protected. The gear describes existing ROM-hack methods; it does not add their battle code.</p>
+<h6>Saving and files</h6>
+<p><strong>Save</strong> or <code>Ctrl+S</code> writes the evolution entries of the selected species. JSON Import/Export on this tab covers evolutions only; imported values are reviewed before writing.</p>
+
+<h5 id="pokemon-learnsets">Learnsets: level-up, TM/HM and Tutors</h5>
+<p>The <strong>Learnsets</strong> tab has three sections: <strong>Level-up Moves</strong>, <strong>TM List</strong> and <strong>Tutors</strong>.</p>
+<h6>Level-up Moves</h6>
+<p>Each entry contains a learning <strong>Level</strong> and <strong>Move</strong>. Choose an entry, adjust either field and use <strong>Change Move</strong>. A counter and format information help identify the recognized structure and its limits.</p>
+<h6>Order, Offset/Structure and Manage...</h6>
+<p><strong>▲</strong>/<strong>▼</strong> reorder level-up entries; unlike merely editing a form, this can write the order immediately after validation. <strong>Offset / Structure</strong> shows the table's location. <strong>Manage...</strong> assists with resizing or relocating it using safe Free Space.</p>
+<h6>TM List</h6>
+<p>Check boxes indicate which TM/HM Moves the species can learn. Changing a species' check box is different from changing the actual Move assigned to a TM: the latter can affect the machine <strong>throughout the game</strong>.</p>
+<h6>Tutors</h6>
+<p>The Tutors list shows Moves taught by Move Tutors and each species' compatibility. Emerald, FireRed and LeafGreen have recognized tutor structures; original Ruby and Sapphire do not expose the same general-purpose tutor table. Adding an NPC tutor still requires in-game scripts.</p>
+<h6>PokéAPI and saving Learnsets</h6>
+<p>PokéAPI data can help compare level-up lists against external references. Missing Move IDs are flagged instead of replaced blindly. The tab's <strong>Save</strong> writes supported Learnsets and compatibility changes; JSON Import/Export keeps its data separate from other tabs.</p>
+
+<h5 id="pokemon-egg-moves">Egg Moves: moves inherited through breeding</h5>
+<p>The <strong>Egg Moves</strong> tab lists Moves a species can inherit through breeding rather than learning them through levels or machines. It displays a counter and indicates when no entries are configured.</p>
+<h6>Add, Change and Remove</h6>
+<p><strong>Add</strong> inserts a Move, <strong>Change</strong> replaces the selected entry and <strong>Remove</strong> deletes it from the editing list. These edits stay pending until the tab is saved. Duplicate or invalid Move IDs are checked.</p>
+<h6>Automatic expansion and shared tables</h6>
+<p><strong>Automatic expansion</strong> can relocate and enlarge the Egg Moves table when it becomes too small. The editor shows capacity information and verifies recognized references, since the table is shared by multiple species. It can preserve old storage when another routine may still use it.</p>
+<p>Expanding the Egg Moves list does not create new Moves in the engine.</p>
+<h6>PokéAPI and import/export</h6>
+<p>PokéAPI can suggest Egg Moves for review, but entries absent from the ROM are not blindly assigned to unrelated IDs. JSON Import/Export handles the current species' Egg Moves, and <strong>Save</strong>/<code>Ctrl+S</code> writes the final result.</p>
+
+<h5 id="pokemon-pokedex">Pokédex: entries and descriptions</h5>
+<p><strong>Pokédex</strong> edits numbering, classification, color, measurements, size comparison and the species' descriptive text.</p>
+<h6>National, Regional/Hoenn and Hoenn to Nat</h6>
+<p>These fields relate species IDs to the National and Regional Pokédex. Their names and availability depend on the game. Renumbering an entry does not create a new species or expand the Pokédex.</p>
+<p><strong>Important:</strong> save a change to the <strong>National</strong> number <strong>before</strong> editing other entry fields. The Suite prevents combining such a change with unrelated edits that might end up written to the wrong Pokédex entry.</p>
+<h6>Species label, Color, Height and Weight</h6>
+<p><strong>Species</strong> is the Pokédex classification, such as “Seed Pokémon,” rather than the editable Pokémon name. <strong>Color (Base Stats)</strong> is a category value stored in the species structure and managed separately from the main Stats. <strong>Height</strong> and <strong>Weight</strong> can be shown in metric and imperial units.</p>
+<h6>Size Comparison</h6>
+<p>The preview compares Pokémon size with a trainer, using <strong>Scale</strong> and <strong>Offset</strong> values for both pictures. <strong>Trainer ID</strong> selects the trainer shown <em>in the preview</em>; it does not replace trainer sprites across the ROM.</p>
+<h6>Descriptions, Page 2 and Repoint</h6>
+<p>Edit descriptive text using the length indicators and <strong>Offset</strong> information. ROMs with a second description page show a corresponding <strong>Page 2</strong> panel.</p>
+<p><strong>Repoint</strong> prepares a different valid description address; it does not itself write the ROM. Longer or shared texts can be stored elsewhere during Save. Use automatic relocation for ordinary longer descriptions instead of choosing offsets manually.</p>
+<h6>PokéAPI and files</h6>
+<p>PokéAPI can help with species labels, color, measurements and selected descriptions. Description lookup may vary by <strong>generation, game and language</strong>. National/Regional mapping and the size-comparison data are not overwritten indiscriminately.</p>
+<p>The tab supports JSON Import/Export and contextual Save with checks protecting the current entry.</p>
+
+<h5 id="pokemon-pokeapi">PokéAPI: search, review and apply</h5>
+<p>PokéAPI integration is offered in <strong>Base Stats, Evolutions, Learnsets, Egg Moves and Pokédex</strong>. Sprites instead use their PNG and Repoint commands.</p>
+<p>The <strong>PokéAPI</strong> switch enables consultation for the active tab; the nearby button can show states such as <strong>Consult</strong>, <strong>Loading</strong>, <strong>Review</strong>, <strong>Partial</strong>, <strong>Updated</strong> or <strong>Error</strong>.</p>
+<h6>Aliases and reviewing differences</h6>
+<p>The <strong>...</strong> button manages aliases between names in the ROM and names used by PokéAPI. Review screens compare external information with local data before application. A Move or evolution method that is unknown to the ROM must not be assigned to an arbitrary game ID.</p>
+<h6>Auto-Apply, Auto-Save and F5</h6>
+<p>Where available, <strong>Auto-Apply</strong> prepares selected changes; <strong>Auto-Save</strong> allows them to be written through the tab's normal save path. Without Auto-Save, applied values generally remain drafts. <code>F5</code> runs the PokéAPI action for the active tab while its mode is enabled; it does not save the entire ROM.</p>
+<h6>Local cache and custom ROM data</h6>
+<p>Downloaded datasets can be reused through the main <strong>PokéAPI Data</strong> manager. ROM hacks may have original names, IDs or mechanics that differ from external databases; those differences require review. <strong>PokéAPI is a reference source, not an engine upgrade.</strong></p>
+
+<h5 id="pokemon-seguranca">Pokémon Editor: safety and compatibility</h5>
+<p>Each tab has its own save behavior. PNG imports, certain Repoint operations and some reordering commands may write separately from tab-specific JSON import drafts. The Suite checks for shared data and suspicious addresses before writing.</p>
+<p>Support covers original <strong>Emerald, FireRed, LeafGreen, Ruby and Sapphire</strong> structures. A ROM hack with moved tables or custom battle rules may require additional configuration. Keep backups and test important changes in-game.</p>
+
+<h4 id="wild-encounter">Wild Encounter</h4>
+<p><strong>Wild Encounter</strong> lets you customize which Pokémon appear in each map's grass, water, Rock Smash and fishing encounters, with per-slot levels and the encounter frequency for each area.</p>
+<nav class="changelog-toc" aria-label="Wild Encounter contents">
+<strong>Wild Encounter contents</strong>
+<a href="#wild-maps">Maps</a><a href="#wild-types">Encounter Types</a><a href="#wild-slots">Pokémon and levels</a><a href="#wild-rate">Encounter ratio</a><a href="#wild-variants">Variants</a><a href="#wild-add-remove">Add and Remove</a><a href="#wild-recovery">Recovery</a><a href="#wild-technical">Technical details</a><a href="#wild-save">Saving</a>
+</nav>
+<h5 id="wild-maps">Maps and navigation</h5>
+<p>The <strong>Maps</strong> panel lists recognized map groups and their locations. Selecting a map loads its encounter data. Map-group and map IDs distinguish similar names. Maps with invalid encounter data remain visible with warnings.</p>
+<h5>Show locations without Wild Encounter</h5>
+<p>This option adds maps with no encounter data to the visible list. It is useful when planning to add wild Pokémon to a previously empty location. Checking it changes only the list, not the ROM.</p>
+<h5 id="wild-types">Grass, Water, Rock Smash and Fishing</h5>
+<p><strong>Type</strong> switches between land encounters (grass and similar areas), water encounters, encounters triggered by Rock Smash and those triggered by fishing. Each Type has its own Pokémon list and encounter ratio. A missing area is identified and can sometimes be created through <strong>Add</strong>.</p>
+<h5 id="wild-slots">Slots, Min, Max and Pokémon</h5>
+<p>Each row identifies a <strong>Slot</strong>, minimum and maximum levels (<strong>Min</strong> and <strong>Max</strong>), Pokémon species, numeric species ID (<strong>No.</strong>) and a <strong>Chance</strong>. Fishing entries also indicate their <strong>Rod</strong>.</p>
+<p>You can edit species and levels; the Suite checks that the minimum level does not exceed the maximum. Chance comes from the original slot distribution and is not directly editable as a free percentage.</p>
+<h5>Chance and slot limits</h5>
+<p>Original Gen III tables have <strong>12 land slots, 5 water slots, 5 Rock Smash slots and 10 fishing slots</strong>. One species can appear in several slots, combining their chances. Changing a slot does not change the underlying slot-selection engine.</p>
+<h5>Old Rod, Good Rod and Super Rod</h5>
+<p>Fishing slots are split into <strong>2 Old Rod</strong>, <strong>3 Good Rod</strong> and <strong>5 Super Rod</strong> slots. This division is fixed by the original game logic; replacing a Pokémon does not move a slot from one rod to another.</p>
+<h5 id="wild-rate">Encounter ratio</h5>
+<p><strong>Encounter ratio</strong> is the base rate at which the game tries to generate encounters for that Type. It can be set between <strong>0 and 255</strong> using a numeric field or slider, with an approximate percentage shown nearby.</p>
+<p>Unlike <strong>Chance</strong>, which decides <em>which</em> Pokémon may appear after an encounter is triggered, Encounter ratio influences <em>how often</em> an encounter may happen. Real outcomes also depend on the game's other rules.</p>
+<h5 id="wild-variants">Variants and special locations</h5>
+<p>Some maps have several sets of encounters. <strong>Variant</strong> chooses which one to view and edit; <strong>Altering Cave</strong> is a recognized example. Where known, the interface can display variant positions and their associated VAR values.</p>
+<p>Saving a variant changes only the selected set. The game must already contain the scripts or logic that decide which variant to use.</p>
+<h5>Feebas and special encounter rules</h5>
+<p>Feebas in Emerald's Route 119 follows special fishing-location rules that are not described completely by ordinary Fishing slots. Editing a slot does not automatically replace all the special behavior implemented by the engine.</p>
+<h5 id="wild-add-remove">Add: creating encounter areas</h5>
+<p><strong>Add</strong> prepares an encounter area of a Type that the map does not yet have. New slots are filled with valid starting values so you can edit them before saving. <strong>Add creates a draft first; it does not immediately write the ROM.</strong></p>
+<h5>Maps without Wild headers</h5>
+<p>With the empty-map display enabled, it can be possible to create the first encounter area on a map that lacks a <strong>Wild header</strong>. During Save, the Suite can create that map entry, find safe free space and update recognized table references. Unsafe or unrecognized structures are rejected.</p>
+<h5>Remove: removing an area</h5>
+<p><strong>Remove</strong> takes away the selected Type's encounter reference after confirmation. Old storage is preserved because other ROM data might still refer to it. In the Initial Release, <strong>removing the last Type did not physically delete an empty Wild header</strong>; that came later.</p>
+<h5 id="wild-recovery">Recreate: recovering invalid entries</h5>
+<p>If a configured area has invalid addresses or corrupted encounter data, it may appear as <strong>Invalid</strong>. <strong>Recreate</strong> prepares a safe replacement elsewhere, preserving the old region. The user reviews the new slots and saves only when the result is acceptable.</p>
+<h5 id="wild-technical">Technical details</h5>
+<p>This panel shows the <strong>Wild header</strong> address, <strong>Structure status</strong>, <strong>Engine behavior</strong>, variant count and selected variant. It also lists the status of Grass, Water, Rock Smash and Fishing, with <strong>Info offset</strong> and <strong>Slots offset</strong>.</p>
+<p>These values help with diagnostics and are not required for ordinary visual editing. Warnings explain malformed data or special engine behavior when it can be recognized.</p>
+<h5>ROM compatibility</h5>
+<p>Wild Encounter supports recognized original <strong>Emerald, FireRed, LeafGreen, Ruby and Sapphire</strong> encounter structures and attempts to locate moved or expanded tables by checking references. A custom encounter engine may need dedicated support.</p>
+<h5 id="wild-save">Save, Ctrl+S and pending changes</h5>
+<p>Use <strong>Save</strong> or <code>Ctrl+S</code> to write the selected area's species, levels and encounter ratio. An <strong>asterisk (*)</strong> in the window title signals unsaved edits. Switching map, Type or Variant, or closing the window, offers Save, Discard or Cancel.</p>
+<p>Before and after writing, the Suite checks the data and attempts to protect against overwriting changes made by other tools or leaving incomplete operations.</p>
+<h5>What Wild Encounter does not do</h5>
+<p>It does not draw maps, add Pokémon species, install new battle engines or create NPC scripts. Back up your ROM and test special encounter areas in-game.</p>
+<p><strong>Release note:</strong> dedicated map search with <code>Ctrl+F</code>, physical removal of empty Wild headers and later interface improvements belong to <strong>v0.02</strong>, not this Initial Release.</p>
+</article>
