@@ -146,7 +146,6 @@
     const boundarySet = new Set(boundaries);
     const topics = [];
     let currentTopic = null;
-    let currentButton = null;
 
     function toggleTopic(selectedTopic) {
       const opening = selectedTopic.section.hidden;
@@ -179,10 +178,10 @@
         section.hidden = true;
         article.appendChild(section);
 
-        currentTopic = { button, section };
-        currentButton = button;
-        topics.push(currentTopic);
-        button.addEventListener("click", () => toggleTopic(currentTopic));
+        const topic = { button, section };
+        currentTopic = topic;
+        topics.push(topic);
+        button.addEventListener("click", () => toggleTopic(topic));
       }
       if (currentTopic) currentTopic.section.appendChild(node);
     }
