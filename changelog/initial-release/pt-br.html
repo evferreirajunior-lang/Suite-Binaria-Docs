@@ -968,4 +968,165 @@
 <p>O suporte às ROMs originais de <strong>Pokémon Emerald, FireRed, LeafGreen, Ruby e Sapphire</strong> leva em consideração diferenças entre os jogos. Em ROM hacks, tabelas expandidas e funções personalizadas exigem que as estruturas correspondentes já estejam presentes e corretamente configuradas.</p>
 <p><strong>Resumo:</strong> o Pokémon Editor permite personalizar profundamente os Pokémon do jogo, mas editar um campo não significa instalar automaticamente uma nova mecânica. O resultado final depende tanto dos dados salvos quanto dos recursos que a ROM hack efetivamente implementou.</p>
 
+
+<h4 id="wild-encounter">Wild Encounter</h4>
+<p>O <strong>Wild Encounter</strong> permite consultar e modificar os Pokémon que aparecem naturalmente pelos mapas do jogo. Com ele, o usuário pode escolher quais espécies serão encontradas na grama, na água, ao usar Rock Smash ou ao pescar, além de ajustar os níveis em que esses Pokémon aparecem.</p>
+<p>A ferramenta também ajuda a organizar encontros em locais que ainda não possuem determinada categoria, recuperar informações de encontros com problemas e trabalhar com mapas que apresentam mais de uma variação de encontros.</p>
+<p>A janela da Release Inicial foi organizada em três partes: <strong>Maps</strong>, para escolher o local; <strong>Encounter Data</strong>, para editar os Pokémon; e <strong>Technical details</strong>, para consultar o estado das informações da ROM.</p>
+<nav class="changelog-toc" aria-label="Partes do Wild Encounter">
+  <strong>Conteúdo do Wild Encounter</strong>
+  <a href="#wild-maps">Maps e navegação</a>
+  <a href="#wild-types">Tipos de encontro</a>
+  <a href="#wild-slots">Pokémon e níveis</a>
+  <a href="#wild-rate">Encounter ratio</a>
+  <a href="#wild-variants">Variantes e locais especiais</a>
+  <a href="#wild-add-remove">Adicionar e remover áreas</a>
+  <a href="#wild-recovery">Recuperação de dados</a>
+  <a href="#wild-technical">Detalhes técnicos</a>
+  <a href="#wild-save">Salvar e segurança</a>
+</nav>
+
+<h5 id="wild-maps">Maps: lista de locais da ROM</h5>
+<p>O painel <strong>Maps</strong>, na parte esquerda, apresenta os locais do jogo organizados por grupos. Ao selecionar um mapa, a Suite carrega as informações de encontros selvagens correspondentes na parte direita.</p>
+<p>Quando a ROM possui nomes de mapas reconhecidos, eles aparecem acompanhados de seus números de identificação. Por exemplo, uma entrada pode ser apresentada com o nome de uma rota e os números do grupo e do mapa entre parênteses.</p>
+<p>Os números ajudam a identificar locais que possuem nomes semelhantes. Eles são utilizados apenas como referência: <strong>selecionar um mapa não muda seu nome nem modifica o cenário do jogo</strong>.</p>
+<p>Por padrão, a lista prioriza os locais que possuem encontros selvagens configurados. Se algum mapa apresentar dados de encontro inválidos, a Suite procura mantê-lo visível e indica a situação com um aviso, em vez de simplesmente escondê-lo.</p>
+
+<h5>Show locations without Wild Encounter</h5>
+<p>Acima da lista fica a opção <strong>Show locations without Wild Encounter</strong>, que permite mostrar também os mapas sem encontros selvagens configurados.</p>
+<p>Essa opção é útil quando o usuário deseja, por exemplo, adicionar Pokémon selvagens a um local que originalmente não possui encontros. Ao ativá-la, o mapa passa a aparecer na lista mesmo que ainda não tenha uma tabela própria de encontros.</p>
+<p><strong>Exibir um local vazio não cria encontros automaticamente.</strong> É necessário escolher o mapa, selecionar um Type de encontro, utilizar <strong>Add</strong> quando a operação estiver disponível e depois salvar.</p>
+<p>Desmarcar essa opção apenas filtra a lista exibida. Nenhum encontro da ROM é apagado por isso.</p>
+
+<h5 id="wild-types">Type: Grass, Water, Rock Smash e Fishing</h5>
+<p>O campo <strong>Type</strong> permite alternar entre as quatro categorias de encontros reconhecidas pelo editor:</p>
+<ul>
+<li><strong>Grass (Land):</strong> Pokémon encontrados ao caminhar por áreas que utilizam encontros terrestres, como grama alta ou cavernas;</li>
+<li><strong>Water:</strong> Pokémon encontrados ao se movimentar pela água, como ao utilizar Surf;</li>
+<li><strong>Rock Smash:</strong> Pokémon que podem aparecer ao quebrar rochas que utilizam essa mecânica;</li>
+<li><strong>Fishing:</strong> Pokémon encontrados por meio das diferentes varas de pesca.</li>
+</ul>
+<p>Cada categoria possui sua própria lista de Pokémon e sua própria taxa-base de encontros. Assim, o mesmo mapa pode possuir Pokémon diferentes na grama e na água, por exemplo.</p>
+<p>Se o Type escolhido não estiver configurado para o local, a Suite mostra essa informação em vez de inventar dados. Dependendo do estado do mapa, é possível criar a área pelo botão <strong>Add</strong>.</p>
+
+<h5 id="wild-slots">Tabela de encontros: Slots, níveis e espécies</h5>
+<p>A parte central de <strong>Encounter Data</strong> contém a tabela dos Pokémon que podem aparecer no Type selecionado. Cada linha representa uma <strong>posição de encontro</strong>, chamada de <em>slot</em>.</p>
+<p>A tabela apresenta:</p>
+<ul>
+<li><strong>Slot:</strong> posição do Pokémon na lista de encontros;</li>
+<li><strong>Min:</strong> menor nível em que aquele Pokémon pode aparecer;</li>
+<li><strong>Max:</strong> maior nível possível para aquele encontro;</li>
+<li><strong>Pokémon:</strong> espécie escolhida para a posição;</li>
+<li><strong>No.:</strong> ID da espécie reconhecido pela ROM;</li>
+<li><strong>Chance:</strong> probabilidade associada àquela posição;</li>
+<li><strong>Rod:</strong> vara de pesca correspondente, exibida quando o Type é Fishing.</li>
+</ul>
+<p>Por exemplo, se uma posição possui <strong>Min 5</strong>, <strong>Max 8</strong> e <strong>Zigzagoon</strong>, esse encontro pode gerar um Zigzagoon entre os níveis 5 e 8, conforme as regras do jogo.</p>
+<p>As opções de Pokémon utilizam os nomes reconhecidos no projeto, incluindo espécies de ROM hacks expandidas quando a tabela correspondente já está configurada na Suite. O campo <strong>No.</strong> acompanha a espécie selecionada, mas não é editado separadamente.</p>
+<p>É possível alterar <strong>Min</strong>, <strong>Max</strong> e <strong>Pokémon</strong> em cada linha. A Suite verifica, por exemplo, se o nível mínimo não ficou maior que o máximo antes de permitir a gravação.</p>
+
+<h5>Chance: como funcionam as probabilidades</h5>
+<p>A coluna <strong>Chance</strong> indica com que frequência cada posição pode ser escolhida <strong>depois que o jogo decide gerar um encontro daquela categoria</strong>.</p>
+<p>Nas estruturas originais da terceira geração, a distribuição entre as posições já faz parte do funcionamento do jogo. Por isso, o usuário pode trocar o Pokémon de uma posição, mas <strong>não altera diretamente o percentual da coluna Chance</strong>.</p>
+<p>Por exemplo, colocar um Pokémon raro em uma posição de <strong>1%</strong> mantém a chance correspondente àquela posição, enquanto colocá-lo em uma posição mais comum permite que ele apareça com maior frequência.</p>
+<p>Também é possível repetir a mesma espécie em mais de uma posição, com níveis diferentes. Nesse caso, a frequência combinada depende de quais posições podem selecionar aquele Pokémon.</p>
+
+<h5>Quantidade de Slots por Type</h5>
+<p>Os encontros originais são organizados em quantidades fixas de posições:</p>
+<ul>
+<li><strong>Grass (Land):</strong> 12 posições;</li>
+<li><strong>Water:</strong> 5 posições;</li>
+<li><strong>Rock Smash:</strong> 5 posições;</li>
+<li><strong>Fishing:</strong> 10 posições, divididas entre as três varas.</li>
+</ul>
+<p>O editor permite escolher os Pokémon e seus níveis dentro dessas posições. <strong>Ele não transforma livremente uma lista de 5 encontros em uma lista de 20</strong>, porque isso exigiria modificar também a lógica que o jogo utiliza para escolher cada posição.</p>
+<p>Esses limites correspondem ao formato original reconhecido pela Suite. ROM hacks que modificam profundamente esse formato precisam de compatibilidade específica.</p>
+
+<h5>Fishing: Old Rod, Good Rod e Super Rod</h5>
+<p>Ao selecionar <strong>Fishing</strong>, surge a coluna <strong>Rod</strong>, que organiza os dez encontros de pesca por vara:</p>
+<ul>
+<li><strong>Old Rod:</strong> 2 posições;</li>
+<li><strong>Good Rod:</strong> 3 posições;</li>
+<li><strong>Super Rod:</strong> 5 posições.</li>
+</ul>
+<p>Cada vara possui suas próprias chances entre as posições disponíveis. Dessa forma, um mesmo local pode oferecer Pokémon simples com a Old Rod e espécies diferentes com a Good Rod ou Super Rod.</p>
+<p>O usuário pode editar espécies e níveis normalmente, mas <strong>não move uma posição da Old Rod para a Super Rod apenas mudando seu nome</strong>. A divisão entre as varas é determinada pelo sistema de encontros do jogo.</p>
+
+<h5 id="wild-rate">Encounter ratio: frequência-base de encontros</h5>
+<p>O campo <strong>Encounter ratio</strong> controla o valor-base utilizado pelo jogo para determinar a frequência de encontros daquele Type no local selecionado.</p>
+<p>Ele pode ser ajustado por um <strong>campo numérico</strong> ou pelo <strong>controle deslizante</strong> logo abaixo. Ambos trabalham juntos: quando um valor é alterado, o outro acompanha.</p>
+<p>A faixa aceita pelo editor é de <strong>0 a 255</strong>. Ao lado, a Suite exibe uma referência percentual calculada conforme o jogo.</p>
+<p>É importante diferenciar esse valor da coluna Chance. <strong>Encounter ratio</strong> influencia a frequência com que o jogo tenta gerar um encontro; <strong>Chance</strong> indica qual Pokémon pode ser escolhido quando o encontro acontece.</p>
+<p>O percentual exibido é uma <strong>referência do cálculo-base</strong>, não uma promessa de que o jogador encontrará exatamente aquela quantidade de Pokémon a cada cem passos. O resultado real pode depender de condições e regras adicionais da engine.</p>
+
+<h5 id="wild-variants">Variant: mapas com mais de um conjunto de encontros</h5>
+<p>Alguns locais possuem <strong>mais de uma versão de sua lista de encontros</strong>. Nesses casos, o campo <strong>Variant</strong> aparece ao lado de Type para escolher qual conjunto o usuário deseja consultar.</p>
+<p>O exemplo mais conhecido é <strong>Altering Cave</strong>, que utiliza diferentes variantes conforme o estado da engine. A Suite permite consultar cada uma sem misturar seus Pokémon ou níveis com os das outras.</p>
+<p>Em situações reconhecidas, a lista pode mostrar informações como a posição da variante e o valor de <strong>VAR</strong> associado àquela entrada.</p>
+<p><strong>Salvar uma variante modifica somente a entrada selecionada.</strong> Isso evita alterar outras versões do mesmo local sem intenção.</p>
+<p>A existência de várias variantes na tabela não significa que todas serão utilizadas automaticamente durante o jogo. A escolha efetiva depende das condições implementadas na ROM.</p>
+
+<h5>Feebas e encontros especiais</h5>
+<p>Em determinadas versões da terceira geração, Pokémon como <strong>Feebas</strong> possuem regras especiais para aparecer. Na Route 119 de Emerald, por exemplo, sua aparição envolve posições específicas de pesca e condições determinadas pelo jogo.</p>
+<p>O Wild Encounter mostra os dados de encontros reconhecidos na tabela principal, mas <strong>nem toda regra especial da engine pode ser representada apenas pelas posições comuns de Fishing</strong>.</p>
+<p>Isso significa que trocar o Pokémon de um slot não equivale necessariamente a modificar toda a mecânica de Feebas. O editor apresenta avisos de comportamento especial onde consegue identificá-los, evitando tratar essas regras como encontros inteiramente comuns.</p>
+<p>Outros locais também podem possuir regras adicionais, como seleção de variantes ou condições específicas que a ROM utiliza para determinar os Pokémon disponíveis.</p>
+
+<h5 id="wild-add-remove">Add: criar uma nova área de encontros</h5>
+<p>O botão <strong>Add</strong> permite preparar uma área de encontros que ainda não existe no Type selecionado.</p>
+<p>Por exemplo, se um mapa já possui encontros em Grass, mas não possui encontros em Water, o usuário pode selecionar <strong>Water</strong> e utilizar Add para preparar essa nova lista.</p>
+<p>A Suite apresenta posições iniciais com dados válidos, que podem ser alterados antes do salvamento. O botão Add <strong>não grava a ROM imediatamente</strong>; primeiro é criado um rascunho que o usuário pode revisar.</p>
+<p>Ao clicar em <strong>Salvar</strong>, a Suite procura espaço livre para armazenar os novos encontros e atualiza as referências necessárias, desde que seja possível realizar a operação com segurança.</p>
+
+<h5>Adicionar encontros a um mapa sem Wild header</h5>
+<p>Se um mapa não possui nenhuma estrutura de encontros, ainda é possível iniciar a criação por meio de <strong>Show locations without Wild Encounter</strong> e <strong>Add</strong>, quando o formato da ROM permite essa operação.</p>
+<p>Nesse caso, a Suite precisa criar não apenas a lista de Pokémon, mas também o registro que liga o mapa a essa lista, conhecido como <strong>Wild header</strong>.</p>
+<p>A ferramenta tenta aproveitar a região da tabela principal quando existe espaço seguro. Se necessário, pode colocar a tabela em outra região e atualizar as referências reconhecidas.</p>
+<p>Em termos simples, isso permite começar a configurar encontros em um mapa que antes não tinha nenhum, <strong>sem exigir que o usuário informe manualmente todos os endereços</strong>.</p>
+<p>Essa operação altera estruturas importantes da ROM e só fica disponível quando o editor consegue validar o local e as referências necessárias.</p>
+
+<h5>Remove: retirar uma área de encontros</h5>
+<p>O botão <strong>Remove</strong> permite retirar do mapa o Type de encontro selecionado, como uma área de Rock Smash ou de Water que não será mais utilizada.</p>
+<p>A Suite pede confirmação porque, diferentemente da edição de um campo em rascunho, <strong>Remove executa a remoção após a confirmação</strong>.</p>
+<p>O procedimento retira a referência que fazia o jogo utilizar aquela área, mas <strong>preserva os dados antigos no local em que estavam armazenados</strong>. Isso evita apagar informações que possam ser utilizadas em outra parte da ROM hack.</p>
+<p>Na Release Inicial, remover a última área de um mapa <strong>não apaga fisicamente o Wild header vazio da tabela principal</strong>. A remoção completa desse registro faz parte de melhorias posteriores.</p>
+
+<h5 id="wild-recovery">Recreate: recuperar uma área inválida</h5>
+<p>Se uma área está configurada, mas contém endereços incorretos ou dados que a Suite não consegue interpretar com segurança, o editor pode apresentar o estado como <strong>Invalid</strong>.</p>
+<p>Nessas situações, o botão Add pode mudar para <strong>Recreate</strong>. Ele permite preparar uma nova área válida, em outro espaço disponível, sem tentar corrigir diretamente os bytes problemáticos.</p>
+<p>O usuário pode revisar os Pokémon, níveis e Encounter ratio antes de clicar em Salvar. A área antiga fica preservada, em vez de ser apagada automaticamente.</p>
+<p>Quando a recuperação não é segura ou o erro não pode ser identificado suficientemente, a Suite impede a gravação e apresenta uma explicação do problema.</p>
+
+<h5 id="wild-technical">Technical details: informações de diagnóstico</h5>
+<p>O painel <strong>Technical details</strong> reúne informações úteis para quem precisa entender como aquele mapa está configurado dentro da ROM.</p>
+<p>Ele mostra, entre outros dados:</p>
+<ul>
+<li><strong>Wild header:</strong> onde fica o registro de encontros do mapa;</li>
+<li><strong>Structure status:</strong> se a estrutura foi reconhecida normalmente, apresenta um aviso ou contém erros;</li>
+<li><strong>Engine behavior:</strong> se o local segue o comportamento comum ou possui alguma regra especial identificada;</li>
+<li><strong>Variants:</strong> quantas variações foram encontradas para aquele mapa;</li>
+<li><strong>Current variant:</strong> qual variação está selecionada, quando existe mais de uma.</li>
+</ul>
+<p>Abaixo fica uma tabela com o estado de <strong>Grass, Water, Rock Smash e Fishing</strong>, incluindo as localizações das informações e listas de Pokémon. Essas localizações aparecem como <strong>Info offset</strong> e <strong>Slots offset</strong>.</p>
+<p>Esses endereços são apresentados para consulta. <strong>Não é necessário conhecer hexadecimal para editar os encontros comuns</strong>; os campos principais de Pokémon e nível já fazem essa parte de forma visual.</p>
+<p>Quando existem erros ou avisos, o painel apresenta detalhes adicionais para ajudar a identificar qual área está com problemas.</p>
+
+<h5>Compatibilidade com ROMs originais e ROM hacks</h5>
+<p>O editor reconhece as estruturas originais de <strong>Pokémon Emerald, FireRed, LeafGreen, Ruby e Sapphire</strong>, nas versões suportadas pela Suite.</p>
+<p>Em uma ROM hack, a tabela principal de encontros pode ter sido movida ou ampliada. A Suite procura localizar a estrutura correta por meio de referências e verificações, em vez de presumir que todas as ROMs armazenam os dados exatamente no mesmo endereço.</p>
+<p>Por segurança, encontrar uma sequência de dados parecida com encontros selvagens <strong>não é suficiente para autorizar uma gravação</strong>. O editor precisa confirmar que realmente pertence à estrutura utilizada pelo jogo.</p>
+<p>ROM hacks com engines de encontros totalmente personalizadas podem exigir suporte adicional e não devem ser tratadas como equivalentes às ROMs originais apenas pelo nome do jogo.</p>
+
+<h5 id="wild-save">Salvar, Ctrl+S e alterações pendentes</h5>
+<p>Depois de alterar espécies, níveis ou Encounter ratio, o usuário pode clicar em <strong>Salvar</strong> ou utilizar <code>Ctrl+S</code> para gravar a área selecionada.</p>
+<p>Enquanto existem alterações pendentes, o título da janela apresenta um <strong>asterisco (*)</strong>. Antes de trocar de mapa, Type ou Variant, ou de fechar o editor, a Suite oferece as opções de salvar, descartar ou cancelar, evitando que o rascunho seja perdido sem aviso.</p>
+<p>O salvamento confere se os dados originais continuam como estavam quando foram carregados. Isso ajuda a impedir que a Suite sobrescreva silenciosamente mudanças realizadas por outro programa ou editor enquanto a janela estava aberta.</p>
+<p>Depois de gravar, a ferramenta lê novamente os dados e verifica se o resultado corresponde ao esperado. Caso encontre uma falha durante operações protegidas, utiliza mecanismos de recuperação disponíveis para evitar uma alteração incompleta.</p>
+
+<h5>O que o Wild Encounter não faz sozinho</h5>
+<p>O Wild Encounter trabalha com os <strong>registros de encontros selvagens</strong>. Ele não cria mapas, não desenha terrenos, não adiciona espécies novas ao jogo e não instala rotinas especiais de batalha.</p>
+<p>Da mesma forma, modificar a tabela de um mapa não significa configurar automaticamente todas as condições especiais que scripts ou outras partes da engine podem utilizar.</p>
+<p>Antes de realizar alterações grandes, especialmente em mapas que utilizam variantes ou mecânicas especiais, é recomendado manter um <strong>backup da ROM</strong> e testar os encontros dentro do jogo.</p>
+<p><strong>Nota sobre as versões:</strong> a busca dedicada de mapas por <code>Ctrl+F</code>, a remoção física de Wild headers vazios e alguns refinamentos de compatibilidade e interface pertencem à evolução posterior do editor, documentada na <strong>v0.02</strong>, e não foram apresentados aqui como funções da Release Inicial.</p>
+
 </article>
