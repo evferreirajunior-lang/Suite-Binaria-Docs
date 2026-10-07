@@ -730,4 +730,105 @@
 <p>Se o JSON pertence a outro Pokémon, a ferramenta pede confirmação antes de aplicar os valores à espécie selecionada.</p>
 <p>A informação de <strong>Dex Color</strong> pertence à aba Pokédex e não é alterada por um salvamento comum de Base Stats.</p>
 
+
+<h5 id="pokemon-evolutions">Aba Evolutions: condições e resultados das evoluções</h5>
+<p>A aba <strong>Evolutions</strong> permite definir <strong>quando e para qual espécie um Pokémon evolui</strong>. Ela atende tanto às evoluções tradicionais da terceira geração quanto a métodos adicionais que uma ROM hack já tenha implementado.</p>
+<p>Na parte esquerda fica a lista de evoluções do Pokémon selecionado. Ao escolher uma entrada, os campos da direita mostram a condição e o Pokémon de destino correspondentes.</p>
+
+<h6>Evolução 1, 2, 3, 4 e 5</h6>
+<p>O editor trabalha com até <strong>cinco posições de evolução por espécie</strong>, de acordo com a estrutura configurada para a ROM. As posições disponíveis podem ser percorridas pela lista ou pelo seletor compacto logo acima dela.</p>
+<p>É possível configurar caminhos diferentes para a mesma espécie. Por exemplo, um Pokémon pode evoluir para espécies distintas dependendo de usar um item, alcançar determinado nível ou atender a outra condição suportada pelo jogo.</p>
+<p>A quantidade de posições apresentada depende da configuração <strong>EvolutionPerPKMN</strong>. Reduzir essa quantidade <strong>não deve ser confundido com apagar automaticamente os registros que ficaram ocultos</strong>: a Suite procura preservar os dados que não estão sendo editados.</p>
+
+<h6>Condição: método de evolução</h6>
+<p>O campo <strong>Condição</strong> escolhe a regra que precisa ser atendida para a evolução ocorrer. Entre os métodos conhecidos da terceira geração estão:</p>
+<ul>
+<li>evoluir ao atingir um <strong>nível</strong> específico;</li>
+<li>evoluir por <strong>Happiness</strong>, inclusive condições de dia ou noite quando suportadas;</li>
+<li>evoluir durante uma <strong>Trade</strong>, com ou sem um item;</li>
+<li>evoluir ao utilizar determinado <strong>Item</strong>;</li>
+<li>evoluir conforme a comparação entre <strong>Attack e Defense</strong>;</li>
+<li>regras especiais de evolução relacionadas a <strong>Personality</strong>, criação de Pokémon adicional e <strong>Beauty</strong>, conforme o jogo.</li>
+</ul>
+<p>Ao selecionar um método, os campos disponíveis são ajustados para facilitar o preenchimento da informação que aquele tipo de evolução precisa.</p>
+
+<h6>Dados: Nível, Item e Pokémon de destino</h6>
+<p>O painel <strong>Dados</strong> reúne as informações utilizadas pela condição selecionada.</p>
+<p>O campo <strong>Nível</strong> é empregado em evoluções por nível. Quando a regra depende de um item, é possível escolher o item correspondente entre os reconhecidos na ROM.</p>
+<p>O campo <strong>Evoluí para</strong> determina qual espécie será recebida depois da evolução. Como exemplo, uma evolução por nível pode ser configurada para transformar Bulbasaur em Ivysaur ao atingir o nível 16.</p>
+<p>Os nomes de Pokémon e Items são apresentados para facilitar a escolha, mas a Suite preserva valores personalizados já existentes quando ainda não há uma identificação correspondente na lista.</p>
+
+<h6>Banco, Golpe, Mapa, Local e Valor</h6>
+<p>A aba também apresenta campos como <strong>Banco</strong>, <strong>Golpe</strong>, <strong>Mapa</strong>, <strong>Local</strong> e <strong>Valor</strong>. Eles são especialmente importantes em ROM hacks com métodos evolutivos personalizados.</p>
+<p><strong>Local</strong> pode mostrar nomes de localidades reconhecidos na própria ROM, facilitando a identificação de uma região do jogo em vez de obrigar o usuário a decorar apenas um número.</p>
+<p>Esses campos <strong>não criam automaticamente uma evolução por localidade, golpe ou mapa</strong>. Para que sejam utilizados de verdade, é necessário que um método da engine reconheça a condição e que exista um mapeamento válido dos dados.</p>
+<p>Quando a Suite não conhece o significado de determinado método, <strong>Valor</strong> pode ser usado para consultar ou editar seu número interno sem inventar uma função que não existe.</p>
+
+<h6>Filler u16 e botão de ajuda</h6>
+<p>O campo <strong>Filler u16</strong> representa dois bytes adicionais presentes em determinados formatos de evolução. Na maioria das estruturas originais, esse espaço é reservado e normalmente aparece como zero.</p>
+<p>Algumas ROM hacks podem utilizá-lo para guardar outra condição. O botão <strong>?</strong> ao lado do campo oferece uma explicação rápida.</p>
+<p>Em estruturas antigas que não possuem esse espaço, o campo fica indisponível. <strong>Se sua ROM não utiliza esse valor para nada específico, o recomendado é deixá-lo como está.</strong></p>
+
+<h6>Engrenagem: métodos evolutivos customizados</h6>
+<p>A engrenagem próxima a Filler u16 abre uma janela para <strong>cadastrar e gerenciar nomes e configurações de métodos evolutivos personalizados</strong>.</p>
+<p>Nela, o usuário pode criar um mapeamento com <strong>Nome</strong>, <strong>Method ID</strong>, uso do campo <strong>Evoluí para</strong> e a finalidade dos campos <strong>Argumento</strong> e <strong>Filler u16</strong>. Entre as possibilidades reconhecidas estão Item, Nível, Golpe, espécie exigida, Local, Banco, Mapa e valores próprios.</p>
+<p>Por exemplo, se uma ROM hack já implementou uma evolução que exige determinado item, o mapeamento pode informar à Suite em qual campo o ID desse item será armazenado. Assim, o usuário passa a trabalhar com um seletor compreensível, em vez de decorar o número usado na ROM.</p>
+<p>Também é possível criar, salvar ou excluir mapeamentos, e há sugestões de nomes para alguns métodos conhecidos.</p>
+<p><strong>Essa janela não programa um novo método de evolução na engine.</strong> Ela ensina a Suite a reconhecer e editar o formato de um método que <strong>já existe</strong> na ROM hack. Os métodos originais ficam protegidos para não serem substituídos acidentalmente.</p>
+
+<h6>Salvar evoluções e Import/Export</h6>
+<p>Depois de ajustar as condições, o usuário grava as evoluções da espécie pelo botão <strong>Salvar</strong> da coluna esquerda ou pelo atalho <code>Ctrl+S</code>.</p>
+<p>Quando Evolutions está aberta, <strong>Import</strong> e <strong>Export</strong> trabalham apenas com os registros de evolução do Pokémon atual, em um arquivo JSON específico dessa aba.</p>
+<p>A importação carrega os novos valores para revisão, sem gravar imediatamente na ROM. Se o arquivo pertence a outra espécie, a Suite pede confirmação antes de aplicar os dados ao Pokémon selecionado.</p>
+<p>A Suite procura respeitar a quantidade de posições configurada, preservar campos extras e impedir que a gravação de uma evolução altere dados de outras abas.</p>
+
+<h5 id="pokemon-learnsets">Aba Learnsets: golpes aprendidos e compatibilidades</h5>
+<p>A aba <strong>Learnsets</strong> reúne diferentes formas pelas quais um Pokémon pode aprender golpes. Ela é dividida em três áreas: <strong>Golpes por Nível</strong>, <strong>TM List</strong> e <strong>Tutors</strong>.</p>
+<p>Essa separação ajuda a distinguir os golpes adquiridos naturalmente ao subir de nível daqueles ensinados por máquinas ou personagens especiais.</p>
+
+<h6>Golpes por Nível</h6>
+<p>O painel <strong>Golpes por Nível</strong> lista o nível e o golpe correspondente de cada entrada. Por exemplo, um Pokémon pode aprender Tackle em um nível inicial e outro golpe mais poderoso ao avançar.</p>
+<p>Ao selecionar uma entrada, os controles abaixo permitem escolher outro <strong>Nível</strong> e outro <strong>Move</strong>. O botão <strong>Alterar golpe</strong> prepara a mudança na lista.</p>
+<p>Um contador mostra quantos golpes estão configurados para aquele Pokémon e informa os limites reconhecidos para o formato da tabela. O painel também identifica o tipo de estrutura utilizada na ROM quando ela é reconhecida.</p>
+<p>Dependendo do layout da ROM hack, algumas estruturas podem ter limites e necessidades de espaço diferentes. Por isso a Suite confere o formato carregado antes de realizar alterações.</p>
+
+<h6>Setas ▲ e ▼: mudar a ordem dos golpes</h6>
+<p>As setas <strong>▲</strong> e <strong>▼</strong> permitem mover um golpe selecionado para uma posição anterior ou posterior da lista.</p>
+<p><strong>Atenção:</strong> esses comandos de reordenação possuem gravação própria e podem <strong>salvar imediatamente a nova ordem na ROM</strong>, após as verificações necessárias. Portanto, não devem ser confundidos com a simples edição de um campo ainda em rascunho.</p>
+<p>A ordem dos registros pode ser relevante para a maneira como o jogo lê ou apresenta a sequência de aprendizado.</p>
+
+<h6>Offset / Estrutura e Gerenciar...</h6>
+<p>O grupo <strong>Offset / Estrutura</strong> mostra onde a lista de golpes por nível está armazenada e informa quantos dados fazem parte dela.</p>
+<p>O botão <strong>Gerenciar...</strong> abre os recursos de ajuste da estrutura, incluindo a possibilidade de <strong>redimensionar ou mover o learnset</strong> quando ele não cabe mais no espaço disponível.</p>
+<p>A Suite pode procurar espaço livre respeitando a configuração geral da ROM. Quando existem registros compartilhados ou endereços reapontados, são feitas verificações adicionais para evitar modificar dados usados por outros Pokémon.</p>
+<p>Apenas abrir essa janela e preparar uma nova posição <strong>não grava automaticamente a mudança</strong>. Quando aplicável, a confirmação final ocorre pelo salvamento contextual da aba.</p>
+
+<h6>TM List: golpes ensinados por TM/HM</h6>
+<p>O grupo <strong>TM List</strong> mostra os golpes associados às máquinas da ROM e indica quais deles o Pokémon selecionado pode aprender.</p>
+<p>Cada linha possui uma caixa de seleção: <strong>marcada</strong> significa que a espécie é compatível com aquele golpe; <strong>desmarcada</strong> significa que ela não possui essa compatibilidade.</p>
+<p>Os botões de alteração permitem editar qual golpe está associado a uma entrada da lista global de TMs/HMs, quando o formato da ROM suporta essa operação.</p>
+<p>É importante diferenciar as duas mudanças: <strong>marcar a compatibilidade</strong> afeta o Pokémon selecionado; <strong>substituir um golpe da TM</strong> pode afetar o funcionamento dessa máquina para todo o jogo, não apenas para uma espécie.</p>
+
+<h6>Tutors: golpes ensinados por Move Tutors</h6>
+<p>O painel <strong>Tutors</strong> funciona de forma semelhante ao de TMs, mas representa os golpes ensinados por personagens que atuam como <strong>Move Tutors</strong>.</p>
+<p>O usuário pode consultar a lista, marcar as compatibilidades do Pokémon e, onde permitido, modificar qual Move corresponde a uma entrada da tabela de Tutors.</p>
+<p><strong>Compatibilidade:</strong> Emerald, FireRed e LeafGreen possuem estruturas de Tutors reconhecidas pelo editor. As ROMs originais de <strong>Ruby e Sapphire</strong> não utilizam essa mesma tabela genérica; por isso, o painel pode aparecer desabilitado nessas versões.</p>
+<p>Uma ROM hack só terá novos Move Tutors em funcionamento se os personagens, scripts e rotinas correspondentes já tiverem sido implementados no jogo.</p>
+
+<h6>Contadores de compatibilidade e navegação</h6>
+<p>Os painéis de TM List e Tutors apresentam contadores que ajudam a comparar quantos golpes estão habilitados para a espécie com o total de entradas configuradas na tabela.</p>
+<p>A compatibilidade pode ser alterada diretamente pelas caixas de seleção, inclusive com o teclado. Isso facilita trabalhar em espécies que possuem uma lista extensa de máquinas ou Tutors.</p>
+<p>Os nomes dos golpes acompanham a tabela reconhecida pela Suite. Caso sejam renomeados no Move Editor, a listagem pode refletir os nomes atualizados.</p>
+
+<h6>PokéAPI dos golpes por nível</h6>
+<p>A área de Golpes por Nível conta com controles <strong>PokéAPI</strong> para consultar listas de aprendizado externas e compará-las com o Pokémon da ROM atual.</p>
+<p>Essa consulta pode ajudar a preencher ou revisar uma lista, mas a Suite verifica quais golpes realmente existem na ROM antes de preparar as alterações.</p>
+<p>Se o golpe sugerido não existir, utilizar outro ID no lugar dele poderia ensinar o Move errado. Por isso, diferenças de nomenclatura ou ausência de uma entrada são sinalizadas para revisão em vez de serem aplicadas cegamente.</p>
+
+<h6>Salvar e arquivos de Learnsets</h6>
+<p>Ao usar <strong>Salvar</strong> ou <code>Ctrl+S</code> com Learnsets ativa, a Suite grava as alterações compatíveis dessa aba, incluindo os dados de golpes por nível e as compatibilidades marcadas.</p>
+<p>Os botões gerais <strong>Import</strong> e <strong>Export</strong> utilizam JSON próprio da aba. O arquivo pode conter golpes por nível, listas de TM/HM e Tutors e informações sobre quais deles o Pokémon pode aprender.</p>
+<p>O Import permite conferir os valores antes de salvar e não deve usar endereços vindos de outra ROM como se fossem endereços seguros da ROM atual.</p>
+<p>Trocar de Pokémon com alterações pendentes aciona os avisos gerais do editor para evitar descartar uma lista ainda não salva.</p>
+
 </article>
