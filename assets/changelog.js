@@ -74,6 +74,25 @@
 
   let requestId = 0;
 
+  function siteText(key) {
+    return window.SuiteSiteI18n?.t(key) || key;
+  }
+
+  function versionLabel(version) {
+    return version === "initial-release" ? siteText("initialRelease") : (versionLabels[version] || version);
+  }
+
+  function showPlaceholder(title, description, isError = false) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "changelog-placeholder" + (isError ? " changelog-error" : "");
+    const strong = document.createElement("strong");
+    strong.textContent = siteText(title);
+    const detail = document.createElement("span");
+    detail.textContent = siteText(description);
+    wrapper.append(strong, detail);
+    viewer.replaceChildren(wrapper);
+  }
+
   function updateLanguageAvailability() {
     const version = versionSelect.value;
     const available = new Set(availableLanguages[version] || []);
@@ -83,7 +102,7 @@
       button.disabled = !enabled;
       button.classList.remove("is-active");
       button.setAttribute("aria-pressed", "false");
-      button.title = enabled ? "" : "Este idioma será disponibilizado quando o changelog-base desta release estiver concluído.";
+      button.title = enabled ? "" : siteText("unavailableLanguage");
     });
   }
 
@@ -95,9 +114,10 @@
     const version = versionSelect.value;
     const onlyPortuguese = (availableLanguages[version] || []).length === 1;
 
-    viewer.innerHTML = onlyPortuguese
-      ? '<div class="changelog-placeholder"><strong>Release em reconstrução.</strong><span>Por enquanto, o changelog desta release está disponível em Português. Os demais idiomas serão adicionados após a conclusão do texto-base.</span></div>'
-      : '<div class="changelog-placeholder"><strong>Escolha um idioma.</strong><span>O changelog da versão selecionada será carregado aqui.</span></div>';
+    showPlaceholder(
+      onlyPortuguese ? "incompleteTitle" : "selectLanguage",
+      onlyPortuguese ? "incompleteDescription" : "changelogWillLoad"
+    );
 
     if (status) status.textContent = "";
   }
@@ -233,8 +253,8 @@
     });
 
     viewer.setAttribute("aria-busy", "true");
-    viewer.innerHTML = '<div class="changelog-placeholder"><strong>Carregando…</strong><span>Aguarde um instante.</span></div>';
-    if (status) status.textContent = `Carregando changelog ${versionLabels[version] || version} — ${labels[language] || language}.`;
+    showPlaceholder("loading", "pleaseWait");
+    if (status) status.textContent = `${siteText("loading")} ${versionLabel(version)} — ${labels[language] || language}.`;
 
     try {
       const response = await fetch(`changelog/${encodeURIComponent(version)}/${encodeURIComponent(language)}.html`, { cache: "no-cache" });
@@ -243,16 +263,24 @@
       if (currentRequest !== requestId) return;
       viewer.innerHTML = html;
       organizeTopics(version, language);
-      if (status) status.textContent = `Changelog ${versionLabels[version] || version} — ${labels[language] || language} carregado.`;
+      if (status) status.textContent = `${siteText("loaded")} ${versionLabel(version)} — ${labels[language] || language}.`;
     } catch (error) {
       if (currentRequest !== requestId) return;
-      viewer.innerHTML = '<div class="changelog-placeholder changelog-error"><strong>Não foi possível carregar este changelog.</strong><span>Tente novamente em alguns instantes.</span></div>';
-      if (status) status.textContent = "Falha ao carregar o changelog.";
+      showPlaceholder("loadError", "retryLater", true);
+      if (status) status.textContent = siteText("loadError");
       console.error("Suite Binária changelog:", error);
     } finally {
       if (currentRequest === requestId) viewer.setAttribute("aria-busy", "false");
     }
   }
+
+  document.addEventListener("suite-site-language-change", () => {
+    // A leitura do changelog mantém seu próprio idioma; só as mensagens
+    // da interface principal e os avisos transitórios seguem o idioma do topo.
+    if (viewer.querySelector(".changelog-placeholder") && viewer.getAttribute("aria-busy") !== "true") {
+      resetViewer();
+    }
+  });
 
   versionSelect.addEventListener("change", resetViewer);
   languageButtons.forEach(button => {
