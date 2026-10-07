@@ -1,0 +1,337 @@
+<article class="changelog-article" lang="es">
+<h3>Suite Binária — Lanzamiento inicial</h3>
+<p>Esta sección presenta las funciones de la primera versión pública de Suite Binária. Está organizada por herramientas y utiliza explicaciones prácticas, pensadas tanto para quienes comienzan a editar ROMs como para usuarios con experiencia.</p>
+<h4>Presentación general</h4>
+<p>El lanzamiento inicial reúne herramientas para editar ROMs Pokémon de la tercera generación. La ventana principal permite abrir una ROM, acceder a las funciones generales y entrar en los distintos editores.</p>
+<h4>Interfaz principal</h4>
+<p>Si no hay una ROM abierta, los editores que la necesitan permanecen deshabilitados. Cuando se carga una ROM compatible, la Suite reconoce el juego y muestra cuál está abierta.</p>
+<p>En la parte superior se encuentran <strong>Opciones, Proyecto, Historial, Herramientas, Configuración, PokéAPI Data e Idiomas</strong>. En el centro aparecen los accesos a los editores.</p>
+<h4>Opciones</h4>
+<p><strong>Abrir ROM</strong> (<code>Ctrl+O</code>) permite seleccionar un archivo GBA. <strong>Recientes</strong> guarda hasta cinco ROMs abiertas correctamente para volver a ellas rápidamente. Si un archivo ya no está disponible, se elimina su acceso cuando se intenta abrirlo.</p>
+<p><strong>Limpiar recientes</strong> borra únicamente ese historial, no los archivos de ROM. <strong>Salir</strong> (<code>Ctrl+Q</code>) cierra la Suite.</p>
+<h4>Proyectos</h4>
+<p>Un proyecto reúne ajustes específicos de una ROM hack sin incluir una copia completa de la ROM.</p>
+<ul><li><strong>Abrir proyecto</strong>: <code>Ctrl+Shift+O</code>.</li><li><strong>Crear proyecto de la ROM actual</strong>: <code>Ctrl+Shift+S</code>.</li><li><strong>Guardar proyecto</strong>: <code>Ctrl+Alt+S</code>.</li></ul>
+<p>Así pueden mantenerse distintos proyectos con sus propias configuraciones.</p>
+<h4>Historial</h4>
+<p><strong>Deshacer</strong> (<code>Ctrl+Z</code>) y <strong>Rehacer</strong> (<code>Ctrl+Y</code>) permiten volver atrás o recuperar cambios de la sesión. <strong>Historial de ROM</strong> (<code>Ctrl+Shift+H</code>) permite consultar las modificaciones registradas.</p>
+<p><strong>Delta Backup</strong> (<code>Ctrl+Shift+B</code>) puede guardar únicamente las partes modificadas, en lugar de duplicar la ROM completa cada vez. Esto ayuda a recuperar cambios y ahorra espacio.</p>
+<h4>Herramientas</h4>
+<p><strong>Explorador global de referencias</strong> (<code>Ctrl+Shift+R</code>) ayuda a localizar dónde se utilizan Pokémon, Moves, Items y Abilities.</p>
+<p><strong>Free Space Manager</strong> (<code>Ctrl+Shift+F</code>) busca lugares disponibles para guardar datos nuevos. <strong>Comparador de ROM / Change Inspector</strong> (<code>Ctrl+Shift+C</code>) permite revisar valores anteriores y nuevos.</p>
+<p><strong>Verificar ROM / Health Check</strong> (<code>Ctrl+Shift+V</code>) señala posibles problemas sin modificar la ROM.</p>
+<h4>Configuración</h4>
+<p>La ventana Configuración reúne tres áreas importantes: <strong>Free Space</strong>, <strong>Types personalizados</strong> e <strong>INI Editor</strong>.</p>
+<h4>Configuración de Free Space</h4>
+<p>Permite indicar desde qué dirección se busca espacio libre cuando un texto, gráfico o tabla necesita trasladarse. Es posible elegir <code>0xFF</code> o <code>0x00</code> como valor libre, sin mezclar ambos tipos en una misma búsqueda.</p>
+<p><code>0xFF</code> suele ser la opción más segura. Al escoger <code>0x00</code>, la Suite muestra una advertencia porque los ceros también pueden formar parte de datos válidos del juego.</p>
+<h4>Types personalizados</h4>
+<p>Permite asignar nombres a Types adicionales ya implementados en una ROM hack, como <strong>Fairy</strong> o <strong>Sound</strong>. Los IDs 0–17 se reservan para los Types originales, y los adicionales pueden registrarse entre 18 y 255.</p>
+<p>Los nombres aparecen en editores como Move Editor y Base Stats. <strong>Registrar un Type aquí no lo añade al sistema de combate</strong>; la ROM ya debe reconocerlo.</p>
+<h4>INI Editor</h4>
+<p>Disponible desde Configuración cuando hay una ROM abierta, ayuda a indicar dónde se encuentran las tablas y cuántas entradas contienen. Es útil para ROM hacks con Pokémon, Moves, Items u otros datos ampliados o trasladados.</p>
+<p>Puede configurarse para abrirse automáticamente al cargar una ROM. Sus ajustes corresponden a la ROM o proyecto apropiado.</p>
+<h4>PokéAPI Data</h4>
+<p>Este gestor descarga y mantiene datos de consulta de PokéAPI que utilizan distintas herramientas. Puede abrirse incluso sin ROM cargada.</p>
+<p>Permite elegir conjuntos de datos, seleccionar los recomendados o todos, descargar lo que falta, actualizar archivos, pausar, continuar o cancelar descargas y ejecutar varias a la vez.</p>
+<p><strong>Verificar integridad</strong> comprueba los archivos locales y <strong>Limpiar seleccionados</strong> elimina únicamente los datos elegidos de la caché, sin modificar la ROM.</p>
+<h4>Idiomas</h4>
+<p>La Suite dispone de <strong>Português (Brasil), English, Español, Français e Italiano</strong>. El modo automático utiliza el idioma de Windows cuando es compatible y, en caso contrario, English. La selección manual se conserva para futuras ejecuciones.</p>
+<p>No se permite cambiar el idioma mientras hay un editor abierto, para evitar ventanas parcialmente traducidas. <strong>El idioma de la interfaz no cambia los textos almacenados dentro de la ROM.</strong></p>
+
+<h4>Ability Editor</h4>
+<p><strong>Ability Editor</strong> permite consultar y modificar los nombres y descripciones de las Abilities presentes en la ROM. La parte izquierda reúne la selección y las acciones; la derecha, los controles de descripción.</p>
+<h5>Selección y búsqueda de Abilities</h5>
+<p>Selecciona una Ability o escribe parte de su nombre para encontrarla. <code>Ctrl+F</code> lleva a la búsqueda. Se muestran su ID y descripción; el ID es informativo.</p>
+<h5>Total Abilities</h5>
+<p><strong>Total Abilities</strong> indica cuántas entradas existentes debe reconocer la Suite. Una ROM original suele tener 78. Las tablas ya ampliadas pueden utilizar hasta 256 registros reconocidos por el editor. <strong>Aumentar esta cantidad no crea Abilities ni sus efectos.</strong></p>
+<h5>Nombre y Renomear</h5>
+<p>Escribe el nombre y pulsa <strong>Renomear</strong> para guardarlo. El contador ayuda a comprobar el espacio disponible en la ROM. Otros editores abiertos pueden actualizar sus listas de nombres.</p>
+<h5>Decap y Decap All</h5>
+<p><strong>Decap</strong> convierte nombres totalmente en mayúsculas en una escritura más natural, por ejemplo <code>INTIMIDATE</code> en <code>Intimidate</code>. <strong>Decap All</strong> aplica ese formato a todas las entradas reconocidas y pide confirmación.</p>
+<h5>Descripción y Length</h5>
+<p>La descripción se modifica en el panel derecho y se guarda con <strong>Salvar</strong>. <strong>Length</strong> indica cuánto ocupa el texto. Si no cabe, la Suite puede almacenarlo en otra región libre y actualizar la referencia, protegiendo las descripciones compartidas.</p>
+<h5>Desc. Offset y Repoint</h5>
+<p><strong>Desc. Offset</strong> muestra dónde se encuentra el texto. <strong>Repoint</strong> puede apuntar a otra descripción válida. Normalmente no hace falta escribir una dirección manual: el guardado puede encargarse del traslado.</p>
+<h5>Free Space y Search</h5>
+<p><strong>Free Space</strong> indica la región de búsqueda configurada y <strong>Search</strong> busca espacio suficiente. Encontrar un lugar libre no guarda la descripción automáticamente.</p>
+<h5>Importación y exportación</h5>
+<p><strong>Import/Import All</strong> leen datos compatibles en JSON; <strong>Export/Export All</strong> permiten guardar uno o varios registros. JSON sirve para volver a importar y CSV para consultar datos en hojas de cálculo. <strong>CSV no puede importarse.</strong></p>
+<p>La Suite valida las entradas, puede mostrar una vista previa y ofrecer una copia de seguridad. Si el ID importado es distinto, pregunta dónde aplicar los datos.</p>
+<h5>Cambios pendientes y límites</h5>
+<p>Se advierte antes de descartar cambios sin guardar. El editor modifica nombres y descripciones; <strong>no crea efectos de batalla nuevos ni implementa la lógica de una Ability</strong>.</p>
+
+<h4>Item Editor</h4>
+<p><strong>Item Editor</strong> permite editar nombres, descripciones, imágenes y parámetros de los Items, además de abrir una ventana específica para sus efectos.</p>
+<h5>Selección, búsqueda y Total Items</h5>
+<p>Se puede buscar por nombre con <code>Ctrl+F</code>. La cantidad original, incluido ID 0, es <strong>377 en Emerald, 375 en FireRed/LeafGreen y 349 en Ruby/Sapphire</strong>. Una ROM hack ya ampliada puede configurar hasta 5.000 registros; el campo no crea Items nuevos.</p>
+<h5>Renomear, Decap y Decap All</h5>
+<p><strong>Renomear</strong> guarda un nombre compatible con el espacio disponible. <strong>Decap</strong> cambia nombres en mayúsculas, como <code>SUPER POTION</code>, a <code>Super Potion</code>; <strong>Decap All</strong> aplica la operación a la lista, respetando nombres que no caben.</p>
+<h5>Descripción, Length y Repoint</h5>
+<p>Edita el texto del Item y pulsa <strong>Salvar Desc.</strong>. <strong>Length</strong> compara el tamaño necesario con el espacio disponible. <strong>Offset</strong> muestra la ubicación actual y <strong>Repoint</strong> permite usar otra descripción válida.</p>
+<p>Si el texto es demasiado largo o está compartido, la Suite puede trasladarlo sin sobrescribir la descripción de otro Item.</p>
+<h5>Gráficos: Icon y Pal</h5>
+<p>La sección Gráficos muestra la imagen y las referencias <strong>Icon</strong> y <strong>Pal</strong>. <strong>Import Icon</strong> acepta PNG de <strong>24 × 24 píxeles</strong> con colores compatibles con GBA; <strong>Export Icon</strong> guarda el gráfico en PNG. <strong>Repoint</strong> utiliza gráficos ya existentes.</p>
+<p>La Suite intenta conservar imágenes compartidas y reutilizar gráficos iguales. <strong>Los iconos individuales funcionan en Emerald, FireRed y LeafGreen; la misma estructura no existe en Ruby/Sapphire originales.</strong></p>
+<h5>Parámetros generales</h5>
+<p>Los campos incluyen <strong>Price</strong>, <strong>Pocket</strong>, <strong>Hold Effect</strong>, <strong>Parameter</strong>, <strong>Field Func</strong>, <strong>Battle Func</strong>, <strong>Btl Usage</strong>, <strong>Type</strong>, <strong>Key Item Val</strong>, <strong>Bag Key Itm</strong> y <strong>Extra Param</strong>.</p>
+<p><strong>Type</strong> aquí es una clasificación interna del Item, no una tipificación elemental. El botón <strong>Salvar</strong> de la selección guarda precio y parámetros; el nombre, descripción y gráficos tienen controles propios.</p>
+<h5>Index: copiar parámetros de otro Item</h5>
+<p><strong>Index</strong> carga los parámetros generales de otro Item como punto de partida. <strong>No cambia el ID, nombre, descripción o icono del Item actual y no graba nada automáticamente.</strong></p>
+<h5>Field Func, Battle Func y Custom...</h5>
+<p>Las listas muestran funciones conocidas para usar Items dentro o fuera del combate. <strong>Custom...</strong> registra la dirección y un nombre opcional de una función ya implementada por la ROM hack; no programa funciones nuevas.</p>
+<h5>Item Effects</h5>
+<p>La ventana <strong>Item Effects</strong> permite configurar efectos compatibles: recuperar HP y PP, revivir, curar estados, PP Up/Max, Evolution Stone, Level-Up, aumentos de batalla, EVs, Friendship y otras opciones previstas por la ROM.</p>
+<p><strong>Save Changes</strong> o <code>Ctrl+S</code> guarda; <strong>Remove Effect</strong> elimina la referencia. El sistema original cubre los Items <strong>13–175</strong>. Enigma Berry necesita un tratamiento especial, y algunas funciones difieren entre Emerald y FireRed.</p>
+<h5>Import INI, Export INI, Import ALL y Export ALL</h5>
+<p>Aunque los botones conservan el nombre <strong>INI</strong>, la importación utiliza <strong>JSON</strong>. CSV solo puede exportarse para consultar registros. Los datos importados incluyen nombres, descripciones y parámetros, pero no cambian automáticamente ID, precio ni gráficos.</p>
+<p>Las importaciones se revisan antes de grabar y las operaciones masivas pueden ofrecer una copia de seguridad.</p>
+<h5>Seguridad</h5>
+<p>El editor avisa sobre cambios pendientes, valida valores y procura proteger datos compartidos. Es recomendable mantener una copia de seguridad de ROM hacks modificadas.</p>
+
+<h4>Trainer Editor</h4>
+<p>El <strong>Trainer Editor</strong> personaliza los entrenadores del juego: identificación, clase, gráficos, opciones de combate, inteligencia artificial, Items y equipos de hasta seis Pokémon.</p>
+<h5>Lista, búsqueda e IDs</h5>
+<p>La lista permite buscar por nombre o Trainer Class. Se muestran los IDs decimal y hexadecimal, que identifican el mismo entrenador sin cambiar su posición.</p>
+<h5>Nombre y Trainer Class</h5>
+<p>El campo <strong>Name</strong> corresponde al entrenador individual. La <strong>Trainer Class</strong> es una categoría compartida entre distintos entrenadores. <strong>Renombrar una clase cambia su nombre para todos los entrenadores que la utilizan</strong>, por lo que la Suite solicita confirmación.</p>
+<h5>Decap, Decap All y engranajes</h5>
+<p><strong>Decap</strong> corrige nombres escritos totalmente en mayúsculas. El engranaje permite elegir si el cambio afecta solo al entrenador o también a su clase; <strong>Decap All</strong> procesa varios entrenadores.</p>
+<h5>Apariencia y Gender</h5>
+<p>Una vista previa muestra el sprite del entrenador. Es posible seleccionar otro <strong>Trainer Sprite</strong> ya existente y elegir <strong>Male</strong> o <strong>Female</strong>. Esta función no importa gráficos nuevos.</p>
+<h5>Battle Music y Battle Style</h5>
+<p><strong>Battle Music</strong> elige una música reconocida por la ROM; <strong>Battle Style</strong> permite <strong>Single Battle</strong> o <strong>Double Battle</strong>. No se añaden canciones ni sistemas de combate inexistentes.</p>
+<h5>AI: comportamiento en combate</h5>
+<p>El engranaje de <strong>AI</strong> abre opciones individuales con explicaciones. <strong>Aplicar</strong> devuelve la configuración al editor y <strong>Salvar Trainer</strong> la graba. Una opción personalizada solo funciona si la engine ya la implementa.</p>
+<h5>Price Money y Money Rate</h5>
+<p><strong>Price Money</strong> muestra una recompensa calculada usando el equipo y la clase; <strong>Money Rate</strong> es la tasa asociada a la clase. <strong>Ambos son informativos y no pueden editarse directamente aquí.</strong></p>
+<h5>Battle Items y Custom Held Item</h5>
+<p>Se pueden configurar hasta cuatro <strong>Battle Items</strong> usados por el entrenador. <strong>Custom Held Item</strong> controla otra cosa: si los Pokémon de su equipo almacenan Items equipados individualmente.</p>
+<h5>Data Party: equipo Pokémon</h5>
+<p>Cada equipo tiene hasta <strong>seis Pokémon</strong>. Se pueden editar <strong>Specie</strong>, <strong>Lv.</strong>, <strong>Held Item</strong>, el campo llamado <strong>EV's</strong> y los cuatro Moves cuando está activado <strong>Custom Moves</strong>.</p>
+<p>Aunque aparezca como EV's, ese campo representa un valor interno utilizado para definir los <strong>IVs</strong> de Pokémon de entrenadores, no una distribución de EVs de entrenamiento.</p>
+<h5>Añadir, quitar, duplicar y ordenar</h5>
+<p><strong>+</strong> añade un Pokémon, <strong>−</strong> lo elimina, <strong>Dup</strong> crea una copia y <strong>↑/↓</strong> cambia su posición. Los cambios pueden revisarse antes de guardar.</p>
+<h5>Data Offset, Editar y Carregar</h5>
+<p><strong>Data Offset</strong> señala dónde se guarda el equipo. <strong>Editar</strong> permite modificar cantidad de Pokémon, estructura de Held Items y Custom Moves y dirección de almacenamiento. Puede buscar espacio libre.</p>
+<p><strong>Carregar</strong> permite ver y copiar un equipo de otra dirección. Copiar los datos no obliga a que dos entrenadores compartan el mismo lugar en la ROM.</p>
+<h5>Preferencias de Party/Repoint</h5>
+<p>El engranaje de configuración permite elegir búsquedas automáticas de espacio libre, avisos de confirmación y opciones avanzadas de direcciones. Hay que tener cuidado con regiones compartidas.</p>
+<h5>Salvar Trainer, Recarregar y atajos</h5>
+<p><strong>Salvar Trainer</strong> o <code>Ctrl+S</code> graba el entrenador y su equipo. <strong>Recarregar</strong> o <code>Ctrl+R</code> vuelve a leer la ROM. Si hay cambios pendientes, se puede <strong>Guardar, Descartar o Cancelar</strong>.</p>
+<h5>Importar y Exportar</h5>
+<p>JSON permite guardar y reutilizar configuraciones y equipos. La importación valida especies, Items, Moves y clases; conserva el ID del entrenador seleccionado y no reutiliza a ciegas los offsets de la ROM de origen.</p>
+<h5>Protección de equipos compartidos</h5>
+<p>Si varios entrenadores comparten datos, la Suite puede guardar una nueva copia del equipo modificado para no cambiar accidentalmente los demás. Se recomiendan copias de seguridad.</p>
+
+<h4>Trade Editor</h4>
+<p>El <strong>Trade Editor</strong> permite editar los intercambios de Pokémon con personajes del juego, los datos del Pokémon recibido y las entradas ampliadas de la tabla.</p>
+<h5>Lista, Offset actual y Trades Total</h5>
+<p>La lista muestra los intercambios de la ROM y <strong>Offset actual</strong> señala su ubicación. Las ROMs originales tienen <strong>4 intercambios en Emerald, 9 en FireRed/LeafGreen y 3 en Ruby/Sapphire</strong>.</p>
+<p><strong>Trades Total</strong> indica cuántos registros ya existen; <strong>no crea intercambios nuevos</strong>.</p>
+<h5>Expandir Trades</h5>
+<p><strong>Expandir Trades</strong> sí crea nuevas entradas, buscando espacio libre y actualizando las referencias conocidas si la tabla debe trasladarse. Esto no genera automáticamente nuevos NPCs ni sus diálogos o scripts.</p>
+<h5>Orden de los intercambios</h5>
+<p>Las flechas <strong>▲/▼</strong> permiten intercambiar posiciones completas. Los NPCs pueden hacer referencia al número de la entrada, por lo que reordenar la lista puede requerir actualizar sus scripts.</p>
+<h5>Pokémon solicitado y recibido</h5>
+<p>Se selecciona qué Pokémon solicita el NPC y cuál entrega al jugador. El recibido puede tener <strong>Nickname</strong>, <strong>Held Item</strong> y elección de Ability. La estructura original permite dos espacios de Ability, no un tercero automático.</p>
+<p>El nivel del Pokémon obtenido generalmente depende del nivel entregado por el jugador, sin un campo independiente para fijarlo.</p>
+<h5>IVs y Hidden Power</h5>
+<p>Se pueden editar los IVs de <strong>HP, Attack, Defense, Sp. Attack, Sp. Defense y Speed</strong> entre 0 y 31.</p>
+<p>La información de <strong>Hidden Power</strong> se actualiza con los IVs. Su engranaje permite buscar combinaciones conservando valores actuales, intentando Power 70 o priorizando IVs de 30/31 y Power 70. <strong>Aplicar combinación</strong> prepara los datos sin guardarlos inmediatamente.</p>
+<h5>Original Trainer</h5>
+<p><strong>OT Name</strong>, <strong>Trainer ID</strong>, <strong>Secret ID</strong> y <strong>Gender</strong> identifican al entrenador original del Pokémon recibido. Algunos campos tienen botones <strong>Random</strong> independientes; no modifican al NPC del mapa.</p>
+<h5>Personality, Contest, Sheen y Mail</h5>
+<p><strong>Personality</strong> (PID) es un valor interno que influye en determinadas características. <strong>Cool, Beauty, Cute, Smart y Tough</strong> son condiciones de Contest; <strong>Sheen</strong> se relaciona con su preparación.</p>
+<p><strong>Mail ID</strong> permite asociar una carta si el Pokémon lleva un Item de Mail. <strong>None (-1)</strong> significa que no hay carta. Los límites dependen de las tablas de la ROM.</p>
+<h5>Randomizar y preferencias</h5>
+<p><strong>Randomizar</strong> prepara valores aleatorios para el intercambio actual. El engranaje permite elegir qué campos cambiar: especies, Nickname, Item, Ability, IVs, OT, Personality, Contest, Sheen y Mail.</p>
+<p><strong>Marcar todo</strong> y <strong>Desmarcar todo</strong> facilitan la selección. Los resultados pueden revisarse: <strong>no se graban hasta pulsar Salvar Trade</strong>.</p>
+<h5>Salvar Trade, Recarregar y Ajuda</h5>
+<p><strong>Salvar Trade</strong> o <code>Ctrl+S</code> graba; <strong>Recarregar</strong> o <code>Ctrl+R</code> vuelve a leer. Si hay cambios pendientes, la Suite permite guardarlos o descartarlos. <strong>Ajuda</strong> explica los valores avanzados sin modificar la ROM.</p>
+<h5>Compatibilidad</h5>
+<p>Funciona con estructuras originales de Emerald, FireRed, LeafGreen, Ruby y Sapphire y tablas ampliadas reconocidas. La edición de intercambios no crea eventos de NPC ni nuevas mecánicas.</p>
+
+<h4>Move Editor</h4>
+<p>El <strong>Move Editor</strong> modifica nombres, descripciones, parámetros de batalla, Flags y referencias de los Moves.</p>
+<h5>Selección, búsqueda y Total Moves</h5>
+<p>Selecciona un golpe por nombre o usa <code>Ctrl+F</code>. Se muestra su ID. <strong>Total Moves</strong> empieza en <strong>355 entradas</strong>, incluido ID 0, y permite reconocer hasta 5.000 entradas previamente implementadas. No crea golpes nuevos.</p>
+<h5>Renomear, Decap y Decap All</h5>
+<p><strong>Renomear</strong> graba el nombre respetando el espacio disponible. <strong>Decap</strong> y <strong>Decap All</strong> corrigen nombres escritos en mayúsculas. El nombre se guarda por separado de los parámetros de batalla.</p>
+<h5>Effect, Power, Type y Accuracy</h5>
+<p><strong>Effect</strong> elige el efecto reconocido por la ROM; <strong>Power</strong> indica la fuerza base; <strong>Type</strong> es la tipificación elemental y <strong>Accuracy</strong> representa la precisión.</p>
+<p>Los Types personalizados pueden aparecer con sus nombres configurados, pero cambiar un valor no instala por sí solo un efecto o Type nuevo.</p>
+<h5>PP y EffectAcc</h5>
+<p><strong>PP</strong> determina cuántas veces puede usarse el golpe. <strong>EffectAcc</strong> se relaciona con determinados efectos secundarios y no equivale necesariamente a la precisión para acertar.</p>
+<h5>Target y Priority</h5>
+<p><strong>Target</strong> indica a qué objetivo puede dirigirse el golpe. <strong>Priority</strong> afecta al orden de movimientos, además de la Speed.</p>
+<h5>Category: Physical, Special y Status</h5>
+<p>En la <strong>tercera generación original</strong>, la separación física/especial depende del <strong>Type</strong> y no de una Category independiente. La clasificación por golpe solo funciona si una ROM hack ya implementó esa mecánica.</p>
+<h5>Pad Byte 1 y Pad Byte 2</h5>
+<p>Son valores adicionales que algunas ROM hacks utilizan para información personalizada. Mantén los originales cuando desconozcas su significado.</p>
+<h5>Flags</h5>
+<p>Las Flags incluyen <strong>Makes Contact</strong> e interacciones con <strong>Protect</strong>, <strong>Magic Coat</strong>, <strong>Snatch</strong>, <strong>Mirror Move</strong> y <strong>King's Rock</strong>, además de <strong>High Critical Chance</strong>.</p>
+<p>High Critical Chance tiene edición específica en el perfil Emerald; las ROMs originales FireRed, LeafGreen, Ruby y Sapphire utilizan otras reglas para los golpes de crítico elevado.</p>
+<h5>Anim. Offset y Repoint</h5>
+<p><strong>Anim. Offset</strong> muestra la dirección de la animación del golpe. <strong>Repoint</strong> permite utilizar otra animación ya presente en la ROM; no crea ni importa gráficos nuevos.</p>
+<h5>Descripción, Desc. Offset y Repoint</h5>
+<p>La descripción tiene su propio botón <strong>Salvar</strong>. Si el texto nuevo ocupa más espacio, la Suite puede trasladarlo. <strong>Desc. Offset</strong> muestra la dirección actual; <strong>Repoint</strong> usa otra válida. La descripción especial del <strong>ID 0</strong> no puede editarse.</p>
+<h5>Dados Hex</h5>
+<p>La vista <strong>Dados Hex</strong> presenta los 12 bytes de parámetros con colores y leyenda. Se actualiza mientras se modifican campos y permite copiar valores, pero no requiere conocimientos de hexadecimal.</p>
+<h5>Botones de guardado independientes</h5>
+<p><strong>Renomear</strong> guarda el nombre; el <strong>Salvar</strong> principal guarda parámetros y Flags; el <strong>Salvar</strong> de la descripción guarda texto; <strong>Repoint</strong> cambia direcciones concretas.</p>
+<h5>Import Single/All y Export Single/All</h5>
+<p>La exportación admite <strong>JSON</strong> para reutilizar información y <strong>CSV</strong> para hojas de cálculo. Solo JSON puede importarse. Se revisan IDs, datos y compatibilidad con la ROM antes de aplicar cambios.</p>
+<h5>Cambios pendientes y seguridad</h5>
+<p>El editor avisa antes de perder datos sin guardar y comprueba valores, nombres y direcciones. Importar parámetros no instala nuevos efectos de combate en la engine.</p>
+
+<h4 id="pokemon-editor">Pokémon Editor</h4>
+<p>El <strong>Pokémon Editor</strong> concentra seis pestañas: <strong>Sprites, Base Stats, Evolutions, Learnsets, Egg Moves y Pokédex</strong>. Todas trabajan sobre la especie seleccionada, pero cada una posee sus propios datos y operaciones.</p>
+<nav class="changelog-toc" aria-label="Secciones del Pokémon Editor">
+<strong>Contenido del Pokémon Editor</strong>
+<a href="#pokemon-geral">Interfaz general</a><a href="#pokemon-sprites">Sprites</a><a href="#pokemon-base-stats">Base Stats</a><a href="#pokemon-evolutions">Evolutions</a><a href="#pokemon-learnsets">Learnsets</a><a href="#pokemon-egg-moves">Egg Moves</a><a href="#pokemon-pokedex">Pokédex</a><a href="#pokemon-pokeapi">PokéAPI</a><a href="#pokemon-seguranca">Seguridad</a>
+</nav>
+<h5 id="pokemon-geral">Interfaz y funciones generales</h5>
+<p>El panel izquierdo permite seleccionar y buscar Pokémon (<code>Ctrl+F</code>), consultar <strong>Total Pokémon</strong> y usar <strong>Renomear</strong>, <strong>Decap</strong>, <strong>Decap All</strong>, <strong>Import</strong>, <strong>Export</strong> y <strong>Salvar</strong>.</p>
+<p>La tabla original reconoce <strong>412 entradas</strong>, incluido ID 0 y posiciones reservadas. Informar una cantidad mayor ayuda a leer tablas ya ampliadas; no añade especies al juego.</p>
+<p><strong>Import/Export</strong> y <strong>Salvar</strong> actúan según la <strong>pestaña activa</strong>, no sobre las seis a la vez. <code>Ctrl+S</code> guarda la pestaña actual; <strong>Ctrl izquierdo + Tab</strong> cambia entre pestañas. Se advierte si hay datos sin guardar.</p>
+
+<h5 id="pokemon-sprites">Sprites: gráficos y posiciones de combate</h5>
+<h6>Main Sprites: Front, Back y Shiny</h6>
+<p><strong>Front Sprite</strong> y <strong>Back Sprite</strong> muestran las imágenes frontal y trasera. <strong>Normal Pal</strong> y <strong>Shiny Pal</strong> contienen sus colores. Las vistas previas permiten comprobar las combinaciones antes de continuar.</p>
+<h6>Import Sprite, Export Sprite y Repoint</h6>
+<p><strong>Export Sprite</strong> guarda una hoja PNG de <strong>256 × 64 píxeles</strong>, con cuatro imágenes de 64 × 64. En disposiciones animadas compatibles puede utilizar <strong>256 × 128 píxeles</strong>.</p>
+<p><strong>Import Sprite</strong> importa una hoja compatible, prepara los gráficos y busca espacio libre cuando es necesario. <strong>Repoint</strong> cambia la referencia a una imagen ya existente. La Suite procura preservar paletas y sprites compartidos entre especies.</p>
+<p>Los botones PNG actúan sobre las imágenes; el Import/Export general de esta pestaña trabaja con referencias gráficas en JSON.</p>
+<h6>Animation (Emerald)</h6>
+<p>En <strong>Emerald</strong> hay un panel para visualizar cuadros animados, consultar colores Shiny y ajustar <strong>Front Anim</strong>, <strong>Back Anim</strong> y <strong>Anim Delay</strong>, con guardado propio. Este panel no funciona igual en FireRed, LeafGreen, Ruby o Sapphire.</p>
+<h6>Icon y Footprint</h6>
+<p>Los iconos pequeños admiten una vista previa con <strong>Pal 0/1/2</strong> y PNG de <strong>32 × 64 píxeles</strong>, compuesto de dos cuadros de 32 × 32. <strong>Footprint</strong> utiliza un PNG de <strong>16 × 16 píxeles</strong>. Ambos tienen Importar, Exportar y Repoint.</p>
+<h6>Battle Sprite Position y Auto Position</h6>
+<p><strong>Player Y</strong>, <strong>Enemy Y</strong> y <strong>Enemy Altitude</strong> ajustan la posición durante el combate. <strong>Auto Position</strong> propone una posición vertical considerando los píxeles visibles, sin modificar automáticamente Enemy Altitude. Después se puede ajustar y pulsar <strong>Salvar</strong>.</p>
+
+<h5 id="pokemon-base-stats">Base Stats: características de la especie</h5>
+<h6>Stats y BST</h6>
+<p>Permite modificar <strong>HP, Attack, Defense, Sp. Attack, Sp. Defense y Speed</strong>. <strong>BST</strong> es su suma y se muestra para consulta, no como un atributo adicional editable.</p>
+<h6>Catch Rate, Base Exp y Run Rate</h6>
+<p><strong>Catch Rate</strong> participa en las reglas de captura. <strong>Base Exp</strong> sirve para calcular experiencia y <strong>Run Rate</strong> es un valor adicional cuyo uso depende del juego o de la ROM hack.</p>
+<h6>Type 1, Type 2 y Types personalizados</h6>
+<p>Se pueden elegir las dos tipificaciones de la especie. Aparecen nombres como Grass, Poison, Fire y Psychic, así como nombres personalizados configurados previamente. Esos Types adicionales deben estar implementados en la ROM.</p>
+<h6>Held Items y Abilities</h6>
+<p>La estructura original permite dos campos de <strong>Held Items</strong> y dos de <strong>Abilities</strong>, <strong>Ability 1</strong> y <strong>Ability 2</strong>. Una Hidden Ability no se añade automáticamente como tercer campo.</p>
+<h6>EV Yield, Egg Groups y Growth Rate</h6>
+<p><strong>EV Yield</strong> indica los puntos que se obtienen al derrotar esa especie, no los EVs de un Pokémon individual. <strong>Egg Group 1/2</strong> se relacionan con la reproducción y <strong>Growth Rate</strong> determina la curva de experiencia.</p>
+<h6>Gender Ratio, Steps to Hatch y Base Happiness</h6>
+<p>Los tres campos ofrecen valores <strong>Standard</strong> y opciones <strong>Custom</strong> para proporción de género, pasos para eclosionar huevos y felicidad inicial.</p>
+<h6>Filler Bytes y guardado</h6>
+<p><strong>Filler Bytes</strong> son valores adicionales que una ROM hack puede utilizar para fines propios. No los cambies si no conoces su significado. <strong>Salvar</strong> y el Import/Export JSON actúan sobre Base Stats; Dex Color se gestiona por separado.</p>
+
+<h5 id="pokemon-evolutions">Evolutions: condiciones y especies resultantes</h5>
+<p>Permite configurar hasta <strong>cinco posiciones evolutivas por especie</strong> según la estructura elegida. Modificar <strong>EvolutionPerPKMN</strong> no borra automáticamente las posiciones ocultas.</p>
+<h6>Condiciones y datos</h6>
+<p>Los métodos conocidos incluyen nivel, Happiness, día/noche cuando la engine lo permita, Trade, Items, comparación Attack/Defense y condiciones especiales. Los campos <strong>Nível</strong>, <strong>Item</strong> y <strong>Evoluí para</strong> se adaptan al método.</p>
+<h6>Bank, Move, Map, Location y Value</h6>
+<p>Estos campos ayudan a describir argumentos de métodos personalizados. Mostrar una Location o un Move no significa que el juego ya sepa ejecutar esa evolución; la ROM hack debe implementar la regla.</p>
+<h6>Filler u16 y métodos customizados</h6>
+<p><strong>Filler u16</strong> muestra un valor adicional de algunas estructuras. Su botón <strong>?</strong> ofrece ayuda. El engranaje permite registrar nombre, <strong>Method ID</strong> y función de los argumentos personalizados, sin modificar métodos originales ni crear nuevas rutinas en el juego.</p>
+<h6>Salvar, Import y Export</h6>
+<p>Los datos de Evolutions se guardan mediante <strong>Salvar</strong> o <code>Ctrl+S</code>. Los archivos JSON de esta pestaña incluyen las evoluciones del Pokémon seleccionado. La importación permite revisar valores antes de grabar.</p>
+
+<h5 id="pokemon-learnsets">Learnsets: aprendizaje por nivel, TM/HM y Tutors</h5>
+<h6>Golpes por nivel</h6>
+<p>La lista contiene el <strong>Nível</strong> y el <strong>Move</strong> de cada entrada. <strong>Alterar golpe</strong> prepara un cambio. Los contadores muestran cuántos golpes se reconocen y el formato de la tabla.</p>
+<h6>Flechas, Offset/Structure y Gerenciar...</h6>
+<p>Las flechas <strong>▲/▼</strong> cambian el orden y pueden grabarlo inmediatamente tras comprobar los datos. <strong>Offset / Estrutura</strong> muestra la ubicación del Learnset; <strong>Gerenciar...</strong> ayuda a ampliar o trasladar la tabla cuando necesita espacio.</p>
+<h6>TM List</h6>
+<p>Las casillas indican qué TM/HM puede aprender una especie. <strong>Marcar compatibilidad</strong> afecta a la especie actual; <strong>modificar el Move asignado a una TM</strong> puede cambiar esa máquina para todo el juego.</p>
+<h6>Tutors</h6>
+<p>La sección Tutors ofrece compatibilidades con Moves enseñados por personajes. Emerald, FireRed y LeafGreen poseen estructuras conocidas; Ruby y Sapphire originales no utilizan la misma tabla general. Añadir personajes Tutors requiere scripts en la ROM.</p>
+<h6>PokéAPI, Import/Export y guardado</h6>
+<p>PokéAPI ayuda a consultar Learnsets externos sin sustituir IDs que no existan en la ROM. <strong>Salvar</strong> guarda los cambios de la pestaña, y los archivos JSON permiten transportar sus listas y compatibilidades.</p>
+
+<h5 id="pokemon-egg-moves">Egg Moves: golpes heredados</h5>
+<p>La lista presenta golpes que pueden heredarse por reproducción, distintos de los aprendidos por nivel o máquina. Muestra el total e informa cuando no hay ninguno.</p>
+<h6>Adicionar, Alterar y Remover</h6>
+<p><strong>Adicionar</strong> añade un Move; <strong>Alterar</strong> lo sustituye; <strong>Remover</strong> lo quita. Se comprueban IDs y duplicados. Los cambios se preparan para revisión y no se graban en cada clic.</p>
+<h6>Expansión automática y datos compartidos</h6>
+<p>La opción <strong>Expansión automática</strong> puede ampliar y trasladar la tabla cuando no queda espacio. Se muestran la capacidad y el espacio utilizado, y se verifican referencias porque varias especies comparten esa tabla.</p>
+<p>Ampliar Egg Moves no crea nuevos Moves en el sistema de combate.</p>
+<h6>PokéAPI y JSON</h6>
+<p>PokéAPI permite consultar Egg Moves externos; los Moves inexistentes deben revisarse. Import/Export utiliza JSON de la especie actual, y <strong>Salvar</strong>/<code>Ctrl+S</code> aplica el resultado.</p>
+
+<h5 id="pokemon-pokedex">Pokédex: datos, medidas y descripciones</h5>
+<h6>National, Regional/Hoenn y Hoenn to Nat</h6>
+<p>Estos valores relacionan a la especie con sus números en la Pokédex National y regional. Cambiarlos no crea Pokémon ni expande automáticamente la Pokédex.</p>
+<p><strong>Precaución:</strong> si cambias <strong>National</strong>, guárdalo primero y modifica las demás informaciones después. La Suite evita combinar ambas operaciones para no escribir datos en la entrada de otra especie.</p>
+<h6>Especie, Color, Altura y Peso</h6>
+<p><strong>Espécie</strong> es la categoría mostrada en la Pokédex, como “Seed Pokémon”, no el nombre principal. <strong>Cor (Base Stats)</strong> es su color de clasificación. Altura y Peso pueden visualizarse en unidades métricas e imperiales.</p>
+<h6>Size Comparison</h6>
+<p>Permite ajustar <strong>Scale</strong> y <strong>Offset</strong> de Pokémon y Trainer para comparar visualmente sus tamaños. <strong>Trainer ID</strong> cambia el gráfico mostrado en la vista previa, no todos los sprites de entrenadores de la ROM.</p>
+<h6>Descripción, Page 2 y Repoint</h6>
+<p>Es posible editar textos y consultar <strong>Length</strong> y <strong>Offset</strong>. Algunas ROMs también permiten editar una segunda página. Si el texto aumenta o está compartido, puede guardarse en otro lugar libre.</p>
+<p><strong>Repoint</strong> prepara otra dirección válida, pero no guarda nada inmediatamente. Es preferible dejar el traslado automático para textos mayores.</p>
+<h6>PokéAPI, Import/Export y Salvar</h6>
+<p>PokéAPI puede ofrecer información de clasificación, color, altura, peso y descripciones por juego e idioma. Los números National/Regional y Size Comparison no deben sobrescribirse sin comprobaciones.</p>
+<p>Los archivos de la pestaña utilizan JSON y el guardado protege los registros correspondientes.</p>
+
+<h5 id="pokemon-pokeapi">PokéAPI: consultar, revisar y aplicar</h5>
+<p>La integración PokéAPI está disponible en <strong>Base Stats, Evolutions, Learnsets, Egg Moves y Pokédex</strong>. Sprites utiliza sus propios controles PNG.</p>
+<h6>Consultar y aliases</h6>
+<p>La acción PokéAPI de cada pestaña puede indicar estados como <strong>Consultar, Obteniendo, Revisar, Parcial, Actualizado o Error</strong>. El botón <strong>...</strong> administra aliases para relacionar nombres personalizados de la ROM con las bases de datos externas.</p>
+<h6>Revisión, Auto-Aplicar y Auto-Save</h6>
+<p>La revisión permite comparar datos actuales con sugerencias externas antes de aplicarlas. <strong>Auto-Aplicar</strong> puede preparar cambios y <strong>Auto-Save</strong> grabarlos mediante el guardado seguro, cuando esa opción esté disponible.</p>
+<p>Sin Auto-Save los datos suelen quedar como borrador. <code>F5</code> ejecuta la acción PokéAPI de la pestaña activa si está habilitada; no guarda toda la ROM.</p>
+<h6>Caché y datos personalizados</h6>
+<p>Los datos descargados pueden reutilizarse desde <strong>PokéAPI Data</strong>. Las ROM hacks pueden contener IDs y mecánicas distintas; las diferencias deben revisarse. <strong>PokéAPI es una fuente de consulta, no una actualización de la engine.</strong></p>
+
+<h5 id="pokemon-seguranca">Guardado, compatibilidad y precauciones</h5>
+<p>Cada pestaña tiene su propio guardado. Importar JSON normalmente prepara valores; algunas acciones gráficas y de reordenación escriben mediante comandos específicos. La Suite comprueba direcciones y datos compartidos antes de grabar.</p>
+<p>La compatibilidad cubre las estructuras originales de Emerald, FireRed, LeafGreen, Ruby y Sapphire. Las ROM hacks con tablas personalizadas pueden necesitar configuración adicional; conviene mantener backups y probar los cambios en el juego.</p>
+
+<h4 id="wild-encounter">Wild Encounter</h4>
+<p><strong>Wild Encounter</strong> permite modificar los Pokémon que aparecen en la hierba, el agua, al usar Rock Smash o al pescar, con niveles y frecuencia de encuentro por área.</p>
+<nav class="changelog-toc" aria-label="Contenido del Wild Encounter">
+<strong>Contenido del Wild Encounter</strong>
+<a href="#wild-maps">Mapas</a><a href="#wild-types">Tipos de encuentro</a><a href="#wild-slots">Pokémon y niveles</a><a href="#wild-rate">Encounter ratio</a><a href="#wild-variants">Variantes</a><a href="#wild-add-remove">Añadir y quitar</a><a href="#wild-recovery">Recuperación</a><a href="#wild-technical">Detalles técnicos</a><a href="#wild-save">Guardar</a>
+</nav>
+<h5 id="wild-maps">Maps: selección de ubicaciones</h5>
+<p>La lista <strong>Maps</strong> muestra grupos y lugares de la ROM. Seleccionar un mapa carga sus encuentros. Los IDs de grupo y mapa ayudan a distinguir lugares con nombres parecidos. Los mapas con estructuras inválidas siguen visibles con advertencias.</p>
+<h5>Show locations without Wild Encounter</h5>
+<p>Esta opción también muestra mapas sin encuentros configurados para poder añadirlos después. Activarla o desactivarla solo filtra la lista y no modifica la ROM.</p>
+<h5 id="wild-types">Grass, Water, Rock Smash y Fishing</h5>
+<p><strong>Type</strong> cambia entre encuentros terrestres, acuáticos, de Rock Smash y de pesca. Cada categoría posee su propia lista de Pokémon y su propio Encounter ratio. Si falta una categoría, puede ser posible crearla mediante <strong>Add</strong>.</p>
+<h5 id="wild-slots">Slots, Min, Max, Pokémon, No. y Chance</h5>
+<p>Cada fila corresponde a una posición de encuentro. <strong>Min</strong> y <strong>Max</strong> indican niveles, <strong>Pokémon</strong> la especie, <strong>No.</strong> su ID y <strong>Chance</strong> la probabilidad asignada a esa posición. Para Fishing también aparece <strong>Rod</strong>.</p>
+<p>Es posible modificar especie y niveles; el mínimo no puede superar el máximo. La probabilidad viene del reparto de posiciones del juego y no puede editarse libremente como porcentaje.</p>
+<h5>Probabilidades y cantidad de Slots</h5>
+<p>Las tablas originales tienen <strong>12 posiciones de Grass, 5 de Water, 5 de Rock Smash y 10 de Fishing</strong>. Una misma especie puede ocupar varias posiciones y acumular sus probabilidades.</p>
+<h5>Old Rod, Good Rod y Super Rod</h5>
+<p>Fishing divide sus posiciones entre <strong>Old Rod (2), Good Rod (3) y Super Rod (5)</strong>. Cambiar un Pokémon no modifica la distribución original de las varas.</p>
+<h5 id="wild-rate">Encounter ratio</h5>
+<p>Este valor controla la frecuencia base con la que el juego intenta generar encuentros. Se modifica mediante un campo numérico o un deslizador, entre <strong>0 y 255</strong>, con una referencia porcentual.</p>
+<p><strong>Encounter ratio</strong> influye en <em>cuándo</em> se produce un encuentro; <strong>Chance</strong> influye en <em>qué Pokémon</em> aparece si se produce. El resultado real puede depender de otras reglas del juego.</p>
+<h5 id="wild-variants">Variant y lugares especiales</h5>
+<p>Algunos mapas tienen varias listas posibles. <strong>Variant</strong> permite ver y editar cada una; <strong>Altering Cave</strong> es un ejemplo. Cuando se reconocen, se muestran posiciones de variante y valores VAR.</p>
+<p>Guardar afecta a la variante seleccionada; la elección utilizada durante el juego depende de la engine o de los scripts.</p>
+<h5>Feebas y reglas particulares</h5>
+<p>Feebas en Route 119 de Emerald utiliza condiciones especiales de pesca que no quedan totalmente representadas por los Slots normales. Editar una posición no cambia automáticamente toda esa mecánica.</p>
+<h5 id="wild-add-remove">Add: crear áreas de encuentro</h5>
+<p><strong>Add</strong> prepara una nueva categoría de encuentros para un mapa. Las posiciones aparecen con datos iniciales válidos para que el usuario los revise. <strong>Add no graba inmediatamente</strong>; es necesario usar Salvar.</p>
+<h5>Mapas sin Wild header</h5>
+<p>En ciertos mapas vacíos, la Suite puede crear el primer <strong>Wild header</strong>, encontrar espacio libre y actualizar referencias conocidas. Si la estructura no puede verificarse con seguridad, la operación se rechaza.</p>
+<h5>Remove: eliminar un área</h5>
+<p><strong>Remove</strong> retira la referencia a una categoría tras confirmación, pero conserva los datos antiguos porque podrían compartirse. En el lanzamiento inicial, <strong>no eliminaba físicamente un Wild header vacío</strong>; eso llegó después.</p>
+<h5 id="wild-recovery">Recreate: recuperar datos inválidos</h5>
+<p>Si un área contiene direcciones o datos incorrectos, puede mostrarse como <strong>Invalid</strong>. <strong>Recreate</strong> permite preparar otra región válida y revisarla antes de guardar, conservando la zona anterior.</p>
+<h5 id="wild-technical">Technical details</h5>
+<p>El panel muestra <strong>Wild header</strong>, <strong>Structure status</strong>, <strong>Engine behavior</strong>, cantidad de variantes, variante actual y los <strong>Info offset</strong> y <strong>Slots offset</strong> de Grass, Water, Rock Smash y Fishing.</p>
+<p>Es información de diagnóstico; no hace falta conocer hexadecimal para editar los encuentros habituales.</p>
+<h5>Compatibilidad</h5>
+<p>Reconoce estructuras originales de Emerald, FireRed, LeafGreen, Ruby y Sapphire y puede localizar tablas movidas o ampliadas mediante verificaciones. Una engine de encuentros completamente personalizada puede necesitar soporte específico.</p>
+<h5 id="wild-save">Salvar, Ctrl+S y cambios pendientes</h5>
+<p><strong>Salvar</strong> o <code>Ctrl+S</code> graba especies, niveles y Encounter ratio. Un <strong>asterisco (*)</strong> indica cambios pendientes. Al cambiar de mapa, Type o Variant, o cerrar la ventana, aparecen las opciones de guardar, descartar o cancelar.</p>
+<p>La Suite verifica los datos antes y después de la escritura y procura evitar sobrescribir modificaciones externas.</p>
+<h5>Límites del Wild Encounter</h5>
+<p>Esta herramienta no dibuja mapas, añade especies a la ROM ni crea nuevas rutinas de batalla o scripts de NPCs. Conviene hacer backups y probar los encuentros especiales dentro del juego.</p>
+<p><strong>Nota:</strong> la búsqueda de mapas mediante <code>Ctrl+F</code>, la eliminación física de Wild headers vacíos y otras mejoras de interfaz pertenecen a <strong>v0.02</strong>, no al lanzamiento inicial.</p>
+</article>
