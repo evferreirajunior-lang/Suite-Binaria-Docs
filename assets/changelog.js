@@ -155,7 +155,7 @@
         topic.button.classList.toggle("is-active", active);
         topic.button.setAttribute("aria-expanded", String(active));
       });
-      if (opening) scrollTo(selectedTopic.section);
+      // Mantém os botões à vista para que o mesmo botão possa fechar a seção.
     }
 
     for (const node of originalNodes) {
