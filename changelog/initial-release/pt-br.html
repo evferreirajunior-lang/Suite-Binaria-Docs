@@ -80,4 +80,59 @@
 <p>O usuário também pode selecionar manualmente um dos cinco idiomas, e essa escolha permanece salva para as próximas execuções.</p>
 <p>Para evitar que uma janela já aberta fique parcialmente em um idioma e parcialmente em outro, a troca de idioma fica temporariamente indisponível enquanto algum editor estiver aberto. Depois que os editores forem fechados, a opção volta a ficar disponível.</p>
 <p>A troca modifica apenas os textos da interface da Suite. Ela <strong>não traduz nem altera nomes, textos ou qualquer outro conteúdo existente dentro da ROM</strong>.</p>
+
+<h4>Ability Editor</h4>
+<p>O <strong>Ability Editor</strong> permite consultar e modificar os <strong>nomes e as descrições das Abilities</strong> presentes na ROM. É útil tanto para corrigir textos quanto para adaptar a apresentação de Abilities já existentes em uma ROM hack.</p>
+<p>A janela é dividida em duas áreas: à esquerda ficam a seleção da Ability, seu nome e as opções de importação e exportação; à direita ficam a descrição e os recursos para localizar ou alterar o local em que esse texto está armazenado.</p>
+
+<h5>Seleção e pesquisa de Abilities</h5>
+<p>A lista na parte superior permite escolher qual Ability deseja consultar ou editar. Também é possível digitar parte do nome para encontrar uma entrada mais rapidamente, sem precisar percorrer toda a lista.</p>
+<p>O atalho <code>Ctrl+F</code> leva o usuário diretamente ao campo de pesquisa. Após selecionar uma Ability, o editor exibe seu nome, seu <strong>ID</strong> e a descrição correspondente. O ID serve para identificar a entrada e não pode ser alterado por esse campo.</p>
+
+<h5>Total Abilities</h5>
+<p>O campo <strong>Total Abilities</strong> informa quantas entradas a Suite deve considerar na tabela de Abilities da ROM. Em uma ROM original da terceira geração, essa quantidade normalmente é de <strong>78 Abilities</strong>.</p>
+<p>Em projetos expandidos, o número pode ser ajustado para acompanhar a quantidade que a ROM hack já utiliza, até o limite de <strong>256 entradas</strong> reconhecidas pelo editor.</p>
+<p>É importante destacar que <strong>aumentar esse número não cria novas Abilities nem amplia automaticamente a tabela dentro do jogo</strong>. A opção serve para que a Suite reconheça entradas que já tenham sido preparadas na ROM hack. Caso a configuração não corresponda a dados válidos, a alteração é recusada.</p>
+
+<h5>Edição do nome</h5>
+<p>O campo do nome permite escrever como a Ability deverá aparecer no jogo. Ao terminar, basta clicar em <strong>Renomear</strong> para gravar a alteração.</p>
+<p>Um contador ao lado do campo ajuda a acompanhar o limite disponível. Como a ROM possui um espaço definido para cada nome, nem sempre o número de letras visíveis corresponde exatamente ao espaço utilizado; o editor faz essa conferência antes de salvar.</p>
+<p>Quando um nome é alterado, os outros editores abertos que utilizam nomes de Abilities podem atualizar suas listas para refletir a mudança.</p>
+
+<h5>Decap e Decap All</h5>
+<p>O botão <strong>Decap</strong> ajuda a transformar nomes escritos inteiramente em letras maiúsculas em uma apresentação mais natural. Por exemplo, um nome como <code>INTIMIDATE</code> pode passar a ser exibido como <code>Intimidate</code>.</p>
+<p><strong>Decap</strong> modifica apenas a Ability selecionada. Já <strong>Decap All</strong> aplica o mesmo tratamento aos nomes de todas as Abilities reconhecidas no projeto.</p>
+<p>Antes de executar <strong>Decap All</strong>, a Suite pede confirmação, pois essa opção realiza várias alterações de uma vez.</p>
+
+<h5>Descrições das Abilities</h5>
+<p>Na parte direita da janela, o usuário pode ler e alterar o texto de descrição da Ability selecionada. Após editar, o botão <strong>Salvar</strong> grava o novo texto.</p>
+<p>O indicador <strong>Length</strong> mostra quanto espaço a descrição precisa e quanto já está disponível no local atual. Ele ajuda a perceber quando um texto ficou maior que o anterior.</p>
+<p>Se a nova descrição couber no espaço existente e esse espaço não for compartilhado com outra Ability, a Suite pode aproveitá-lo. Se o texto precisar de mais espaço, ela oferece a possibilidade de encontrar outro local e atualizar a referência automaticamente.</p>
+<p>A ferramenta também toma cuidado com descrições compartilhadas entre diferentes entradas, evitando que a edição de uma Ability altere acidentalmente a descrição de outra.</p>
+
+<h5>Desc. Offset e Repoint</h5>
+<p>O campo <strong>Desc. Offset</strong> indica onde a descrição está localizada dentro da ROM. O botão <strong>Repoint</strong> permite apontar a Ability para uma descrição existente em outro endereço.</p>
+<p>Essa opção é mais voltada a usuários que já trabalham com ROM hacks e conhecem os locais em que seus textos estão armazenados. A Suite confere se o endereço informado contém uma descrição válida antes de aplicar a mudança.</p>
+<p>Para simplesmente escrever uma descrição maior, normalmente <strong>não é necessário informar um endereço manualmente</strong>: o botão <strong>Salvar</strong> pode cuidar desse processo quando for preciso.</p>
+
+<h5>Free Space e Search</h5>
+<p>A seção <strong>Free Space</strong> mostra a região definida nas configurações gerais como ponto de partida para procurar espaço livre na ROM.</p>
+<p>O botão <strong>Search</strong> procura uma região com espaço suficiente para a descrição que está no editor. O endereço encontrado é exibido para consulta.</p>
+<p>Essa busca utiliza as preferências de Free Space configuradas pelo usuário. Encontrar um endereço não significa que ele tenha sido gravado imediatamente: a alteração da descrição continua dependendo do comando de salvamento.</p>
+
+<h5>Importação e exportação</h5>
+<p>O Ability Editor possui quatro botões para facilitar o reaproveitamento de dados entre projetos:</p>
+<ul>
+<li><strong>Import:</strong> importa o nome e a descrição de uma Ability a partir de um arquivo JSON compatível;</li>
+<li><strong>Import All:</strong> permite importar várias Abilities de uma só vez;</li>
+<li><strong>Export:</strong> exporta os dados da Ability selecionada;</li>
+<li><strong>Export All:</strong> exporta o conjunto de Abilities reconhecido na ROM.</li>
+</ul>
+<p>As exportações podem ser feitas em <strong>JSON</strong>, indicado para guardar dados que poderão ser importados novamente, ou em <strong>CSV</strong>, útil para visualizar nomes e descrições em programas de planilhas. <strong>Arquivos CSV servem apenas para exportação; a importação utiliza JSON.</strong></p>
+<p>Ao importar uma Ability individual cujo ID seja diferente do atualmente selecionado, a Suite pergunta onde o conteúdo deverá ser aplicado. Nas importações maiores, ela analisa o arquivo antes de gravar, apresenta uma prévia das alterações e oferece a opção de criar um backup da ROM.</p>
+
+<h5>Cuidados ao editar</h5>
+<p>Se houver alterações ainda não salvas, o editor avisa antes de mudar de Ability ou fechar a janela. Assim, um texto digitado não é descartado silenciosamente.</p>
+<p>As mudanças são conferidas antes e depois da gravação, e operações inválidas são recusadas para reduzir o risco de danificar dados existentes.</p>
+<p><strong>Importante:</strong> o Ability Editor modifica a apresentação e os textos das Abilities. Ele <strong>não cria novos efeitos de batalha nem altera sozinho o funcionamento de uma Ability</strong>; esses comportamentos precisam já existir na ROM hack.</p>
 </article>
